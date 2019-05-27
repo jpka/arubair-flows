@@ -1,0 +1,86 @@
+Flow
+
+1-ingresar nombre de cliente que solicita precios.
+(una variable si es para import o para export)
+
+2A- para import una alarma a las 24 hrs para pedir confirmacion que la cotizacion se envio, SI? Ingrese el numero de cotización o cotización misma
+2B-Si es export, inmediatamente,dar comando para pedir precios de flete(maritimo o aereo)Ingresar nombres de las compañías donde se pidio, Y para pedir precio de agente en destino. En este paso, debe de haber un control, si pedi flete a 6 compañías de barco, solo contestaron 1, alarma o comando para volver a solicitarlo, lo mismo para agente de destino( queremos seguir usando nuestro webmail, sera posible el link para que lleve control, de los que se enviaron y cuantos se reciben de vuelta?)
+
+3-Export, Despues de 48hrs una alarma, para pedir confirmación que la cotizacion se envió, SI? Ingrese el numero de cotizacion NO? Mandar al cliente carta/ llamada informando que estamos trabajando en ella y faltan algunos precios de flete o destino para completarla, lo mantendremos informado.
+
+4A-Si cotización ha sido aceptada, meter el trabajo en el horario de operaciones
+
+5-Alarma para hacerle un seguimiento después de enviar una cotización(1 semana después, si cliente no contesto recibido, 3 semanas después si contesto recibido pero no ha reservado fechas)
+
+6-Correo standard enviado automáticamente al cliente con información 2 semanas antes del trabajo ( un modelo para import otro para export)
+
+7A-Alarma 2 semanas antes del trabajo para solicitar contenedor vacío para export
+7B-Alarma 2 semanas antes de llegada del barco, para ver que cliente haya entregado todos los documentos para import
+
+8-Correo standard enviado automáticamente al cliente 1 semana antes del trabajo (export), o llegada del barco(import) 2 modelos diferentes, ya sea import o export
+
+9A- Alarma para introducir documentos en aduana para import 1 semana antes llegada de barco
+9B-Alarma para introducir documentos en aduana para export 3 dias antes de cargar contenedor (podremos editar estos tiempos si hay cambios en aduanas?)
+
+10-2 dias antes del trabajo, sacar un alerta o alarma con preguntas claves, para hacerle check marks si todo esta listo para cliente “X”: empleados/ camiones/ material/ herramientas/ documentos/ job order/etc ( quizás dejar algunas lineas en blanco para agregar en cada caso, si tiene algún requerimiento especifico)
+
+11-Alarma 2 dias antes, para notificar aduanas y pedir inspección, la misma para import o export
+
+12-Alarma 2 dias antes, para avisar camionero y reservar espacio para mover los contenedores
+
+13- Día del trabajo, notificación para llamar al grupo de operaciones a las 11:00 am y 3:00 pm para preguntar como va el trabajo cuanto falta ingresar info básica en el programa (falta mucho/ están casi listos/alguna eventualidad o detalle inesperado)
+
+14- Día después del trabajo, alarma para revisar documentos Deben estar firmados y con fecha, escanear los documentos, reportes de calidad y enviarlos a agente de destino o de origen
+pasar folder a contabilidad con todos los detalles para facturación.
+14B-Solicitar documentos y reportes de calidad de agentes en destino (ingresar fecha estimada de llegada, para que en esa fecha se soliciten los documentos)
+additionals:
+ - al siguiente dia del trabajo entre las cosas que hay que recordar, lo ya mencionado y esto: shipping instructions para freight line, draft awb/bl to destination agent. ISF si va para US.
+ - Considera punto 14-1 agregar notificar al Trucking company para llevar el container vacio para el puerto
+
+15-Alarma 4 dias después del trabajo, Ingresar numero de factura y fecha que se envio
+
+--------------------------
+
+Hola Monica, voy a hacer el modelo de acuerdo a los datos que me diste. Para responder a tus dudas:
+- Asignar tareas: si, por supuesto, la aplicación maneja tareas, asignarlas a alguien es necesario. 
+- Agregar notas: Si, me pareció una funcionalidad básica para tener en una aplicación asi.
+- Manejar desde el celular: No. Te pregunté y me dijiste que querías una aplicación de escritorio. Es decir, una aplicación que esta hecha para el escritorio en una PC. El celular puede abrir aplicaciones web y aplicaciones para celular. Si quieres, podemos hacerlo una app web. Una app web la puedes ver desde el navegador en el escritorio o en el celular. Sin embargo, toda la parte gráfica requiere más trabajo para adaptarla al celular. Básicamente es un diseño diferente (e implementarlo lleva trabajo). Te añadiría de 3 a 5 días de desarrollo y $300
+- Editar tareas (revisando lo que me mandaste recién me percato de esta pregunta): editar tareas cómo exactamente? Cambiar a quien esta asignado? Si. Editar notas si. Cambiar quienes se notifican? Si. Algo más hace falta editar?
+
+
+----
+
+Actual workflow
+- 1: Ingresar nombre de cliente que solicita precios
+    - 2a import: alarma a las 24 hrs para pedir confirmacion que la cotizacion se envio
+        - SI? Ingrese el numero de cotización o cotización misma
+        - No? Pedirla nuevamente
+    - 2b export: dar comando para pedir precios de flete(maritimo o aereo)Ingresar nombres de las compañías donde se pidio, Y para pedir precio de agente en destino. En este paso, debe de haber un control, si pedi flete a 6 compañías de barco, solo contestaron 1, alarma o comando para volver a solicitarlo, lo mismo para agente de destino
+        - 3 Export, Despues de 48hrs una alarma, para pedir confirmación que la cotizacion se envió
+            - SI? Ingrese el numero de cotizacion 
+            - NO? Mandar al cliente carta/ llamada informando que estamos trabajando en ella y faltan algunos precios de flete o destino para completarla, lo mantendremos informado.
+        - 4a Si cotización ha sido aceptada, meter el trabajo en el horario de operaciones
+
+
+Basic layout
+    - Mostrar principamente una estructura semejante a una tabla, para que pueda ser reorganizada.
+        -  Qué es cada elemento de la tabla?
+            - Un flow/cliente/trabajo.
+                Me permite mostrar cada paso del flow limpiamente ya sea abriendo el item flow como un habanico o mostrando a la derecha cada paso
+            - Una tarea
+                Permite que la estructura tabla sea todo lo que hay. Reordenando la tabla por flow, te queda la lista de flow ordenada pero tambien puedes ordenar por tiempo asi ves cual es el siguiente paso "overall".
+
+            Por tarea me parece lo mejor, más flexible.
+    - Una grid de flows y tiempos
+        mejor
+
+
+Views to show
+    - Main View, with some tasks in the past and some in the future.
+        - Dates and times at the top, orders at left
+        - Things I need
+            - A table encompassing all of the screen. Dates at the top. Orders at left. Minimal lines
+    - New order popup
+    - Alert view with email template for editing
+        - Side menu
+    - Random task view with form, some notes and attached documents

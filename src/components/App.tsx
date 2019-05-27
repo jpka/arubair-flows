@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
+// import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { 
-	colors,
-	Paper,
+	colors
 } from '@material-ui/core';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
-import AppBar from './AppBar';
-import Drawer from './Drawer';
-import Timetable from './Timetable';
+import { Dashboard } from '../index';
 
 declare module "@material-ui/core/styles/createMuiTheme" {
 	interface ThemeOptions {
@@ -27,29 +27,30 @@ const theme = createMuiTheme({
 	status: {danger: 'red'}
 });
 
+export const useStyles = makeStyles({
+	middleBottomFab: {
+		position: "absolute",
+		left: "50%",
+		marginLeft: -24,
+		bottom: -24,
+		zIndex: 999
+	}
+});
+
 const App: React.FC = () => {
-	const [drawerOpen, setDrawerState] = useState(true);
+	// const [drawerOpen, setDrawerState] = useState(true);
 	// const setDrawerState = (state) => {};
 	// const drawe
 	return (
-			<MuiThemeProvider theme={theme}>
-				<Paper>
-					<AppBar position="fixed" onAdd={() => setDrawerState(true)} />
-				</Paper>
-				<Drawer open={drawerOpen} onClose={() => setDrawerState(false)} />
-				<div style={{
-					display: "inline-block", 
-					background: "#424348", 
-					padding: 10,
-					// width: "calc(100% - 20px)",
-					paddingLeft: 0,
-					width: "calc(100% - 310px)"
-				}}>
-					<Paper>
-						<Timetable />
-					</Paper>
-				</div>
-			</MuiThemeProvider>
+		<ThemeProvider theme={theme}>
+			<Dashboard />
+			{/* <Router>
+				<Switch>
+					<Route path="/users" component={Users} />
+					<Route path="/" component={Dashboard} />
+				</Switch>
+			</Router> */}
+		</ThemeProvider>
 	);
 }
 
