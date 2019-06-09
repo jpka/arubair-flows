@@ -41,15 +41,6 @@ additionals:
 
 --------------------------
 
-Hola Monica, voy a hacer el modelo de acuerdo a los datos que me diste. Para responder a tus dudas:
-- Asignar tareas: si, por supuesto, la aplicación maneja tareas, asignarlas a alguien es necesario. 
-- Agregar notas: Si, me pareció una funcionalidad básica para tener en una aplicación asi.
-- Manejar desde el celular: No. Te pregunté y me dijiste que querías una aplicación de escritorio. Es decir, una aplicación que esta hecha para el escritorio en una PC. El celular puede abrir aplicaciones web y aplicaciones para celular. Si quieres, podemos hacerlo una app web. Una app web la puedes ver desde el navegador en el escritorio o en el celular. Sin embargo, toda la parte gráfica requiere más trabajo para adaptarla al celular. Básicamente es un diseño diferente (e implementarlo lleva trabajo). Te añadiría de 3 a 5 días de desarrollo y $300
-- Editar tareas (revisando lo que me mandaste recién me percato de esta pregunta): editar tareas cómo exactamente? Cambiar a quien esta asignado? Si. Editar notas si. Cambiar quienes se notifican? Si. Algo más hace falta editar?
-
-
-----
-
 Actual workflow
 - 1: Ingresar nombre de cliente que solicita precios
     - 2a import: alarma a las 24 hrs para pedir confirmacion que la cotizacion se envio

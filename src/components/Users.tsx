@@ -18,11 +18,12 @@ import {
 	CenterText
 } from './Misc';
 import {
-	User
+	User,
+	UsersState
 } from '../modules/users';
 
 interface UsersProps {
-	users: User[],
+	users: UsersState,
   addUser: () => void
 }
 
@@ -40,7 +41,7 @@ const Users: FC<UsersProps> = ({users, addUser}) => {
 	return (
 		<div style={{position: "relative"}}>
 			<Grid
-				rows={users}
+				rows={users.users}
 				columns={[
 					{ name: 'profilePic', title: "Picture", getCellValue: row => <Avatar><AccountCircle/></Avatar>},
 					{ name: 'name', title: "Name", getCellValue: row => <CenterText>{row.name}</CenterText> },

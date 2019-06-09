@@ -7,9 +7,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AppBar from './AppBar';
 import Drawer from './Drawer';
 import {
-	Users,
-	Timetable
+	Users
 } from '../index';
+import Timetable from './Timetable';
+import Login from './Login';
 
 interface DashboardProps {
 	ui: any
@@ -21,7 +22,7 @@ const Dashboard: React.FC<DashboardProps> = ({ ui }) => {
 			<Paper>
 				<AppBar position="fixed" onAdd={() => false} />
 			</Paper>
-			{ui.drawer && <Drawer onClose={() => false} />}
+			{ui.drawer && <Drawer onClose={() => false} {...ui.drawer} />}
 			<div style={{
 				display: "inline-block", 
 				background: "#424348", 
@@ -33,6 +34,7 @@ const Dashboard: React.FC<DashboardProps> = ({ ui }) => {
 				<Paper>
 					<Router>
 						<Switch>
+							<Route path="/login" component={Login} />
 							<Route path="/users" component={Users} />
 							<Route path="/" component={Timetable} />
 						</Switch>

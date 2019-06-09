@@ -8,7 +8,10 @@ import {
 import {
 	Done as DoneIcon,
 	Email as EmailIcon,
-	Add as AddIcon
+	Add as AddIcon,
+	Cancel as CancelIcon,
+	RemoveCircle,
+	EventNoteOutlined
 } from '@material-ui/icons';
 import { 
   Grid, 
@@ -17,24 +20,33 @@ import {
   TableFixedColumns
 } from '@devexpress/dx-react-grid-material-ui';
 // import { sample } from 'lodash';
-// import moment from 'moment';
+import moment from 'moment';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import {
 	useStyles
 } from './App';
-
 import {
-	Order
+	actions as uiActions
+} from '../modules/ui';
+import {
+	actions as ordersActions,
+	Order,
+	statuses
 } from '../modules/orders';
+import { State } from '..';
 
 const sample = (arr) => arr[0];
 const randomPic = () => `/imgs/profile/${sample(['boy', 'girl', 'man'])}.png`;
 
-const Task = ({type, name, past, ...rest}) => {
+const Task = ({type, label, past, onDelete, openDetails, status, ...rest}) => {
 	let style: any = {
 		color: "#fff",
 		fontWeight: "500"
 	};
 	let avatar;
+	const completed = status === statuses.completed;
 	switch (type) {
 		case "alarm":
 			Object.assign(style, {
@@ -52,16 +64,18 @@ const Task = ({type, name, past, ...rest}) => {
 			}}><EmailIcon /></Avatar>;
 			break;
 	};
-	if (past) style.opacity = 0.7;
+	if (completed) style.opacity = 0.7;
 	return (
 		<div>
 			<Chip
-			className={type}
-			style={style}
-			label={name}
-			avatar={avatar}
-			onDelete={() => {}}
-			{...rest}
+				className={type}
+				style={style}
+				label={label}
+				avatar={avatar}
+				onClick={openDetails}
+				onDelete={completed ? () => {} : onDelete}
+				deleteIcon={completed ? <DoneIcon /> : <CancelIcon />}
+				// {...rest}
 			>
 			</Chip>
 		</div>
@@ -100,12 +114,45 @@ const TableHeaderContent = ({
 	</TableHeaderRow.Content>
 );
 
-interface TimetableProps {
-	orders: Order[],
-  newOrder: () => void
-}
+const TasksCell = connect(
+	({orders}: State, {orderId, date}: any) => ({tasks: orders.orderedTasks[date] && orders.orderedTasks[date][orderId], orderId}),
+	// dispatch => bindActionCreators({ removeTask: ordersActions.task.remove, editOrder: uiActions.editOrder }, dispatch)
+)(({tasks, orderId, dispatch}: any) => {
+	return tasks ? (
+		<div style={{lineHeight: 3}}>
+			{tasks.map((task: any, i) => (
+				<Task 
+					key={i.toString()} 
+					openDetails={() => dispatch(uiActions.editTask(orderId, task.id))}
+					onDelete={() => dispatch(ordersActions.task.remove(orderId, task.id))}
+					
+					{...task}
+				/>
+			))}
+		</div>
+	) : null;
+});
 
-const Timetable: React.FC<TimetableProps> = ({orders, newOrder}) => {
+const actionStyle = {
+	cursor: "pointer"
+};
+
+const ActionsCell = connect(
+	null,
+	// dispatch => bindActionCreators({ removeOrder: ordersActions.order.remove }, dispatch)
+)(({orderId, dispatch}: any) => {
+	return (
+		<React.Fragment>
+			<div><EventNoteOutlined fontSize="small" style={actionStyle} onClick={() => dispatch(uiActions.editOrder(orderId))}/></div>
+			<div><RemoveCircle fontSize="small" style={actionStyle} onClick={() => dispatch(ordersActions.order.remove(orderId))} /></div>
+		</React.Fragment>
+	);
+});
+
+const Timetable = connect(
+	({orders}: State) => ({ orders: orders.orders, dates: orders.dates }),
+	dispatch => bindActionCreators({ newOrder: uiActions.newOrder }, dispatch)
+)(({orders, dates, newOrder}: {orders: any, dates: any[], newOrder: () => void}) => {
 	const classes = useStyles();
 	const task = (data, i) => {
 		i = `t-${i}`;
@@ -115,25 +162,41 @@ const Timetable: React.FC<TimetableProps> = ({orders, newOrder}) => {
 
 	let columns = [
 		{ name: 'order', title: " ", getCellValue: row => (
-		<div>
-			<div style={{fontWeight: "bold", fontSize: "14px"}}>{row.client}</div>
-			<div style={{fontStyle: "italic"}}>{row.type}</div>
-		</div>
+			<React.Fragment>
+				<div style={{fontWeight: "bold", fontSize: "14px"}}>{row.client.name}</div>
+				<div style={{fontStyle: "italic"}}>{row.type}</div>
+			</React.Fragment>
 		)},
+		{name: 'actions', title: " ", getCellValue: row => <ActionsCell orderId={row.id} />}
 	];
 
-	if (orders && orders.length > 1) {
-		// columns = columns.concat(
-		// 	dates.map((date, i) => ({name: date, title: date, getCellValue: row =>
-		// 	row[date] && (Array.isArray(row[date]) ? <div style={{lineHeight: 3}}>{row[date].map((d, j) => task(d, `${i}-${j}`))}</div> : task(row[date], i))
-		// 	}))	
-		// );
+	console.log("RENDER TIMETABLE")
+
+	if (dates.length > 1) {
+		columns = columns.concat(
+			dates.map((date, i) => ({
+				name: date, 
+				title: moment().dayOfYear(date).format('DD[/]MM[/]YY'),
+				getCellValue: row => <TasksCell key={`${row.id}-${date}`} orderId={row.id} date={date} />
+					// row.tasks && row.tasks[date] && (
+					// 	Array.isArray(row.tasks[date])
+					// 	? 
+					// 	<div style={{lineHeight: 3}}>
+					// 		{row.tasks[date].map((d, j) => task(d, `${i}-${j}`))}
+					// 	</div>
+					// 	: 
+					// 	task(row.tasks[date], i)
+					// )
+				})
+			)	
+		);
 	}
 
 	return (
 		<div style={{position: "relative"}}>
 			<Grid
-				rows={orders}
+				rows={Object.values(orders)}
+				RootProps={{style:{width: 3000}}}
 				// rows={[
 				// 	{ 
 				// 		client: 'Perez, Juan', 
@@ -164,14 +227,21 @@ const Timetable: React.FC<TimetableProps> = ({orders, newOrder}) => {
 				// 	}
 				// ]}
 				columns={columns}>
-				<Table 
+				<Table
+					RootProps={{style:{width: 3000}}}
 					// noDataCellComponent={{getMessage: () => "No workflows"}}
 					// ref={onMount}
-					// columnExtensions={dates.map(date => ({columnName: date, width: 270}))} 
+					columnExtensions={
+						dates.map(date => ({columnName: date, width: 270})).concat([
+							//@ts-ignore
+							{columnName: 'order', width: 150, wordWrapEnabled: true},
+							{columnName: 'actions', width: 50}
+						])
+					}
 				/>
 				<TableHeaderRow contentComponent={TableHeaderContent} />
 				<TableFixedColumns
-					leftColumns={["order"]}
+					leftColumns={["order", "actions"]}
 				/>
 				<Fab 
 					color="primary"
@@ -185,6 +255,6 @@ const Timetable: React.FC<TimetableProps> = ({orders, newOrder}) => {
 			</Grid>
 		</div>
 	);
-}
+});
 
 export default Timetable;

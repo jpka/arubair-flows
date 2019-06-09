@@ -3,22 +3,27 @@ import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import {
 	Paper,
-	TextField,
-	createStyles,
 	Theme,
-	Typography,
 	Chip,
 	Avatar,
-	InputAdornment,
-	Button,
-	ListItem,
-	ListItemText,
-	List
 } from '@material-ui/core';
 import {
 	Close as CloseIcon, AccountCircle, CheckBox, NoteAdd as NoteAddIcon, CheckCircle
 } from '@material-ui/icons';
-import BaseNewOrder from './forms/NewOrder';
+import { connect } from 'react-redux';
+// import { bindActionCreators, combineReducers } from 'redux';
+import { 
+	actions as ordersActions
+} from '../modules/orders';
+import { 
+	actions as usersActions
+} from '../modules/users'
+import { ThunkDispatch } from 'redux-thunk';
+
+import { State } from '../index';
+import BaseOrderForm from './forms/Order';
+import BaseTaskForm from './forms/Task';
+import BaseUser from './forms/User';
 
 const styles = (theme: Theme) => ({
 	container: {
@@ -29,8 +34,8 @@ const styles = (theme: Theme) => ({
 		lineHeight: "75px"
 	},
 	wideField: {
-	//   marginLeft: theme.spacing.unit,
-	//   marginRight: theme.spacing.unit,
+	//   marginLeft: theme.spacing(1),
+	//   marginRight: theme.spacing(1),
 		marginLeft: "auto",
 		marginRight: "auto",
 		width: "100%",
@@ -43,9 +48,7 @@ const styles = (theme: Theme) => ({
 		width: 300,
 	},
 	button: {
-			marginLeft: "auto",
-			marginRight: "auto",
-			width: "80%"
+		width: "100%"
 	},
 	header: {
 			marginBottom: 15
@@ -55,128 +58,96 @@ const styles = (theme: Theme) => ({
 	}
 });
 
-// const NewOrder = withStyles(styles)((props: any) => {
-// 		let {classes} = props;
+// const UserChip = ({name, pic}) => 
+// 	<Chip 
+// 		avatar={<Avatar src={`/imgs/profile/${pic}.png`}/>}
+// 		label={name}
+// 		onDelete={() => {}}
+// 	/>;
 
-// 		// const handleChange = (name) => (event: React.ChangeEvent<HTMLInputElement>) => {
-// 		// 	setValues({ ...values, [name]: event.target.value });
-// 		// };
+// const connectTaskForm = (form) => {
+// 	connect(
+// 		({orders}: State, {id}: any) => ({ initialValues: orders.tasks[id] }),
+// 		(dispatch: ThunkDispatch<any, any, any>, {orderId, taskId}) => ({ 
+// 			onSubmit: (values) => dispatch(ordersActions.task.modify(orderId, taskId, values)),
+// 			title: "Cotization",
+// 			submitText: "Save"
+// 		})
+// 	)(withStyles(styles)(form))
+// };
 
-// 		return (
-				
-// 		);
+const viewsMap = {
+	newOrder: connect(
+		null,
+		(dispatch: ThunkDispatch<any, any, any>) => ({
+			onSubmit: (values) => dispatch(ordersActions.order.add(values)),
+			title: "New order",
+			submitText: "Add"
+		})
+	)(withStyles(styles)(BaseOrderForm)),
+	editOrder: connect(
+		({orders}: State, {orderId}: any) => ({ initialValues: orders.orders[orderId] }),
+		(dispatch: ThunkDispatch<any, any, any>, {orderId}) => ({ 
+			onSubmit: (values) => dispatch(ordersActions.order.modify(orderId, values)),
+			title: "Edit order",
+			submitText: "Save"
+		})
+	)(withStyles(styles)(BaseOrderForm)),
+	editTask: connect(
+		({orders}: State, {taskId}: any) => ({ task: orders.tasks[taskId] }),
+		(dispatch: ThunkDispatch<any, any, any>, {orderId, taskId}) => ({ 
+			onSubmit: (values) => dispatch(ordersActions.task.modify(orderId, taskId, values)),
+			sendEmails: () => dispatch(ordersActions.task.sendEmails(orderId, taskId))
+		})
+	)(withStyles(styles)(BaseTaskForm)),
+	newUser: connect(
+		({users}: State) => ({ error: users.error }),
+		(dispatch: ThunkDispatch<any, any, any>) => ({
+			onSubmit: (values) => dispatch(usersActions.createUser(values)),
+			title: "New user",
+			submitText: "Create"
+		})
+	)(withStyles(styles)(BaseUser))
+};
+
+// const Contents = withStyles(styles)(({classes}: any) => {
+// 	return (
+// 		<Paper className={classes.container}>
+// 			<OrderForm />
+// 			{/* <TaskEdit /> */}
+// 		</Paper>
+// 	);
 // });
 
-const UserChip = ({name, pic}) => 
-	<Chip 
-		avatar={<Avatar src={`/imgs/profile/${pic}.png`}/>}
-		label={name}
-		onDelete={() => {}}
-	/>;
+const AppDrawer = withStyles(styles)(({view, params, classes}: any) => {
+	const View = viewsMap[view];
 
-const TaskEdit = withStyles(styles)(({classes}: any) => {
-		return (
-				<div>
-						<Typography className={classes.header} variant="h6">Client questionnaire</Typography>
-						<TextField
-								id="assignee"
-								label="Assigned to"
-								className={classes.wideField}
-								value="Juan Delgado"
-								variant="outlined"
-								InputProps={{
-										startAdornment: (
-												<InputAdornment position="start">
-														<Avatar src="/imgs/profile/man.png"/>
-												</InputAdornment>
-										)
-								}}
-						/>
-						<TextField
-								id="notified"
-								label="Subscribed"
-								className={classes.wideField}
-								variant="outlined"
-								InputProps={{
-										startAdornment: (
-												<InputAdornment position="start">
-														<Avatar style={{marginRight: 5}} src="/imgs/profile/girl.png"/>
-														<Avatar src="/imgs/profile/boy.png"/>
-												</InputAdornment>
-										)
-								}}
-						/>
-						<Typography variant="body1">Check the following items with the client</Typography>
-						<List>
-								<ListItem dense button className={classes.listItem}>
-										<CheckBox color="primary" checked={true}/>
-										<ListItemText>Item 1</ListItemText>
-								</ListItem>
-								<ListItem dense button className={classes.listItem}>
-										<CheckBox color="primary" checked={true}/>
-										<ListItemText>Item 2</ListItemText>
-								</ListItem>
-								<ListItem dense button className={classes.listItem}>
-										<CheckBox color="primary" checked={false}/>
-										<ListItemText>Item 3</ListItemText>
-								</ListItem>
-								<ListItem dense button className={classes.listItem}>
-										<CheckBox color="primary" checked={false}/>
-										<ListItemText>...</ListItemText>
-								</ListItem>
-						</List>
-						<div style={{textAlign: "center"}}>
-								<Button className={classes.button} variant="contained" color="secondary">
-										Add note
-										<NoteAddIcon style={{marginLeft: 10}} />
-								</Button>
-								<Button className={classes.button} style={{marginTop: "-10px"}} variant="contained" color="primary">
-										Mark as finished
-										<CheckCircle style={{marginLeft: 10}} />
-								</Button>
-						</div>
-				</div>
-		);
-})
-
-const NewOrder = withStyles(styles)(BaseNewOrder);
-
-const Contents = withStyles(styles)((props: any) => {
-	let {classes} = props;
 	return (
-		<Paper className={classes.container}>
-			<NewOrder onSubmit={(values) => console.log(values)} />
-			{/* <TaskEdit /> */}
-		</Paper>
+		// <Drawer variant="persistent" anchor="left" {...props} open={true} PaperProps={{style: {
+		//     top: "64px",
+		//     // background: colors.orange[700],
+		//     // background: "rgb(149, 152, 161) none repeat scroll 0% 0%",
+		//     background: "rgb(66, 67, 72) none repeat scroll 0% 0%"
+		// }}}>
+				// {/* <div style={{display: 'flex',
+				//     alignItems: 'center',
+				//     // padding: '0 8px',
+				//     // ...theme.mixins.toolbar,
+				//     justifyContent: 'flex-end'
+				// }}>
+				//     <IconButton onClick={onClose}>
+				//         <CloseIcon />
+				//     </IconButton>
+				// </div> */}
+				<div style={{width: 300, display: "inline-block", float: "left", position: "relative"}}>
+					<CloseIcon style={{position: "absolute", right: 25, top: 35}} />
+					{/* <Contents {...params}/> */}
+					<Paper className={classes.container}>
+						<View {...params} />
+					</Paper>
+				</div>
+		// </Drawer>
 	);
 });
-
-
-const AppDrawer = (onClose, ...props) => {
-		console.log(props["open"]);
-		return (
-				// <Drawer variant="persistent" anchor="left" {...props} open={true} PaperProps={{style: {
-				//     top: "64px",
-				//     // background: colors.orange[700],
-				//     // background: "rgb(149, 152, 161) none repeat scroll 0% 0%",
-				//     background: "rgb(66, 67, 72) none repeat scroll 0% 0%"
-				// }}}>
-						// {/* <div style={{display: 'flex',
-						//     alignItems: 'center',
-						//     // padding: '0 8px',
-						//     // ...theme.mixins.toolbar,
-						//     justifyContent: 'flex-end'
-						// }}>
-						//     <IconButton onClick={onClose}>
-						//         <CloseIcon />
-						//     </IconButton>
-						// </div> */}
-						<div style={{width: 300, display: "inline-block", float: "left", position: "relative"}}>
-								<CloseIcon style={{position: "absolute", right: 25, top: 35}}/>
-								<Contents/>
-						</div>
-				// </Drawer>
-		);
-}
 
 export default withStyles(styles)(AppDrawer);
