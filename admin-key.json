@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "arubair-flows",
+  "private_key_id": "62270f620352b8d575ed6153bbddacb1794784bc",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCLIdy0H4YMWoDo\nea6jdASl5Jt023g1TedGAsjHVKagf7kvOVWLAYwUBkW7nr/W1kTmWgHzRB2WW0o0\nNW1IAKdjrezHCDnxvpx3juNlnRqwFBVyZH3Uqwhp5/1lktXsckjfQfjSqxH/sgto\nMOduC8z31AK9R+d4unD3U+oKXhGmtAi5MXnkPefjKXZAS+6V9lqLGR+m4U3scEHk\n2QjGJLmQwpcAjrVVeZZsu/6B0m4TFRVkskCcTqAFVmU/fTe8LqMPh11V8VaxP2bV\nvb3X41ckNrmNwfPnwf4nZurtneynOFiMqaDGq4Wq6OiW75Y3RNjfsLZ9PVXKXBEk\nOiyGyirzAgMBAAECgf9qrCgngDzGdNZEg+qMZ6599GUDXiUvnNI1BgnqWHy+A2gi\n2xms3a16V42tr4lJyuIInmune6BQJ1ivBA6awldblX4C4q9Rm4wGHpXlC4DORpe5\nKzaj5Zp/mImE84+fHRzegW82wPKL0a9Clq32ThXm0NDXFeaNfw9zA0cKHaPAOXxH\nKwAtKEGZUc5L9JvXT3AtV7pokoxKrrrxPKYjoTDnSzRMCduCsAZ9ZxW0cgc5rJql\navrL+U50fOUa2Rhd8UEGwkH59gJwkPpfDDKlR/cv7VjazHVAm+S8txmCAQUgsj1H\nDNGyOral1S9JXjw1bHKsL/dt/MaYn9PYZIyvLakCgYEAwkXxmr8Soh03bSF/nGef\nQ1aZtJbxmQWH1/Ly2FO6/IKis+1Fe7M+embHKYpzS3AwthlYBacCam3yEr1ffQ/h\nozlk0ldMjOnzSw3yWzyBQPV1XEdE57bkNNf7Z4rOAZO3ts5WBw1W8BqaRHwsxUS7\npakYdf4J/ojU+HWwo4ncbCkCgYEAt1bKRLgg7RxdCbF6WPe9HKfsA41VkbgD/gjW\n2obF6Ujov+LtuXYLT9FfQBD7ok4RTWnm2vWA00it2N9YO6ki0KIqJJecVCk8ffjj\nfx8R36lsr8034CQrx7MOG7HyqZ5FPkpgOjDTXI2ja4C3Hy0X9Wywx3tGffw93eJZ\nMl7jAbsCgYBVhJaLKQsZw8SvTGyxO8gWy1tT7JIjaxTWUcLmyUzpdNQMYikQ/+FD\n3lRTi/eewJ8gud1Od6sPkKBb8XLESaZoxI4GLZmr+hw38Ma7tNGs96AW4+SIH7Er\nNdwcQzTV6uGXHhMufYfEn+FCvmqy18PGc74pyo85taASUzRTeQ9HqQKBgQCRRsGS\ngID+wjnrA2paczy0J0+6ZNUIWdM4ChMOKDtNJsvfuVb8XdCK1/JtFsf+jXPibudS\nW7VQNsgjEJ+e7uA6iDVyt3xVqDNZ8s16HsmP/HW2PJxpDOBwJq8oPPJ3e4WM3Wyw\nz528OjPjbKQunRHeFNljyIhMLoNrff+GDXA+HwKBgQC8djPAsRtwtN3W8gNCHBWy\nHEQXlUHsJhUNqyHH3LN4io9/bsyhElrawAzcuNMUumMNcdXIzuuMSu8UiGxNWBvN\nYOZsdv1UP6+v6cvRCd9ZYTLTdgijMnz0hARGZ3nnlbOAHFW9SJUj0Vpi1sX049cb\nF0Mt0LvAcjixGegHmaSsDA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "arubair-flows@appspot.gserviceaccount.com",
+  "client_id": "116958168835895786755",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/arubair-flows%40appspot.gserviceaccount.com"
+}

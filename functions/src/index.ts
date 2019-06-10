@@ -6,8 +6,10 @@ import * as smtpTransport from 'nodemailer-smtp-transport';
 firebase.initializeApp();
 
 // const corsFn = cors({ origin: true });
-const ordersColl = firebase.firestore().collection('orders');
 const firestore = firebase.firestore;
+const db = firestore(); 
+const ordersColl = db.collection('orders');
+const usersColl = db.collection('users');
 
 const account = "mails@arubair.com";
 
@@ -154,5 +156,24 @@ export const sendTaskEmailsNow = functions.https.onCall(async ({orderId, taskId,
 		// 	return res.send('Sended');
 		// });
 	// });
+});
+
+export const checkDues = functions.https.onRequest((req, res) => {
+	const messaging = firebase.messaging();
+	db.collectionGroup('tasks')
+		.where("due", "<", firestore.Timestamp.now())
+		.orderBy('due')
+		.onSnapshot(snapshot => {
+			snapshot.docs.forEach(doc => {
+				const { assigned, subscribed } = doc.data();
+
+				messaging.send({
+					token: 
+					data: {
+
+					}
+				});
+			});
+		});
 });
 

@@ -17,10 +17,12 @@ const firebaseConfig = {
 	firebase.firestore().enablePersistence()
     .catch(function(err) {
         if (err.code == 'failed-precondition') {
+            alert("Multiple tabs not allowed");
             // Multiple tabs open, persistence can only be enabled
             // in one tab at a a time.
             // ...
         } else if (err.code == 'unimplemented') {
+            alert("Browser does not support offline functionality");
             // The current browser does not support all of the
             // features required to enable persistence
             // ...

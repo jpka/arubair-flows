@@ -17,12 +17,16 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import { connect } from 'react-redux';
 // import { 
 //   colors
 // } from '@material-ui/core';
 // import {
 //   Add as AddIcon
 // } from '@material-ui/icons';
+import {
+  actions as uiActions
+} from '../modules/ui';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -96,23 +100,34 @@ const styles = (theme: Theme) =>
   });
 
 export interface Props extends WithStyles<typeof styles> {
-  onAdd: any,
-  position: any
+  position: any,
+  addUser: () => any
 }
 
 interface State {
   anchorEl: null | HTMLElement;
   mobileMoreAnchorEl: null | HTMLElement;
+  menu: {
+    name?: string,
+    origin?: number | 'left' | 'right' | 'center'
+  };
 }
 
 class PrimarySearchAppBar extends React.Component<Props, State> {
   state: State = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
+    menu: {}
   };
 
-  handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    this.setState({ anchorEl: event.currentTarget });
+  handleMenuOpen = (name, origin) => (event: React.MouseEvent<HTMLElement>) => {
+    this.setState({ 
+      anchorEl: event.currentTarget,
+      menu: {
+        name,
+        origin
+      }
+    });
   };
 
   handleMenuClose = () => {
@@ -128,22 +143,32 @@ class PrimarySearchAppBar extends React.Component<Props, State> {
     this.setState({ mobileMoreAnchorEl: null });
   };
 
+  menuAction = (action) => () => {
+    this.handleMenuClose();
+    action();
+  };
+
   render() {
-    const { anchorEl, mobileMoreAnchorEl } = this.state;
-    const { classes } = this.props;
+    const { anchorEl, mobileMoreAnchorEl, menu } = this.state;
+    const { classes, addUser } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
     const renderMenu = (
       <Menu
         anchorEl={anchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{ vertical: 'top', horizontal: menu.origin || 'left' }}
+        transformOrigin={{ vertical: 'top', horizontal: menu.origin || 'left' }}
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+        {menu.name === "profile" && [
+          <MenuItem key={1} onClick={this.handleMenuClose}>Profile</MenuItem>,
+          <MenuItem key={2} onClick={this.handleMenuClose}>My account</MenuItem>
+        ]}
+        {menu.name === "actions" && [
+          <MenuItem key={1} onClick={this.menuAction(addUser)}>Add user</MenuItem>
+        ]}
       </Menu>
     );
 
@@ -171,7 +196,7 @@ class PrimarySearchAppBar extends React.Component<Props, State> {
           </IconButton>
           <p>Notifications</p>
         </MenuItem>
-        <MenuItem onClick={this.handleProfileMenuOpen}>
+        <MenuItem onClick={this.handleMenuOpen("profile", "left")}>
           <IconButton color="inherit">
             <AccountCircle />
           </IconButton>
@@ -184,7 +209,7 @@ class PrimarySearchAppBar extends React.Component<Props, State> {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton onClick={this.props.onAdd} className={classes.menuButton} color="inherit" aria-label="Open drawer">
+            <IconButton onClick={this.handleMenuOpen("actions", "left")} className={classes.menuButton} color="inherit" aria-label="Open drawer">
               <MenuIcon />
             </IconButton>
             {/* <IconButton color="inherit" style={{
@@ -233,7 +258,7 @@ class PrimarySearchAppBar extends React.Component<Props, State> {
               <IconButton
                 aria-owns={isMenuOpen ? 'material-appbar' : undefined}
                 aria-haspopup="true"
-                onClick={this.handleProfileMenuOpen}
+                onClick={this.handleMenuOpen("profile", "right")}
                 color="inherit"
               >
                 <Avatar src="/imgs/profile/boy.png" />
@@ -257,4 +282,7 @@ class PrimarySearchAppBar extends React.Component<Props, State> {
   classes: PropTypes.object.isRequired,
 } as any;
 
-export default withStyles(styles)(PrimarySearchAppBar);
+export default connect(
+  null,
+  ({addUser: uiActions.newUser})
+)(withStyles(styles)(PrimarySearchAppBar));

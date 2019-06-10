@@ -20,7 +20,8 @@ import {
 	SubTitle,
 	Checkbox,
 	RadioGroup,
-	SendEmailButton as OGSendEmailButton
+	SendEmailButton as OGSendEmailButton,
+	Select
 } from './components';
 import {
 	Task,
@@ -169,6 +170,15 @@ const makeTaskForm = (taskName, props) => {
 		return (
 			<Form>
 				<Title classes={classes}>{values.label}</Title>
+				<Select 
+					className={classes.wideField}
+					name="assignee" 
+					label="Assignee"
+					labelWidth={40} 
+					variant="outlined" 
+					required={true} 
+					options={props.users.map(user => [user.id, user.name])}
+				/>
 				<TextField
 					required
 					name="label"
