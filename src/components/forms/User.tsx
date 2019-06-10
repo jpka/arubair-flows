@@ -13,7 +13,8 @@ import {
 	Form,
 	TextField,
 	Select,
-	makeForm
+	makeForm,
+	Error
 } from './components';
 // import { Field } from 'formik'
 import * as Yup from 'yup';
@@ -54,6 +55,7 @@ export default makeForm(
 				className={classes.button} 
 				variant="contained" 
 				color="primary">{submitText}</Button>
+			{/* {error && <Error>There has been an error, check your connection and try again</Error>} */}
 		</Form>
 	);
 });

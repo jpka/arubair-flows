@@ -7,7 +7,8 @@ export const actionTypes = {
 	editOrder: `${prefix}.EDIT_ORDER`,
 	editTask: `${prefix}.EDIT_TASK`,
 	newUser: `${prefix}.NEW_USER`,
-	notification: `${prefix}.ERROR`
+	notification: `${prefix}.ERROR`,
+	drawerClose: `${prefix}.CLOSE_DRAWER`
 };
 
 export const actions = {
@@ -15,7 +16,8 @@ export const actions = {
 	editOrder: (orderId) => ({ type: actionTypes.editOrder, payload: { orderId } }),
 	editTask: (orderId, taskId) => ({ type: actionTypes.editTask, payload: { orderId, taskId } }),
 	newUser: () => ({ type: actionTypes.newUser }),
-	notification: (notification) => ({ type: actionTypes.notification, payload: notification })
+	notification: (notification) => ({ type: actionTypes.notification, payload: notification }),
+	closeDrawer: () => ({ type: actionTypes.drawerClose })
 };
 
 interface DrawerState {
@@ -37,6 +39,8 @@ export const reducer = combineReducers({
 				return {view: "editTask", params: payload};
 			case actionTypes.newUser:
 				return {view: "newUser", params: null};
+			case actionTypes.drawerClose:
+				return null;
 			default:
 				return state;
 		}

@@ -6,6 +6,7 @@ import {
 	Theme,
 	Chip,
 	Avatar,
+	Drawer
 } from '@material-ui/core';
 import {
 	Close as CloseIcon, AccountCircle, CheckBox, NoteAdd as NoteAddIcon, CheckCircle
@@ -17,7 +18,10 @@ import {
 } from '../modules/orders';
 import { 
 	actions as usersActions
-} from '../modules/users'
+} from '../modules/users';
+import { 
+	actions as uiActions
+} from '../modules/ui';
 import { ThunkDispatch } from 'redux-thunk';
 
 import { State } from '../index';
@@ -25,7 +29,7 @@ import BaseOrderForm from './forms/Order';
 import BaseTaskForm from './forms/Task';
 import BaseUser from './forms/User';
 
-const styles = (theme: Theme) => ({
+export const styles = (theme: Theme) => ({
 	container: {
 	//   display: 'flex',
 	//   flexWrap: 'wrap',
@@ -51,10 +55,10 @@ const styles = (theme: Theme) => ({
 		width: "100%"
 	},
 	header: {
-			marginBottom: 15
+		marginBottom: 15
 	},
 	listItem: {
-			paddingLeft: 0
+		paddingLeft: 0
 	}
 });
 
@@ -94,14 +98,15 @@ const viewsMap = {
 		})
 	)(withStyles(styles)(BaseOrderForm)),
 	editTask: connect(
-		({orders}: State, {taskId}: any) => ({ task: orders.tasks[taskId] }),
+		({orders, users}: State, {taskId}: any) => ({ task: orders.tasks[taskId], users: users.users }),
 		(dispatch: ThunkDispatch<any, any, any>, {orderId, taskId}) => ({ 
 			onSubmit: (values) => dispatch(ordersActions.task.modify(orderId, taskId, values)),
 			sendEmails: () => dispatch(ordersActions.task.sendEmails(orderId, taskId))
 		})
 	)(withStyles(styles)(BaseTaskForm)),
 	newUser: connect(
-		({users}: State) => ({ error: users.error }),
+		// ({users}: State) => ({ error: users.error }),
+		null,
 		(dispatch: ThunkDispatch<any, any, any>) => ({
 			onSubmit: (values) => dispatch(usersActions.createUser(values)),
 			title: "New user",
@@ -119,11 +124,13 @@ const viewsMap = {
 // 	);
 // });
 
-const AppDrawer = withStyles(styles)(({view, params, classes}: any) => {
+const AppDrawer = connect(
+	null,
+	({close: uiActions.closeDrawer})
+)(withStyles(styles)(({view, params, classes, close, ...props}: any) => {
 	const View = viewsMap[view];
 
-	return (
-		// <Drawer variant="persistent" anchor="left" {...props} open={true} PaperProps={{style: {
+	// PaperProps={{style: {
 		//     top: "64px",
 		//     // background: colors.orange[700],
 		//     // background: "rgb(149, 152, 161) none repeat scroll 0% 0%",
@@ -139,15 +146,18 @@ const AppDrawer = withStyles(styles)(({view, params, classes}: any) => {
 				//         <CloseIcon />
 				//     </IconButton>
 				// </div> */}
-				<div style={{width: 300, display: "inline-block", float: "left", position: "relative"}}>
-					<CloseIcon style={{position: "absolute", right: 25, top: 35}} />
-					{/* <Contents {...params}/> */}
-					<Paper className={classes.container}>
-						<View {...params} />
-					</Paper>
-				</div>
+
+	return (
+		// <Drawer variant="persistent" anchor="left" {...props} open={true}>
+			<div style={{width: 300, display: "inline-block", float: "left", position: "relative"}}>
+				<CloseIcon onClick={close} style={{position: "absolute", right: 25, top: 35}} />
+				{/* <Contents {...params}/> */}
+				<Paper className={classes.container}>
+					<View {...params} />
+				</Paper>
+			</div>
 		// </Drawer>
 	);
-});
+}));
 
 export default withStyles(styles)(AppDrawer);

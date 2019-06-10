@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { 
-	colors
+	colors, Paper
 } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/styles';
-import { createMuiTheme, Theme } from '@material-ui/core/styles';
+import { createMuiTheme, Theme, withStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import { SnackbarProvider, withSnackbar } from 'notistack';
+import { withSnackbar } from 'notistack';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { connect } from 'react-redux';
 
 import { 
 	State, 
 	Dashboard 
 } from '../index';
-import { connect } from 'react-redux';
+import { actions as usersActions } from '../modules/users';
+import LoginForm from './forms/Login';
+import { styles as drawerStyles } from './Drawer';
 
 declare module "@material-ui/core/styles/createMuiTheme" {
 	interface ThemeOptions {
@@ -56,14 +60,38 @@ export const useStyles = makeStyles((theme: Theme) => createStyles({
 const Notification = connect(
 	({ui}: State) => ({notification: ui.notification})
 )(withSnackbar(({enqueueSnackbar, notification}: any) => {
-	if (notification) enqueueSnackbar(notification.message, { variant: notification.type });
+	if (notification) useEffect(() => { enqueueSnackbar(notification.message, { variant: notification.type }) });
 	return <div></div>;
 }));
+
+const Login = connect(
+	// ({users}: State) => ({ error: users.error }),
+	null,
+	(dispatch: any) => ({
+		onSubmit: (values) => { dispatch(usersActions.login(values)); }
+	})
+)(withStyles(drawerStyles)(LoginForm));
 
 const App = () => {
 	return (
 		<ThemeProvider theme={theme}>
-			<Dashboard />
+			<Router>
+				<Switch>
+					<Route path="/login" render={() => <div style={{
+						width: 300,
+						margin: "0 auto",
+						padding: 10,
+						position: "relative",
+						top: "50vh",
+						transform: "translateY(-50%)"
+					}}>
+						<Paper style={{padding: "20px 30px"}}>
+							<Login />
+						</Paper>
+					</div>} />
+					<Route path="/" component={Dashboard} />
+				</Switch>
+			</Router>
 			{/* <Router>
 				<Switch>
 				<Route path="/users" component={Users} />

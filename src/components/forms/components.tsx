@@ -76,6 +76,7 @@ export const TextField = ({name, ...props}) => {
 
 export const Select = ({name, label, labelWidth, options, required, ...props}) => {
 	const id = `${name}-field`;
+	const optionsArray = Array.isArray(options);
 	return (
 		<Field name={name} render={({field}) => (
 			<FormControl {...props}>
@@ -85,7 +86,9 @@ export const Select = ({name, label, labelWidth, options, required, ...props}) =
 					input={ <OutlinedInput required={required} id={id} {...field} labelWidth={labelWidth}/> }
 				>
 					{Object.keys(options).map(k => (
-						<MenuItem key={k} value={Array.isArray(options) ? options[k] : k}>{options[k]}</MenuItem>)
+						<MenuItem key={k} value={optionsArray ? options[k][0] : k}>
+							{optionsArray ? options[k][1] : options[k]}
+						</MenuItem>)
 					)}
 				</MSelect>
 			</FormControl>

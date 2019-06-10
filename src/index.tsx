@@ -1,8 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './components/App';
-import * as serviceWorker from './serviceWorker';
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { bindActionCreators, combineReducers } from 'redux';
@@ -13,7 +10,10 @@ import PickerAdapter from '@date-io/moment';
 import { SnackbarProvider } from 'notistack';
 import 'typeface-roboto';
 
+import './index.css';
+import * as serviceWorker from './serviceWorker';
 import './plumbing';
+import App from './components/App';
 import BaseUsers from './components/Users';
 import BaseDashboard from './components/Dashboard';
 import BaseDrawer from './components/Drawer';
@@ -23,7 +23,8 @@ import {
 } from './modules/ui';
 import { 
 	actions as usersActions,
-	reducer as usersReducer
+	reducer as usersReducer,
+	connect as usersConnect
 } from './modules/users';
 import { 
 	actions as ordersActions,
@@ -82,6 +83,7 @@ const initialState: State = {
 const composeEnhancers = window["__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"] || compose;
 const store = createStore(reducer, initialState, composeEnhancers(applyMiddleware(thunk)));
 ordersConnect(store.dispatch);
+usersConnect(store.dispatch);
 
 ReactDOM.render(
 	<Provider store={store}>
@@ -97,4 +99,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register();
