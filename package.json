@@ -63,6 +63,7 @@
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.1",
+    "react-select": "^3.0.4",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "resolve": "1.10.0",
@@ -84,7 +85,9 @@
     "start": "PORT=3006 node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "emulator": "GOOGLE_APPLICATION_CREDENTIALS='admin-key.json' firebase emulators:start --only functions"
+    "fb:credentials": "export GOOGLE_APPLICATION_CREDENTIALS=\"/home/morat-van/dev/work/arubair/app/admin-key.json\"",
+    "fb:emulator:fn": "npm run fb:credentials && firebase emulators:start --only functions",
+    "fb:fn:shell": "GOOGLE_APPLICATION_CREDENTIALS=\"/home/morat-van/dev/work/arubair/app/admin-key.json\" && firebase functions:shell"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -13,6 +13,7 @@ import {
 	Form,
 	TextField,
 	Select,
+	DateTimePicker,
 	makeForm
 } from './components';
 // import { Field } from 'formik'
@@ -31,11 +32,10 @@ const schema = Yup.object().shape({
 
 const OrderForm = makeForm(
 	{validationSchema: schema}, 
-	({classes, title, isValid, submitText}: any) => {
+	({classes, title, isValid, submitText, ...props}: any) => {
 	return (
 		<Form>
 			<Typography className={classes.header} variant="h6">{title}</Typography>
-			{/* <Field name="clientName" component={() => */}
 			<TextField
 				required
 				name="client.name"
@@ -44,7 +44,6 @@ const OrderForm = makeForm(
 				margin="normal"
 				variant="outlined"
 			/>
-			{/* }/> */}
 			<Select 
 				className={classes.wideField}
 				name="type" 
@@ -54,23 +53,6 @@ const OrderForm = makeForm(
 				required={true} 
 				options={{import: "Import", export: "Export", other: "Other"}}
 			/>
-			{/* <FormControl variant="outlined" className={classes.wideField}>
-				<InputLabel htmlFor="type">Type</InputLabel>
-				<Select
-					required
-					input={
-						<OutlinedInput
-							value="Import"
-							labelWidth={40}
-							name="type"
-							id="type"
-						/>
-					}
-				>
-					<MenuItem value="Import">Import</MenuItem>
-					<MenuItem value="Export">Export</MenuItem>
-				</Select>
-			</FormControl> */}
 			<TextField
 				required
 				name="client.email"
@@ -93,10 +75,12 @@ const OrderForm = makeForm(
 				margin="normal"
 				variant="outlined"
 			/>
-			{/* <TextField
-				name="jobDate"
-				label="operations"
-			/> */}
+			{/* {props.edit && <DateTimePicker 
+				name="jobDate" 
+				label="Job date" 
+				classes={classes} 
+				variant="outlined" 
+			/>} */}
 			{/* <div style={{textAlign: "center"}}> */}
 				<Button 
 					type="submit"

@@ -77,19 +77,21 @@ export const TextField = ({name, ...props}) => {
 export const Select = ({name, label, labelWidth, options, required, ...props}) => {
 	const id = `${name}-field`;
 	const optionsArray = Array.isArray(options);
+	const selectProps = props.selectProps || {};
 	return (
 		<Field name={name} render={({field}) => (
 			<FormControl {...props}>
 				<InputLabel htmlFor={id}>{label}</InputLabel>
 				<MSelect
-					value={field.value || ""}
+					value={field.value || (props.multiple ? [] : "")}
 					input={ <OutlinedInput required={required} id={id} {...field} labelWidth={labelWidth}/> }
+					multiple={props.multiple}
 				>
 					{Object.keys(options).map(k => (
 						<MenuItem key={k} value={optionsArray ? options[k][0] : k}>
 							{optionsArray ? options[k][1] : options[k]}
-						</MenuItem>)
-					)}
+						</MenuItem>
+					))}
 				</MSelect>
 			</FormControl>
 		)}/>
@@ -101,7 +103,7 @@ export const DateTimePicker = ({name, label, variant, ...props}) => (
 		<OGDateTimePicker
 			name={name}
 			label={label}
-			value={field.value}
+			value={field.value ? (field.value.toDate ? field.value.toDate() : field.value) : null}
 			minutesStep={30}
 			onChange={(val: any) => field.onChange({target: {name, value: val.toDate()}})}
 			inputVariant={variant}

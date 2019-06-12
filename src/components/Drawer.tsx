@@ -94,7 +94,8 @@ const viewsMap = {
 		(dispatch: ThunkDispatch<any, any, any>, {orderId}) => ({ 
 			onSubmit: (values) => dispatch(ordersActions.order.modify(orderId, values)),
 			title: "Edit order",
-			submitText: "Save"
+			submitText: "Save",
+			edit: true
 		})
 	)(withStyles(styles)(BaseOrderForm)),
 	editTask: connect(

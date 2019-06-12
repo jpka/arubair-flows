@@ -7,8 +7,9 @@ import { makeStyles, createStyles } from '@material-ui/styles';
 import { createMuiTheme, Theme, withStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { withSnackbar } from 'notistack';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
+import Login from './Login';
 
 import { 
 	State, 
@@ -64,32 +65,40 @@ const Notification = connect(
 	return <div></div>;
 }));
 
-const Login = connect(
-	// ({users}: State) => ({ error: users.error }),
-	null,
-	(dispatch: any) => ({
-		onSubmit: (values) => { dispatch(usersActions.login(values)); }
-	})
-)(withStyles(drawerStyles)(LoginForm));
-
-const App = () => {
+const App = connect(
+	({users}: State) => ({loggedIn: users.loggedIn})
+)(({loggedIn}) => {
 	return (
 		<ThemeProvider theme={theme}>
 			<Router>
 				<Switch>
-					<Route path="/login" render={() => <div style={{
-						width: 300,
-						margin: "0 auto",
-						padding: 10,
-						position: "relative",
-						top: "50vh",
-						transform: "translateY(-50%)"
-					}}>
-						<Paper style={{padding: "20px 30px"}}>
-							<Login />
-						</Paper>
-					</div>} />
-					<Route path="/" component={Dashboard} />
+					<Route path="/login" render={() =>
+						loggedIn
+						?
+						<Redirect to="/" />
+						:
+						<div style={{
+							width: 300,
+							margin: "0 auto",
+							padding: 10,
+							position: "relative",
+							top: "50vh",
+							transform: "translateY(-50%)"
+						}}>
+							<Paper style={{padding: "20px 30px"}}>
+								<Login />
+							</Paper>
+						</div>
+					}/>
+					<Route path="/" render={() => {
+						if (loggedIn === false) {
+							return <Redirect to="/login" />;
+						} else if (loggedIn) {
+							return <Dashboard />;
+						} else {
+							return null;
+						}
+					}} />
 				</Switch>
 			</Router>
 			{/* <Router>
@@ -101,6 +110,6 @@ const App = () => {
 			<Notification />
 		</ThemeProvider>
 	);
-};
+});
 
 export default App;

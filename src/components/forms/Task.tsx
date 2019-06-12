@@ -146,6 +146,45 @@ const taskFragments = {
 				</React.Fragment>
 			);
 		}
+	},
+	cotizationFollowup: {
+		schema: {},
+		Fragment: ({classes, values, setValues, ...props}) => {
+			if (values.data.jobDate && (values.data.jobDateReserved === "false" || values.data.cotizationAnswered === "false")) {
+				setValues({...values, data: {...values.data, jobDate: null}});
+			}
+			return (
+				<React.Fragment>
+					<FormGroup row>
+						<SubTitle classes={classes}>Cotization answered?</SubTitle>
+						<RadioGroup name="data.cotizationAnswered" options={[["Yes", true], ["No", false]]} />
+					</FormGroup>
+					{values.data && values.data.cotizationAnswered === "true" && (
+						<React.Fragment>
+							<FormGroup row>
+								<SubTitle classes={classes}>job date reserved?</SubTitle>
+								<RadioGroup name="data.jobDateReserved" options={[["Yes", true], ["No", false]]} />
+							</FormGroup>
+							{values.data && values.data.jobDateReserved === "true" && (
+								<DateTimePicker 
+									name="data.jobDate" 
+									label="Job date" 
+									classes={classes} 
+									variant="outlined" 
+								/>
+							)}
+						</React.Fragment>
+					)}
+					{values.data && (values.data.cotizationAnswered === "false" || values.data.jobDateReserved === "false") && (
+						<React.Fragment>
+							<TextField name="emails.list[0].subject" label="Email subject" variant="outlined" />
+							<TextField name="emails.list[0].body" label="Email body" variant="outlined" multiline />
+							<SendEmailButton className={classes.button} values={values} {...props} />
+						</React.Fragment>
+					)}
+				</React.Fragment>
+			);
+		}
 	}
 };
 
@@ -163,22 +202,14 @@ const makeTaskForm = (taskName, props) => {
 			data: taskFragment.schema,
 		}),
 		...props,
-	}, ({classes, values, isValid}: any) => {
+	}, ({classes, values, isValid, ...otherProps}: any) => {
 		//@ts-ignore
 		const completed = utils.taskIsCompleted(values);
-		console.log("form values", values);
+		// console.log("form values", values);
+		const userOptions: any[] = props.users.map(user => [user.id, user.name]);
 		return (
 			<Form>
 				<Title classes={classes}>{values.label}</Title>
-				<Select 
-					className={classes.wideField}
-					name="assignee" 
-					label="Assignee"
-					labelWidth={40} 
-					variant="outlined" 
-					required={true} 
-					options={props.users.map(user => [user.id, user.name])}
-				/>
 				<TextField
 					required
 					name="label"
@@ -187,9 +218,28 @@ const makeTaskForm = (taskName, props) => {
 					margin="normal"
 					variant="outlined"
 				/>
+				<Select 
+					className={classes.wideField}
+					name="assignee" 
+					label="Assignee"
+					labelWidth={70} 
+					variant="outlined" 
+					required={false} 
+					options={userOptions}
+				/>
+				<Select 
+					className={classes.wideField}
+					name="subscribers" 
+					label="Subscribers"
+					labelWidth={80} 
+					variant="outlined" 
+					required={false} 
+					options={userOptions.filter(([id]) => id !== values.assignee)}
+					multiple
+				/>
 				<DateTimePicker name="due" label="Due" classes={classes} variant="outlined" />
 
-				<Fragment {...props} values={values} />
+				<Fragment {...props} {...otherProps} values={values} />
 				
 				<Button 
 					type="submit"

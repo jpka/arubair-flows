@@ -3,6 +3,7 @@ import * as firebase from 'firebase-admin';
 import * as nodemailer from 'nodemailer';
 // import * as cors from 'cors';
 import * as smtpTransport from 'nodemailer-smtp-transport';
+import * as moment from 'moment';
 firebase.initializeApp();
 
 // const corsFn = cors({ origin: true });
@@ -158,22 +159,70 @@ export const sendTaskEmailsNow = functions.https.onCall(async ({orderId, taskId,
 	// });
 });
 
-export const checkDues = functions.https.onRequest((req, res) => {
-	const messaging = firebase.messaging();
-	db.collectionGroup('tasks')
-		.where("due", "<", firestore.Timestamp.now())
-		.orderBy('due')
-		.onSnapshot(snapshot => {
-			snapshot.docs.forEach(doc => {
-				const { assigned, subscribed } = doc.data();
+const messaging = firebase.messaging();
 
-				messaging.send({
-					token: 
+const sendMessageToUser = async (userId: string, message) => {
+	const userDoc = await usersColl.doc(userId).get();
+	if (!userDoc) return false;
+	const data = userDoc.data();
+	if (!data) return false;
+	const tokens = data.tokens;
+	if (!tokens) return false;
+	return Object.keys(tokens).map(token => messaging.send({...message, token}));
+}
+
+export const checkDues = functions.https.onCall(async () => {
+	const query = db.collectionGroup('tasks').where("due", "<", firestore.Timestamp.now()).orderBy("due");
+	const pending = query.where("status", "==", "pending");
+	const overdue = query.where("status", "==", "overdue");
+	const process = (status) => {
+		return (snapshot: firebase.firestore.QuerySnapshot) => {
+			snapshot.forEach(async taskDoc => {
+				const { assignee, subscribers, id, orderId, label, due } = taskDoc.data();
+				if (!assignee && !subscribers) return;
+				const orderDoc = await ordersColl.doc(orderId).get();
+				const order = orderDoc.data();
+				if (!orderDoc.exists || !order) {
+					taskDoc.ref.delete();
+					return;
+				}
+				const message = {
+					notification: {
+						title: `${label} (${order.type}) - ${order.client.name}`
+					},
 					data: {
-
+						taskId: id
 					}
-				});
+				};
+
+				if (assignee) {
+					sendMessageToUser(assignee, {
+						...message,
+						notification: {
+							...message.notification,
+							body: "It's time to complete this task"
+						}
+					});
+				}
+
+				if (subscribers) {
+					subscribers.forEach(subscriber => {
+						sendMessageToUser(assignee, {
+							...message,
+							notification: {
+								...message.notification,
+								body: "This task's time is up"
+							}
+						});
+					});
+				}
+
+				taskDoc.ref.update({ status: "overdue", due: moment(due.toDate()).add(1, 'hour').toDate() })
 			});
-		});
+		}
+	}
+
+	overdue.get().then(process("overdue"));
+	pending.get().then(process("pending"));
 });
 

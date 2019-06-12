@@ -27,6 +27,9 @@ import { connect } from 'react-redux';
 import {
   actions as uiActions
 } from '../modules/ui';
+import {
+  actions as userActions
+} from '../modules/users';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -101,7 +104,8 @@ const styles = (theme: Theme) =>
 
 export interface Props extends WithStyles<typeof styles> {
   position: any,
-  addUser: () => any
+  addUser: () => any,
+  logout: () => any
 }
 
 interface State {
@@ -150,7 +154,7 @@ class PrimarySearchAppBar extends React.Component<Props, State> {
 
   render() {
     const { anchorEl, mobileMoreAnchorEl, menu } = this.state;
-    const { classes, addUser } = this.props;
+    const { classes, addUser, logout } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -163,8 +167,8 @@ class PrimarySearchAppBar extends React.Component<Props, State> {
         onClose={this.handleMenuClose}
       >
         {menu.name === "profile" && [
-          <MenuItem key={1} onClick={this.handleMenuClose}>Profile</MenuItem>,
-          <MenuItem key={2} onClick={this.handleMenuClose}>My account</MenuItem>
+          <MenuItem key={1} onClick={this.handleMenuClose}>Edit user</MenuItem>,
+          <MenuItem key={2} onClick={this.menuAction(logout)}>Logout</MenuItem>
         ]}
         {menu.name === "actions" && [
           <MenuItem key={1} onClick={this.menuAction(addUser)}>Add user</MenuItem>
@@ -284,5 +288,5 @@ class PrimarySearchAppBar extends React.Component<Props, State> {
 
 export default connect(
   null,
-  ({addUser: uiActions.newUser})
+  ({addUser: uiActions.newUser, logout: userActions.logout})
 )(withStyles(styles)(PrimarySearchAppBar));

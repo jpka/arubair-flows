@@ -2,6 +2,7 @@ import moment from 'moment';
 import firebase, { database } from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/functions';
+import 'firebase/auth';
 import produce from 'immer';
 // import { uniq, different } from 'lodash';
 
@@ -50,7 +51,7 @@ export interface Task {
 	name: 'importCotizationConfirmation' | 'exportCotizationConfirmation' | 'exportPricesRequest' | 'cotizationFollowup',
 	label: string,
 	type: 'alarm' | 'email',
-	status: 'pending' | 'in progress' | 'completed',
+	status: 'pending' | 'in progress' | 'completed' | 'overdue',
 	due: firebase.firestore.Timestamp | Date,
 	dueDate?: number,
 	data?: any,
@@ -88,7 +89,7 @@ export const actionTypes = {
 }
 
 const isEmpty = v => v === null || v === undefined || v === "";
-const checkEmails = (emails) => emails.status === "sent"
+const checkEmails = (emails) => emails && emails.status === "sent"
 const tasksMeta: {
 	[key: string]: {
 		defaults?: any,
@@ -112,17 +113,21 @@ const tasksMeta: {
 			label: "Cotization confirmation",
 		},
 		conditions: {
-			data: ({data}) => (
-				data && !isEmpty(data.cotization)
+			data: ({data, emails}) => (
+				(data && !isEmpty(data.cotization))
+				||
+				checkEmails(emails)
 			)
 		},
-		afterSave: ({orderId, ...task}: Task) => {
-			if (!orderId) return;
-			createTask(orderId, {
-				type: "alarm",
-				name: "cotizationFollowup",
-				due: moment().add(7, 'days').toDate()
-			});
+		afterSave: (task: Task) => {
+			if (!task.orderId) return;
+			if (task.status === "completed") {
+				createTask(task.orderId, {
+					type: "alarm",
+					name: "cotizationFollowup",
+					due: moment().add(7, 'days').toDate()
+				});
+			}
 		}
 	},
 	exportPricesRequest: {
@@ -174,11 +179,18 @@ const tasksMeta: {
 	},
 	cotizationFollowup: {
 		defaults: {
-			label: "Cotization followup"
+			label: "Cotization followup",
+			emails: {
+				list: [{subject: "Cotization followup", body: "Cotization followup template"}]
+			}
 		},
 		conditions: {
-			data: ({emails}) => {
-				return checkEmails(emails);
+			data: ({data, emails}) => (data && data.jobDate) || checkEmails(emails)
+		},
+		beforeSave: (task: Task) => {
+			const { data } = task;
+			if (data.cotizationAnswered === true && data.jobDateReserved === false) {
+				task.due = moment(task.due).add(14, 'days').toDate();
 			}
 		}
 	}
@@ -197,11 +209,26 @@ const formatTask = (task: Partial<Task>) => {
 	return task;
 }
 
-const createTask = (orderId: string, {name, ...task}: Partial<Task>) => {
+// const parseTask = (task: Task) => {
+// 	task.data && Object.keys(task.data).forEach(key => { 
+// 		const value = task.data[key];
+// 		if (
+// 			(typeof value === "string" && value.trim() === "")
+// 		)  {
+// 			task.data[key] = null
+// 		}
+// 	});
+// 	return task;
+// }
+
+const createTask = async (orderId: string, {name, ...task}: Partial<Task>) => {
 	const defaults = (name && tasksMeta[name] && tasksMeta[name].defaults) || {};
+	const currentUser = firebase.auth().currentUser;
 	return ordersColl.doc(orderId).collection('tasks').add(formatTask({
 		status: "pending",
 		name,
+		orderId,
+		assignee: currentUser && currentUser.uid,
 		...defaults,
 		...task
 	}));
@@ -248,7 +275,8 @@ export const actions = {
 							createTask(doc.id, {
 								type: "alarm",
 								name: "exportPricesRequest",
-								due: new Date()
+								due: new Date(),
+								status: "overdue"
 							}),
 							createTask(doc.id, {
 								type: "alarm",
@@ -296,7 +324,7 @@ export const actions = {
 			console.log("update values", values);
 			if (taskMeta.beforeSave) taskMeta.beforeSave(updatedTask);
 			await doc.update(values);
-			// if (taskMeta.afterSave) taskMeta.afterSave(getTask(orderId, id));
+			if (taskMeta.afterSave) taskMeta.afterSave(updatedTask);
 			return dispatch({ type: actionTypes.tasks.modify });
 		},
 		added: (orderId, id, task: Task) => ({

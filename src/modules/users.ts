@@ -27,6 +27,7 @@ export const actionTypes = {
 	authenticating: `${prefix}.AUTHENTICATING`,
 	authenticationError: `${prefix}.AUTHENTICATION_ERROR`,
 	authenticated: `${prefix}.AUTHENTICATED`,
+	logout: `${prefix}.LOGOUT`,
 	usersChanged: `${prefix}.USERS_CHANGED`
 }
 
@@ -77,13 +78,18 @@ export const actions = {
 		}
 	},
 	authenticated: (user) => ({type: actionTypes.authenticated, payload: { user } }),
-	usersChanged: (users) => ({ type: actionTypes.usersChanged, payload: users })
+	usersChanged: (users) => ({ type: actionTypes.usersChanged, payload: users }),
+	logout: () => async dispatch => {
+		await auth.signOut();
+		return dispatch({type: actionTypes.logout});
+	}
 }
 
 export interface UsersState {
 	users: User[],
 	current: User | null,
-	creationStatus: "processing" | null
+	creationStatus: "processing" | null,
+	loggedIn: boolean | undefined
 }
 
 export const initialState: UsersState = {
@@ -126,7 +132,14 @@ export const reducer = (state: UsersState = initialState, action) => {
 		case actionTypes.authenticated:
 			return {
 				...state,
-				current: payload.user
+				current: payload.user,
+				loggedIn: true
+			};
+		case actionTypes.logout:
+			return {
+				...state,
+				current: null,
+				loggedIn: false
 			};
 		case actionTypes.usersChanged:
 			return {
