@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/functions';
 
 const firebaseConfig = {
 	apiKey: "AIzaSyBFShbAKxP-A7I90schh5O1fJv0AyJmSeA",
@@ -13,7 +14,7 @@ const firebaseConfig = {
 
 // export default () => {
 	// Initialize Firebase
-	firebase.initializeApp(firebaseConfig);
+	const app = firebase.initializeApp(firebaseConfig);
 	firebase.firestore().enablePersistence()
     .catch(function(err) {
         if (err.code == 'failed-precondition') {
@@ -28,4 +29,5 @@ const firebaseConfig = {
             // ...
         }
     });
+    app.functions().useFunctionsEmulator('http://localhost:5001');
 // }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	Button,
 	InputAdornment,
@@ -23,6 +23,7 @@ import {
 	SendEmailButton as OGSendEmailButton,
 	Select
 } from './components';
+import Modal from "../Modal";
 import {
 	Task,
 	utils,
@@ -31,11 +32,12 @@ import {
 
 const SendEmailButton = (props) => {
 	console.log("send email button values", props.values);
+	console.log(props);
 	return <OGSendEmailButton 
 		className={props.className}
 		send={props.sendEmails}
 		status={props.values.emails && props.values.emails.status}
-		sentTimes={props.values.emails && props.values.emails.sentTimes}
+		// sentTimes={props.values.emails && props.values.emails.sentTimes}
 	/>;
 }
 
@@ -149,10 +151,16 @@ const taskFragments = {
 	},
 	cotizationFollowup: {
 		schema: {},
-		Fragment: ({classes, values, setValues, ...props}) => {
-			if (values.data.jobDate && (values.data.jobDateReserved === "false" || values.data.cotizationAnswered === "false")) {
+		Fragment: ({classes, setValues, modalOpen, setModalOpen, ...props}) => {
+			const { values } = props;
+			// const [emailModalOpen, setEmailModalOpen] = useState(false);
+			
+			if (values.data && values.data.jobDate && (values.data.jobDateReserved === "false" || values.data.cotizationAnswered === "false")) {
 				setValues({...values, data: {...values.data, jobDate: null}});
 			}
+
+			console.log("values", values);
+
 			return (
 				<React.Fragment>
 					<FormGroup row>
@@ -177,9 +185,20 @@ const taskFragments = {
 					)}
 					{values.data && (values.data.cotizationAnswered === "false" || values.data.jobDateReserved === "false") && (
 						<React.Fragment>
-							<TextField name="emails.list[0].subject" label="Email subject" variant="outlined" />
+							<Modal open={modalOpen} setOpen={setModalOpen}>
+								<EmailForm classes={classes} {...props} index={0} />
+							</Modal>
+							<Button 
+								className={classes.button} 
+								variant="contained" 
+								color="secondary"
+								onClick={() => setModalOpen(true)}
+							>
+								Send email to client
+							</Button>
+							{/* <TextField name="emails.list[0].subject" label="Email subject" variant="outlined" />
 							<TextField name="emails.list[0].body" label="Email body" variant="outlined" multiline />
-							<SendEmailButton className={classes.button} values={values} {...props} />
+							<SendEmailButton className={classes.button} values={values} {...props} /> */}
 						</React.Fragment>
 					)}
 				</React.Fragment>
@@ -187,6 +206,16 @@ const taskFragments = {
 		}
 	}
 };
+
+export const EmailForm = React.forwardRef(({index, classes, ...props}: any, ref) => {
+	return (
+		<React.Fragment>
+			<TextField name={`emails.list[${index}].subject`} label="Subject" variant="outlined" />
+			<TextField name={`emails.list[${index}].body`} label="Body" variant="outlined" multiline />
+			<SendEmailButton className={classes.button} {...props} />
+		</React.Fragment>
+	)
+});
 
 const makeTaskForm = (taskName, props) => {
 	// console.log(props);
@@ -206,7 +235,7 @@ const makeTaskForm = (taskName, props) => {
 		//@ts-ignore
 		const completed = utils.taskIsCompleted(values);
 		// console.log("form values", values);
-		const userOptions: any[] = props.users.map(user => [user.id, user.name]);
+		const userOptions: any[] = Object.values(props.users).map((user: any) => [user.id, user.name]);
 		return (
 			<Form>
 				<Title classes={classes}>{values.label}</Title>
@@ -257,7 +286,8 @@ const makeTaskForm = (taskName, props) => {
 
 const TaskForms = {};
 
-export default ({task, ...props}: {task: Task}) => {
+export default (props: {task: Task}) => {
+	const { task } = props;
 	if (!TaskForms[task.name]) TaskForms[task.name] = makeTaskForm(task.name, props);
 	const TaskForm = TaskForms[task.name];
 	return (

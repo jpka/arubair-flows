@@ -231,7 +231,7 @@ export const RadioGroup = ({name, options, ...props}) => {
 	)
 }
 
-export const SendEmailButton = ({status, send, sentTimes, ...props}) => {
+export const SendEmailButton = ({status, send, ...props}) => {
 	const classes = useStyles();
 	const sending = status === "sending";
 	return (
@@ -249,7 +249,7 @@ export const SendEmailButton = ({status, send, sentTimes, ...props}) => {
 				{sending && <CircularProgress size={24} className={classes.buttonProgress} />}
 			</div>
 			{status === "failed" && <Error>Failed to send emails. Check the connection and try again</Error>}
-			{(sentTimes && status !== "failed") && <Typography variant="caption">Emails succesfully sent {sentTimes} times</Typography>}
+			{/* {(sentTimes && status !== "failed") && <Typography variant="caption">Emails succesfully sent {sentTimes} times</Typography>} */}
 		</div>
 	);
 }
@@ -259,9 +259,18 @@ export const Title = ({classes, children}) => <Typography className={classes.hea
 export const SubTitle = ({classes, children}) => <Typography variant="subtitle1">{children}</Typography>;
 
 export const makeForm = (props, Component) => {
+	// const isValid = ({ errors }) => Object.keys(errors).length === 0;
+	// const isInitialValid = ({ touched }) => touched ? true : false;
+	const isInitialValid = true;
 	return ({classes, onSubmit, ...otherProps}) => {
+		// console.log(otherProps.initialValues);
+		// onSubmit = (values, { resetForm }) => {
+		// 	resetForm(values);
+		// 	return onSubmit(values);
+		// };
+
 		return (
-			<Formik onSubmit={onSubmit} initialValues={otherProps.initialValues} {...props}>
+			<Formik onSubmit={onSubmit} initialValues={otherProps.initialValues} isInitialValid={isInitialValid} {...props}>
 				{(props) => <Component classes={classes} {...props} {...otherProps} />}
 			</Formik>
 		);

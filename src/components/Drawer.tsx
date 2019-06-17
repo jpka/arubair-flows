@@ -28,6 +28,7 @@ import { State } from '../index';
 import BaseOrderForm from './forms/Order';
 import BaseTaskForm from './forms/Task';
 import BaseUser from './forms/User';
+import EditUser from './forms/EditUser';
 
 export const styles = (theme: Theme) => ({
 	container: {
@@ -99,10 +100,14 @@ const viewsMap = {
 		})
 	)(withStyles(styles)(BaseOrderForm)),
 	editTask: connect(
-		({orders, users}: State, {taskId}: any) => ({ task: orders.tasks[taskId], users: users.users }),
+		({orders, users, ui}: State, {taskId}: any) => ({ 
+			task: orders.tasks[taskId], users: users.users,
+			modalOpen: ui.modal
+		}),
 		(dispatch: ThunkDispatch<any, any, any>, {orderId, taskId}) => ({ 
 			onSubmit: (values) => dispatch(ordersActions.task.modify(orderId, taskId, values)),
-			sendEmails: () => dispatch(ordersActions.task.sendEmails(orderId, taskId))
+			sendEmails: () => dispatch(ordersActions.task.sendEmails(orderId, taskId)),
+			setModalOpen: (state) => dispatch(uiActions.setModalOpen(state))
 		})
 	)(withStyles(styles)(BaseTaskForm)),
 	newUser: connect(
@@ -113,7 +118,13 @@ const viewsMap = {
 			title: "New user",
 			submitText: "Create"
 		})
-	)(withStyles(styles)(BaseUser))
+	)(withStyles(styles)(BaseUser)),
+	editUser: connect(
+		({users}: State) => ({ initialValues: users.users[users.current.uid] }),
+		(dispatch: ThunkDispatch<any, any, any>, { initialValues }: any) => ({ 
+			onSubmit: (values) => dispatch(usersActions.modify(values.id, values))
+		})
+	)(withStyles(styles)(EditUser)),
 };
 
 // const Contents = withStyles(styles)(({classes}: any) => {

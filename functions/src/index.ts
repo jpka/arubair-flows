@@ -83,12 +83,14 @@ var transporter = nodemailer.createTransport(smtpTransport({
 	logger: true
 }));
 
-const sendEmail = (email: TaskEmail) => {
+const sendEmail = (email: TaskEmail, clientAddress) => {
 	const mailOptions = {
 		// from: 'Your Account Name <yourgmailaccount@gmail.com>', // Something like: Jane Doe <janedoe@gmail.com>
 		from: account,
 		replyTo: account,
-		to: email.recipients.map(recipient => recipient.address),
+		to: email.recipients.map(
+			recipient => recipient.address === "CLIENT_ADDRESS" ? clientAddress : recipient.address
+		),
 		// bcc: account,
 		subject: email.subject, // email subject
 		html: email.body // email content in HTML
@@ -120,7 +122,10 @@ const sendTaskEmails = async (orderId, id, task: Task, mock = false) => {
 	} else {
 		emails = (task.emails && task.emails.list) || [];
 	}
-	const taskRef = ordersColl.doc(orderId).collection('tasks').doc(id);
+	const orderDoc = ordersColl.doc(orderId);
+	const order = (await orderDoc.get()).data();
+	if (!order) return;
+	const taskRef = orderDoc.collection('tasks').doc(id);
 	// const updateTask = () => taskRef.update(task);
 	let done: Promise<any>[] = [];
 	if (!task.emails) task.emails = {};
@@ -132,10 +137,13 @@ const sendTaskEmails = async (orderId, id, task: Task, mock = false) => {
 		// email.status = "sending";
 		// updateTask();
 		// done.push(sendEmail(email).then(updateTask));
-		done.push(mock ? sendEmailMock() : sendEmail(email));
+		done.push(mock ? sendEmailMock() : sendEmail(email, order.client.email));
 	});
 	return Promise.all(done)
-		.then(() => taskRef.update({"emails.status": "sent", "emails.sentTimes": firestore.FieldValue.increment(1)}))
+		.then(() => taskRef.update({
+			"emails.status": "sent", 
+			// "emails.sentTimes": task.emails.sentTimes + 1
+		}))
 		.catch(error => taskRef.update({"emails.status": "failed", "emails.error": error.toString()}));
 }
 
@@ -143,6 +151,7 @@ const getTask = async (orderId, id) => (await ordersColl.doc(orderId).collection
 
 export const sendTaskEmailsNow = functions.https.onCall(async ({orderId, taskId, mock}, context) => {
 	// corsFn(req, res, async () => {
+		console.log("sendTaskEmailsNow triggered");
 		const task: any = await getTask(orderId, taskId);
 		if (task) {
 			await sendTaskEmails(orderId, taskId, task, mock || false);

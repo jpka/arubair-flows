@@ -1,1110 +1,679 @@
-[debug] [2019-06-11T04:27:02.986Z] ----------------------------------------------------------------------
-[debug] [2019-06-11T04:27:02.988Z] Command:       /home/morat-van/.nvm/versions/node/v10.15.3/bin/node /home/morat-van/.nvm/versions/node/v10.15.3/bin/firebase functions:shell
-[debug] [2019-06-11T04:27:02.988Z] CLI Version:   6.11.0
-[debug] [2019-06-11T04:27:02.988Z] Platform:      linux
-[debug] [2019-06-11T04:27:02.988Z] Node Version:  v10.15.3
-[debug] [2019-06-11T04:27:02.988Z] Time:          Tue Jun 11 2019 01:27:02 GMT-0300 (Argentina Standard Time)
-[debug] [2019-06-11T04:27:02.988Z] ----------------------------------------------------------------------
+[debug] [2019-06-12T23:29:05.853Z] ----------------------------------------------------------------------
+[debug] [2019-06-12T23:29:05.855Z] Command:       /home/morat-van/.nvm/versions/node/v10.15.3/bin/node /home/morat-van/.nvm/versions/node/v10.15.3/bin/firebase functions:shell
+[debug] [2019-06-12T23:29:05.855Z] CLI Version:   6.11.0
+[debug] [2019-06-12T23:29:05.855Z] Platform:      linux
+[debug] [2019-06-12T23:29:05.855Z] Node Version:  v10.15.3
+[debug] [2019-06-12T23:29:05.856Z] Time:          Wed Jun 12 2019 20:29:05 GMT-0300 (Argentina Standard Time)
+[debug] [2019-06-12T23:29:05.856Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2019-06-11T04:27:02.995Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2019-06-11T04:27:02.995Z] > authorizing via signed-in user
-[debug] [2019-06-11T04:27:02.995Z] [iam] checking project arubair-flows for permissions ["firebase.projects.get"]
-[debug] [2019-06-11T04:27:02.996Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/arubair-flows:testIamPermissions  
+[debug] [2019-06-12T23:29:05.862Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-06-12T23:29:05.862Z] > authorizing via signed-in user
+[debug] [2019-06-12T23:29:05.862Z] [iam] checking project arubair-flows for permissions ["firebase.projects.get"]
+[debug] [2019-06-12T23:29:05.864Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/arubair-flows:testIamPermissions  
 
-[debug] [2019-06-11T04:27:04.746Z] <<< HTTP RESPONSE 200
-[debug] [2019-06-11T04:27:04.762Z] [functions] Using node@10 from host.
-[debug] [2019-06-11T04:27:04.763Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/arubair-flows  
+[debug] [2019-06-12T23:29:07.219Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-12T23:29:07.234Z] [functions] Using node@10 from host.
+[debug] [2019-06-12T23:29:07.235Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/arubair-flows  
  
-[debug] [2019-06-11T04:27:06.892Z] <<< HTTP RESPONSE 200
-[debug] [2019-06-11T04:27:06.893Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/619775745147:getServerAppConfig  
+[debug] [2019-06-12T23:29:08.652Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-12T23:29:08.653Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/619775745147:getServerAppConfig  
  
-[debug] [2019-06-11T04:27:08.127Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-12T23:29:09.079Z] <<< HTTP RESPONSE 200
 [info] ✔  functions: Emulator started at http://localhost:5001
-[debug] [2019-06-11T04:27:08.142Z] [functions] Watching "/home/morat-van/dev/work/arubair/app/functions" for Cloud Functions...
-[debug] [2019-06-11T04:27:08.412Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T04:27:08.413Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T04:27:09.019Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-12T23:29:09.090Z] [functions] Watching "/home/morat-van/dev/work/arubair/app/functions" for Cloud Functions...
+[debug] [2019-06-12T23:29:09.369Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-12T23:29:09.369Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-12T23:29:09.956Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T04:27:09.348Z] [functions] HTTP trigger initialized at http://localhost:5001/arubair-flows/us-central1/sendTaskEmailsNow
-[debug] [2019-06-11T04:27:09.349Z] [functions] HTTP trigger initialized at http://localhost:5001/arubair-flows/us-central1/checkDues
+[debug] [2019-06-12T23:29:10.300Z] [functions] HTTP trigger initialized at http://localhost:5001/arubair-flows/us-central1/sendTaskEmailsNow
+[debug] [2019-06-12T23:29:10.301Z] [functions] HTTP trigger initialized at http://localhost:5001/arubair-flows/us-central1/checkDues
 [info] i  functions: Loaded functions: sendTaskEmailsNow, checkDues
-[debug] [2019-06-11T04:27:13.262Z] Accepted request POST /arubair-flows/us-central1/checkDues --> checkDues
-[debug] [2019-06-11T04:27:13.534Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T04:27:13.535Z] [functions] Beginning execution of "checkDues"
-[debug] [2019-06-11T04:27:13.535Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T04:27:14.131Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-12T23:29:16.401Z] Accepted request POST /arubair-flows/us-central1/checkDues --> checkDues
+[debug] [2019-06-12T23:29:16.666Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-12T23:29:16.666Z] [functions] Beginning execution of "checkDues"
+[debug] [2019-06-12T23:29:16.667Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-12T23:29:17.244Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T04:27:14.275Z] DEBUG: Trigger "checkDues" has been found, beginning invocation!
-[debug] [2019-06-11T04:27:14.276Z] DEBUG: 
-[debug] [2019-06-11T04:27:14.276Z] DEBUG: Running checkDues in mode HTTPS
-[debug] [2019-06-11T04:27:14.282Z] {"socketPath":"/tmp/firebase_emulator_invocation_5453.sock"}
-[debug] [2019-06-11T04:27:14.285Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_5453.sock"}
-[debug] [2019-06-11T04:27:14.308Z] DEBUG: Ephemeral server used!
-[info] >  Request body is missing data. {}
-[info] >  Invalid request IncomingMessage {
-[info] >    _readableState:
-[info] >     ReadableState {
-[info] >       objectMode: false,
-[info] >       highWaterMark: 16384,
-[info] >       buffer: BufferList { head: null, tail: null, length: 0 },
-[info] >       length: 0,
-[info] >       pipes: null,
-[info] >       pipesCount: 0,
-[info] >       flowing: true,
-[info] >       ended: true,
-[info] >       endEmitted: true,
-[info] >       reading: false,
-[info] >       sync: false,
-[info] >       needReadable: false,
-[info] >       emittedReadable: false,
-[info] >       readableListening: false,
-[info] >       resumeScheduled: false,
-[info] >       paused: false,
-[info] >       emitClose: true,
-[info] >       destroyed: false,
-[info] >       defaultEncoding: 'utf8',
-[info] >       awaitDrain: 0,
-[info] >       readingMore: false,
-[info] >       decoder: null,
-[info] >       encoding: null },
-[info] >    readable: false,
-[info] >    _events:
-[info] >     [Object: null prototype] { end: [Function: resetHeadersTimeoutOnReqEnd] },
-[info] >    _eventsCount: 1,
-[info] >    _maxListeners: undefined,
-[info] >    socket:
-[info] >     Socket {
-[info] >       connecting: false,
-[info] >       _hadError: false,
-[info] >       _handle:
-[info] >        Pipe {
-[info] >          onread: [Function: onStreamRead],
-[info] >          reading: true,
-[info] >          _consumed: true,
-[info] >          [Symbol(owner)]: [Circular] },
-[info] >       _parent: null,
-[info] >       _host: null,
-[info] >       _readableState:
-[info] >        ReadableState {
-[info] >          objectMode: false,
-[info] >          highWaterMark: 16384,
-[info] >          buffer: BufferList { head: null, tail: null, length: 0 },
-[info] >          length: 0,
-[info] >          pipes: null,
-[info] >          pipesCount: 0,
-[info] >          flowing: true,
-[info] >          ended: false,
-[info] >          endEmitted: false,
-[info] >          reading: true,
-[info] >          sync: false,
-[info] >          needReadable: true,
-[info] >          emittedReadable: false,
-[info] >          readableListening: false,
-[info] >          resumeScheduled: false,
-[info] >          paused: false,
-[info] >          emitClose: false,
-[info] >          destroyed: false,
-[info] >          defaultEncoding: 'utf8',
-[info] >          awaitDrain: 0,
-[info] >          readingMore: false,
-[info] >          decoder: null,
-[info] >          encoding: null },
-[info] >       readable: true,
-[info] >       _events:
-[info] >        [Object: null prototype] {
-[info] >          end: [Array],
-[info] >          drain: [Array],
-[info] >          timeout: [Function: socketOnTimeout],
-[info] >          data: [Function: bound socketOnData],
-[info] >          error: [Function: socketOnError],
-[info] >          close: [Array],
-[info] >          resume: [Function: onSocketResume],
-[info] >          pause: [Function: onSocketPause] },
-[info] >       _eventsCount: 8,
-[info] >       _maxListeners: undefined,
-[info] >       _writableState:
-[info] >        WritableState {
-[info] >          objectMode: false,
-[info] >          highWaterMark: 16384,
-[info] >          finalCalled: false,
-[info] >          needDrain: false,
-[info] >          ending: false,
-[info] >          ended: false,
-[info] >          finished: false,
-[info] >          destroyed: false,
-[info] >          decodeStrings: false,
-[info] >          defaultEncoding: 'utf8',
-[info] >          length: 0,
-[info] >          writing: false,
-[info] >          corked: 0,
-[info] >          sync: true,
-[info] >          bufferProcessing: false,
-[info] >          onwrite: [Function: bound onwrite],
-[info] >          writecb: null,
-[info] >          writelen: 0,
-[info] >          bufferedRequest: null,
-[info] >          lastBufferedRequest: null,
-[info] >          pendingcb: 0,
-[info] >          prefinished: false,
-[info] >          errorEmitted: false,
-[info] >          emitClose: false,
-[info] >          bufferedRequestCount: 0,
-[info] >          corkedRequestsFree: [Object] },
-[info] >       writable: true,
-[info] >       allowHalfOpen: true,
-[info] >       _sockname: null,
-[info] >       _pendingData: null,
-[info] >       _pendingEncoding: '',
-[info] >       server:
-[info] >        Server {
-[info] >          _events: [Object],
-[info] >          _eventsCount: 2,
-[info] >          _maxListeners: undefined,
-[info] >          _connections: 1,
-[info] >          _handle: [Pipe],
-[info] >          _usingWorkers: false,
-[info] >          _workers: [],
-[info] >          _unref: false,
-[info] >          allowHalfOpen: true,
-[info] >          pauseOnConnect: false,
-[info] >          httpAllowHalfOpen: false,
-[info] >          timeout: 120000,
-[info] >          keepAliveTimeout: 5000,
-[info] >          _pendingResponseData: 0,
-[info] >          maxHeadersCount: null,
-[info] >          headersTimeout: 40000,
-[info] >          _pipeName: '/tmp/firebase_emulator_invocation_5453.sock',
-[info] >          _connectionKey: '-1:/tmp/firebase_emulator_invocation_5453.sock:-1',
-[info] >          [Symbol(IncomingMessage)]: [Function],
-[info] >          [Symbol(ServerResponse)]: [Function],
-[info] >          [Symbol(asyncId)]: 16 },
-[info] >       _server:
-[info] >        Server {
-[info] >          _events: [Object],
-[info] >          _eventsCount: 2,
-[info] >          _maxListeners: undefined,
-[info] >          _connections: 1,
-[info] >          _handle: [Pipe],
-[info] >          _usingWorkers: false,
-[info] >          _workers: [],
-[info] >          _unref: false,
-[info] >          allowHalfOpen: true,
-[info] >          pauseOnConnect: false,
-[info] >          httpAllowHalfOpen: false,
-[info] >          timeout: 120000,
-[info] >          keepAliveTimeout: 5000,
-[info] >          _pendingResponseData: 0,
-[info] >          maxHeadersCount: null,
-[info] >          headersTimeout: 40000,
-[info] >          _pipeName: '/tmp/firebase_emulator_invocation_5453.sock',
-[info] >          _connectionKey: '-1:/tmp/firebase_emulator_invocation_5453.sock:-1',
-[info] >          [Symbol(IncomingMessage)]: [Function],
-[info] >          [Symbol(ServerResponse)]: [Function],
-[info] >          [Symbol(asyncId)]: 16 },
-[info] >       timeout: 120000,
-[info] >       parser:
-[info] >        HTTPParser {
-[info] >          '0': [Function: parserOnHeaders],
-[info] >          '1': [Function: parserOnHeadersComplete],
-[info] >          '2': [Function: parserOnBody],
-[info] >          '3': [Function: parserOnMessageComplete],
-[info] >          '4': [Function: bound onParserExecute],
-[info] >          _headers: [],
-[info] >          _url: '',
-[info] >          socket: [Circular],
-[info] >          incoming: [Circular],
-[info] >          outgoing: null,
-[info] >          maxHeaderPairs: 2000,
-[info] >          _consumed: true,
-[info] >          onIncoming: [Function: bound parserOnIncoming],
-[info] >          parsingHeadersStart: 1560227234288,
-[info] >          [Symbol(isReused)]: false },
-[info] >       on: [Function: socketOnWrap],
-[info] >       _paused: false,
-[info] >       _httpMessage:
-[info] >        ServerResponse {
-[info] >          _events: [Object],
-[info] >          _eventsCount: 1,
-[info] >          _maxListeners: undefined,
-[info] >          output: [],
-[info] >          outputEncodings: [],
-[info] >          outputCallbacks: [],
-[info] >          outputSize: 0,
-[info] >          writable: true,
-[info] >          _last: false,
-[info] >          chunkedEncoding: false,
-[info] >          shouldKeepAlive: false,
-[info] >          useChunkedEncodingByDefault: true,
-[info] >          sendDate: true,
-[info] >          _removedConnection: false,
-[info] >          _removedContLen: false,
-[info] >          _removedTE: false,
-[info] >          _contentLength: null,
-[info] >          _hasBody: true,
-[info] >          _trailer: '',
-[info] >          finished: false,
-[info] >          _headerSent: false,
-[info] >          socket: [Circular],
-[info] >          connection: [Circular],
-[info] >          _header: null,
-[info] >          _onPendingData: [Function: bound updateOutgoingData],
-[info] >          _sent100: false,
-[info] >          _expect_continue: false,
-[info] >          req: [Circular],
-[info] >          locals: [Object: null prototype] {},
-[info] >          [Symbol(isCorked)]: false,
-[info] >          [Symbol(outHeadersKey)]: [Object] },
-[info] >       [Symbol(asyncId)]: 19,
-[info] >       [Symbol(lastWriteQueueSize)]: 0,
-[info] >       [Symbol(timeout)]:
-[info] >        Timeout {
-[info] >          _called: false,
-[info] >          _idleTimeout: 120000,
-[info] >          _idlePrev: [TimersList],
-[info] >          _idleNext: [TimersList],
-[info] >          _idleStart: 1031,
-[info] >          _onTimeout: [Function: bound ],
-[info] >          _timerArgs: undefined,
-[info] >          _repeat: null,
-[info] >          _destroyed: false,
-[info] >          [Symbol(unrefed)]: true,
-[info] >          [Symbol(asyncId)]: 20,
-[info] >          [Symbol(triggerId)]: 19 },
-[info] >       [Symbol(kBytesRead)]: 0,
-[info] >       [Symbol(kBytesWritten)]: 0 },
-[info] >    connection:
-[info] >     Socket {
-[info] >       connecting: false,
-[info] >       _hadError: false,
-[info] >       _handle:
-[info] >        Pipe {
-[info] >          onread: [Function: onStreamRead],
-[info] >          reading: true,
-[info] >          _consumed: true,
-[info] >          [Symbol(owner)]: [Circular] },
-[info] >       _parent: null,
-[info] >       _host: null,
-[info] >       _readableState:
-[info] >        ReadableState {
-[info] >          objectMode: false,
-[info] >          highWaterMark: 16384,
-[info] >          buffer: BufferList { head: null, tail: null, length: 0 },
-[info] >          length: 0,
-[info] >          pipes: null,
-[info] >          pipesCount: 0,
-[info] >          flowing: true,
-[info] >          ended: false,
-[info] >          endEmitted: false,
-[info] >          reading: true,
-[info] >          sync: false,
-[info] >          needReadable: true,
-[info] >          emittedReadable: false,
-[info] >          readableListening: false,
-[info] >          resumeScheduled: false,
-[info] >          paused: false,
-[info] >          emitClose: false,
-[info] >          destroyed: false,
-[info] >          defaultEncoding: 'utf8',
-[info] >          awaitDrain: 0,
-[info] >          readingMore: false,
-[info] >          decoder: null,
-[info] >          encoding: null },
-[info] >       readable: true,
-[info] >       _events:
-[info] >        [Object: null prototype] {
-[info] >          end: [Array],
-[info] >          drain: [Array],
-[info] >          timeout: [Function: socketOnTimeout],
-[info] >          data: [Function: bound socketOnData],
-[info] >          error: [Function: socketOnError],
-[info] >          close: [Array],
-[info] >          resume: [Function: onSocketResume],
-[info] >          pause: [Function: onSocketPause] },
-[info] >       _eventsCount: 8,
-[info] >       _maxListeners: undefined,
-[info] >       _writableState:
-[info] >        WritableState {
-[info] >          objectMode: false,
-[info] >          highWaterMark: 16384,
-[info] >          finalCalled: false,
-[info] >          needDrain: false,
-[info] >          ending: false,
-[info] >          ended: false,
-[info] >          finished: false,
-[info] >          destroyed: false,
-[info] >          decodeStrings: false,
-[info] >          defaultEncoding: 'utf8',
-[info] >          length: 0,
-[info] >          writing: false,
-[info] >          corked: 0,
-[info] >          sync: true,
-[info] >          bufferProcessing: false,
-[info] >          onwrite: [Function: bound onwrite],
-[info] >          writecb: null,
-[info] >          writelen: 0,
-[info] >          bufferedRequest: null,
-[info] >          lastBufferedRequest: null,
-[info] >          pendingcb: 0,
-[info] >          prefinished: false,
-[info] >          errorEmitted: false,
-[info] >          emitClose: false,
-[info] >          bufferedRequestCount: 0,
-[info] >          corkedRequestsFree: [Object] },
-[info] >       writable: true,
-[info] >       allowHalfOpen: true,
-[info] >       _sockname: null,
-[info] >       _pendingData: null,
-[info] >       _pendingEncoding: '',
-[info] >       server:
-[info] >        Server {
-[info] >          _events: [Object],
-[info] >          _eventsCount: 2,
-[info] >          _maxListeners: undefined,
-[info] >          _connections: 1,
-[info] >          _handle: [Pipe],
-[info] >          _usingWorkers: false,
-[info] >          _workers: [],
-[info] >          _unref: false,
-[info] >          allowHalfOpen: true,
-[info] >          pauseOnConnect: false,
-[info] >          httpAllowHalfOpen: false,
-[info] >          timeout: 120000,
-[info] >          keepAliveTimeout: 5000,
-[info] >          _pendingResponseData: 0,
-[info] >          maxHeadersCount: null,
-[info] >          headersTimeout: 40000,
-[info] >          _pipeName: '/tmp/firebase_emulator_invocation_5453.sock',
-[info] >          _connectionKey: '-1:/tmp/firebase_emulator_invocation_5453.sock:-1',
-[info] >          [Symbol(IncomingMessage)]: [Function],
-[info] >          [Symbol(ServerResponse)]: [Function],
-[info] >          [Symbol(asyncId)]: 16 },
-[info] >       _server:
-[info] >        Server {
-[info] >          _events: [Object],
-[info] >          _eventsCount: 2,
-[info] >          _maxListeners: undefined,
-[info] >          _connections: 1,
-[info] >          _handle: [Pipe],
-[info] >          _usingWorkers: false,
-[info] >          _workers: [],
-[info] >          _unref: false,
-[info] >          allowHalfOpen: true,
-[info] >          pauseOnConnect: false,
-[info] >          httpAllowHalfOpen: false,
-[info] >          timeout: 120000,
-[info] >          keepAliveTimeout: 5000,
-[info] >          _pendingResponseData: 0,
-[info] >          maxHeadersCount: null,
-[info] >          headersTimeout: 40000,
-[info] >          _pipeName: '/tmp/firebase_emulator_invocation_5453.sock',
-[info] >          _connectionKey: '-1:/tmp/firebase_emulator_invocation_5453.sock:-1',
-[info] >          [Symbol(IncomingMessage)]: [Function],
-[info] >          [Symbol(ServerResponse)]: [Function],
-[info] >          [Symbol(asyncId)]: 16 },
-[info] >       timeout: 120000,
-[info] >       parser:
-[info] >        HTTPParser {
-[info] >          '0': [Function: parserOnHeaders],
-[info] >          '1': [Function: parserOnHeadersComplete],
-[info] >          '2': [Function: parserOnBody],
-[info] >          '3': [Function: parserOnMessageComplete],
-[info] >          '4': [Function: bound onParserExecute],
-[info] >          _headers: [],
-[info] >          _url: '',
-[info] >          socket: [Circular],
-[info] >          incoming: [Circular],
-[info] >          outgoing: null,
-[info] >          maxHeaderPairs: 2000,
-[info] >          _consumed: true,
-[info] >          onIncoming: [Function: bound parserOnIncoming],
-[info] >          parsingHeadersStart: 1560227234288,
-[info] >          [Symbol(isReused)]: false },
-[info] >       on: [Function: socketOnWrap],
-[info] >       _paused: false,
-[info] >       _httpMessage:
-[info] >        ServerResponse {
-[info] >          _events: [Object],
-[info] >          _eventsCount: 1,
-[info] >          _maxListeners: undefined,
-[info] >          output: [],
-[info] >          outputEncodings: [],
-[info] >          outputCallbacks: [],
-[info] >          outputSize: 0,
-[info] >          writable: true,
-[info] >          _last: false,
-[info] >          chunkedEncoding: false,
-[info] >          shouldKeepAlive: false,
-[info] >          useChunkedEncodingByDefault: true,
-[info] >          sendDate: true,
-[info] >          _removedConnection: false,
-[info] >          _removedContLen: false,
-[info] >          _removedTE: false,
-[info] >          _contentLength: null,
-[info] >          _hasBody: true,
-[info] >          _trailer: '',
-[info] >          finished: false,
-[info] >          _headerSent: false,
-[info] >          socket: [Circular],
-[info] >          connection: [Circular],
-[info] >          _header: null,
-[info] >          _onPendingData: [Function: bound updateOutgoingData],
-[info] >          _sent100: false,
-[info] >          _expect_continue: false,
-[info] >          req: [Circular],
-[info] >          locals: [Object: null prototype] {},
-[info] >          [Symbol(isCorked)]: false,
-[info] >          [Symbol(outHeadersKey)]: [Object] },
-[info] >       [Symbol(asyncId)]: 19,
-[info] >       [Symbol(lastWriteQueueSize)]: 0,
-[info] >       [Symbol(timeout)]:
-[info] >        Timeout {
-[info] >          _called: false,
-[info] >          _idleTimeout: 120000,
-[info] >          _idlePrev: [TimersList],
-[info] >          _idleNext: [TimersList],
-[info] >          _idleStart: 1031,
-[info] >          _onTimeout: [Function: bound ],
-[info] >          _timerArgs: undefined,
-[info] >          _repeat: null,
-[info] >          _destroyed: false,
-[info] >          [Symbol(unrefed)]: true,
-[info] >          [Symbol(asyncId)]: 20,
-[info] >          [Symbol(triggerId)]: 19 },
-[info] >       [Symbol(kBytesRead)]: 0,
-[info] >       [Symbol(kBytesWritten)]: 0 },
-[info] >    httpVersionMajor: 1,
-[info] >    httpVersionMinor: 1,
-[info] >    httpVersion: '1.1',
-[info] >    complete: true,
-[info] >    headers:
-[info] >     { host: 'localhost:5001',
-[info] >       accept: 'application/json',
-[info] >       'content-type': 'application/json',
-[info] >       'content-length': '2',
-[info] >       connection: 'close' },
-[info] >    rawHeaders:
-[info] >     [ 'host',
-[info] >       'localhost:5001',
-[info] >       'accept',
-[info] >       'application/json',
-[info] >       'content-type',
-[info] >       'application/json',
-[info] >       'content-length',
-[info] >       '2',
-[info] >       'connection',
-[info] >       'close' ],
-[info] >    trailers: {},
-[info] >    rawTrailers: [],
-[info] >    aborted: false,
-[info] >    upgrade: false,
-[info] >    url: '/',
-[info] >    method: 'POST',
-[info] >    statusCode: null,
-[info] >    statusMessage: null,
-[info] >    client:
-[info] >     Socket {
-[info] >       connecting: false,
-[info] >       _hadError: false,
-[info] >       _handle:
-[info] >        Pipe {
-[info] >          onread: [Function: onStreamRead],
-[info] >          reading: true,
-[info] >          _consumed: true,
-[info] >          [Symbol(owner)]: [Circular] },
-[info] >       _parent: null,
-[info] >       _host: null,
-[info] >       _readableState:
-[info] >        ReadableState {
-[info] >          objectMode: false,
-[info] >          highWaterMark: 16384,
-[info] >          buffer: BufferList { head: null, tail: null, length: 0 },
-[info] >          length: 0,
-[info] >          pipes: null,
-[info] >          pipesCount: 0,
-[info] >          flowing: true,
-[info] >          ended: false,
-[info] >          endEmitted: false,
-[info] >          reading: true,
-[info] >          sync: false,
-[info] >          needReadable: true,
-[info] >          emittedReadable: false,
-[info] >          readableListening: false,
-[info] >          resumeScheduled: false,
-[info] >          paused: false,
-[info] >          emitClose: false,
-[info] >          destroyed: false,
-[info] >          defaultEncoding: 'utf8',
-[info] >          awaitDrain: 0,
-[info] >          readingMore: false,
-[info] >          decoder: null,
-[info] >          encoding: null },
-[info] >       readable: true,
-[info] >       _events:
-[info] >        [Object: null prototype] {
-[info] >          end: [Array],
-[info] >          drain: [Array],
-[info] >          timeout: [Function: socketOnTimeout],
-[info] >          data: [Function: bound socketOnData],
-[info] >          error: [Function: socketOnError],
-[info] >          close: [Array],
-[info] >          resume: [Function: onSocketResume],
-[info] >          pause: [Function: onSocketPause] },
-[info] >       _eventsCount: 8,
-[info] >       _maxListeners: undefined,
-[info] >       _writableState:
-[info] >        WritableState {
-[info] >          objectMode: false,
-[info] >          highWaterMark: 16384,
-[info] >          finalCalled: false,
-[info] >          needDrain: false,
-[info] >          ending: false,
-[info] >          ended: false,
-[info] >          finished: false,
-[info] >          destroyed: false,
-[info] >          decodeStrings: false,
-[info] >          defaultEncoding: 'utf8',
-[info] >          length: 0,
-[info] >          writing: false,
-[info] >          corked: 0,
-[info] >          sync: true,
-[info] >          bufferProcessing: false,
-[info] >          onwrite: [Function: bound onwrite],
-[info] >          writecb: null,
-[info] >          writelen: 0,
-[info] >          bufferedRequest: null,
-[info] >          lastBufferedRequest: null,
-[info] >          pendingcb: 0,
-[info] >          prefinished: false,
-[info] >          errorEmitted: false,
-[info] >          emitClose: false,
-[info] >          bufferedRequestCount: 0,
-[info] >          corkedRequestsFree: [Object] },
-[info] >       writable: true,
-[info] >       allowHalfOpen: true,
-[info] >       _sockname: null,
-[info] >       _pendingData: null,
-[info] >       _pendingEncoding: '',
-[info] >       server:
-[info] >        Server {
-[info] >          _events: [Object],
-[info] >          _eventsCount: 2,
-[info] >          _maxListeners: undefined,
-[info] >          _connections: 1,
-[info] >          _handle: [Pipe],
-[info] >          _usingWorkers: false,
-[info] >          _workers: [],
-[info] >          _unref: false,
-[info] >          allowHalfOpen: true,
-[info] >          pauseOnConnect: false,
-[info] >          httpAllowHalfOpen: false,
-[info] >          timeout: 120000,
-[info] >          keepAliveTimeout: 5000,
-[info] >          _pendingResponseData: 0,
-[info] >          maxHeadersCount: null,
-[info] >          headersTimeout: 40000,
-[info] >          _pipeName: '/tmp/firebase_emulator_invocation_5453.sock',
-[info] >          _connectionKey: '-1:/tmp/firebase_emulator_invocation_5453.sock:-1',
-[info] >          [Symbol(IncomingMessage)]: [Function],
-[info] >          [Symbol(ServerResponse)]: [Function],
-[info] >          [Symbol(asyncId)]: 16 },
-[info] >       _server:
-[info] >        Server {
-[info] >          _events: [Object],
-[info] >          _eventsCount: 2,
-[info] >          _maxListeners: undefined,
-[info] >          _connections: 1,
-[info] >          _handle: [Pipe],
-[info] >          _usingWorkers: false,
-[info] >          _workers: [],
-[info] >          _unref: false,
-[info] >          allowHalfOpen: true,
-[info] >          pauseOnConnect: false,
-[info] >          httpAllowHalfOpen: false,
-[info] >          timeout: 120000,
-[info] >          keepAliveTimeout: 5000,
-[info] >          _pendingResponseData: 0,
-[info] >          maxHeadersCount: null,
-[info] >          headersTimeout: 40000,
-[info] >          _pipeName: '/tmp/firebase_emulator_invocation_5453.sock',
-[info] >          _connectionKey: '-1:/tmp/firebase_emulator_invocation_5453.sock:-1',
-[info] >          [Symbol(IncomingMessage)]: [Function],
-[info] >          [Symbol(ServerResponse)]: [Function],
-[info] >          [Symbol(asyncId)]: 16 },
-[info] >       timeout: 120000,
-[info] >       parser:
-[info] >        HTTPParser {
-[info] >          '0': [Function: parserOnHeaders],
-[info] >          '1': [Function: parserOnHeadersComplete],
-[info] >          '2': [Function: parserOnBody],
-[info] >          '3': [Function: parserOnMessageComplete],
-[info] >          '4': [Function: bound onParserExecute],
-[info] >          _headers: [],
-[info] >          _url: '',
-[info] >          socket: [Circular],
-[info] >          incoming: [Circular],
-[info] >          outgoing: null,
-[info] >          maxHeaderPairs: 2000,
-[info] >          _consumed: true,
-[info] >          onIncoming: [Function: bound parserOnIncoming],
-[info] >          parsingHeadersStart: 1560227234288,
-[info] >          [Symbol(isReused)]: false },
-[info] >       on: [Function: socketOnWrap],
-[info] >       _paused: false,
-[info] >       _httpMessage:
-[info] >        ServerResponse {
-[info] >          _events: [Object],
-[info] >          _eventsCount: 1,
-[info] >          _maxListeners: undefined,
-[info] >          output: [],
-[info] >          outputEncodings: [],
-[info] >          outputCallbacks: [],
-[info] >          outputSize: 0,
-[info] >          writable: true,
-[info] >          _last: false,
-[info] >          chunkedEncoding: false,
-[info] >          shouldKeepAlive: false,
-[info] >          useChunkedEncodingByDefault: true,
-[info] >          sendDate: true,
-[info] >          _removedConnection: false,
-[info] >          _removedContLen: false,
-[info] >          _removedTE: false,
-[info] >          _contentLength: null,
-[info] >          _hasBody: true,
-[info] >          _trailer: '',
-[info] >          finished: false,
-[info] >          _headerSent: false,
-[info] >          socket: [Circular],
-[info] >          connection: [Circular],
-[info] >          _header: null,
-[info] >          _onPendingData: [Function: bound updateOutgoingData],
-[info] >          _sent100: false,
-[info] >          _expect_continue: false,
-[info] >          req: [Circular],
-[info] >          locals: [Object: null prototype] {},
-[info] >          [Symbol(isCorked)]: false,
-[info] >          [Symbol(outHeadersKey)]: [Object] },
-[info] >       [Symbol(asyncId)]: 19,
-[info] >       [Symbol(lastWriteQueueSize)]: 0,
-[info] >       [Symbol(timeout)]:
-[info] >        Timeout {
-[info] >          _called: false,
-[info] >          _idleTimeout: 120000,
-[info] >          _idlePrev: [TimersList],
-[info] >          _idleNext: [TimersList],
-[info] >          _idleStart: 1031,
-[info] >          _onTimeout: [Function: bound ],
-[info] >          _timerArgs: undefined,
-[info] >          _repeat: null,
-[info] >          _destroyed: false,
-[info] >          [Symbol(unrefed)]: true,
-[info] >          [Symbol(asyncId)]: 20,
-[info] >          [Symbol(triggerId)]: 19 },
-[info] >       [Symbol(kBytesRead)]: 0,
-[info] >       [Symbol(kBytesWritten)]: 0 },
-[info] >    _consuming: true,
-[info] >    _dumped: false,
-[info] >    next: [Function: next],
-[info] >    baseUrl: '',
-[info] >    originalUrl: '/',
-[info] >    _parsedUrl:
-[info] >     Url {
-[info] >       protocol: null,
-[info] >       slashes: null,
-[info] >       auth: null,
-[info] >       host: null,
-[info] >       port: null,
-[info] >       hostname: null,
-[info] >       hash: null,
-[info] >       search: null,
-[info] >       query: null,
-[info] >       pathname: '/',
-[info] >       path: '/',
-[info] >       href: '/',
-[info] >       _raw: '/' },
-[info] >    params: { '0': '' },
-[info] >    query: {},
-[info] >    res:
-[info] >     ServerResponse {
-[info] >       _events: [Object: null prototype] { finish: [Array] },
-[info] >       _eventsCount: 1,
-[info] >       _maxListeners: undefined,
-[info] >       output: [],
-[info] >       outputEncodings: [],
-[info] >       outputCallbacks: [],
-[info] >       outputSize: 0,
-[info] >       writable: true,
-[info] >       _last: false,
-[info] >       chunkedEncoding: false,
-[info] >       shouldKeepAlive: false,
-[info] >       useChunkedEncodingByDefault: true,
-[info] >       sendDate: true,
-[info] >       _removedConnection: false,
-[info] >       _removedContLen: false,
-[info] >       _removedTE: false,
-[info] >       _contentLength: null,
-[info] >       _hasBody: true,
-[info] >       _trailer: '',
-[info] >       finished: false,
-[info] >       _headerSent: false,
-[info] >       socket:
-[info] >        Socket {
-[info] >          connecting: false,
-[info] >          _hadError: false,
-[info] >          _handle: [Pipe],
-[info] >          _parent: null,
-[info] >          _host: null,
-[info] >          _readableState: [ReadableState],
-[info] >          readable: true,
-[info] >          _events: [Object],
-[info] >          _eventsCount: 8,
-[info] >          _maxListeners: undefined,
-[info] >          _writableState: [WritableState],
-[info] >          writable: true,
-[info] >          allowHalfOpen: true,
-[info] >          _sockname: null,
-[info] >          _pendingData: null,
-[info] >          _pendingEncoding: '',
-[info] >          server: [Server],
-[info] >          _server: [Server],
-[info] >          timeout: 120000,
-[info] >          parser: [HTTPParser],
-[info] >          on: [Function: socketOnWrap],
-[info] >          _paused: false,
-[info] >          _httpMessage: [Circular],
-[info] >          [Symbol(asyncId)]: 19,
-[info] >          [Symbol(lastWriteQueueSize)]: 0,
-[info] >          [Symbol(timeout)]:
-[info] >           Timeout {
-[info] >             _called: false,
-[info] >             _idleTimeout: 120000,
-[info] >             _idlePrev: [TimersList],
-[info] >             _idleNext: [TimersList],
-[info] >             _idleStart: 1031,
-[info] >             _onTimeout: [Function: bound ],
-[info] >             _timerArgs: undefined,
-[info] >             _repeat: null,
-[info] >             _destroyed: false,
-[info] >             [Symbol(unrefed)]: true,
-[info] >             [Symbol(asyncId)]: 20,
-[info] >             [Symbol(triggerId)]: 19 },
-[info] >          [Symbol(kBytesRead)]: 0,
-[info] >          [Symbol(kBytesWritten)]: 0 },
-[info] >       connection:
-[info] >        Socket {
-[info] >          connecting: false,
-[info] >          _hadError: false,
-[info] >          _handle: [Pipe],
-[info] >          _parent: null,
-[info] >          _host: null,
-[info] >          _readableState: [ReadableState],
-[info] >          readable: true,
-[info] >          _events: [Object],
-[info] >          _eventsCount: 8,
-[info] >          _maxListeners: undefined,
-[info] >          _writableState: [WritableState],
-[info] >          writable: true,
-[info] >          allowHalfOpen: true,
-[info] >          _sockname: null,
-[info] >          _pendingData: null,
-[info] >          _pendingEncoding: '',
-[info] >          server: [Server],
-[info] >          _server: [Server],
-[info] >          timeout: 120000,
-[info] >          parser: [HTTPParser],
-[info] >          on: [Function: socketOnWrap],
-[info] >          _paused: false,
-[info] >          _httpMessage: [Circular],
-[info] >          [Symbol(asyncId)]: 19,
-[info] >          [Symbol(lastWriteQueueSize)]: 0,
-[info] >          [Symbol(timeout)]:
-[info] >           Timeout {
-[info] >             _called: false,
-[info] >             _idleTimeout: 120000,
-[info] >             _idlePrev: [TimersList],
-[info] >             _idleNext: [TimersList],
-[info] >             _idleStart: 1031,
-[info] >             _onTimeout: [Function: bound ],
-[info] >             _timerArgs: undefined,
-[info] >             _repeat: null,
-[info] >             _destroyed: false,
-[info] >             [Symbol(unrefed)]: true,
-[info] >             [Symbol(asyncId)]: 20,
-[info] >             [Symbol(triggerId)]: 19 },
-[info] >          [Symbol(kBytesRead)]: 0,
-[info] >          [Symbol(kBytesWritten)]: 0 },
-[info] >       _header: null,
-[info] >       _onPendingData: [Function: bound updateOutgoingData],
-[info] >       _sent100: false,
-[info] >       _expect_continue: false,
-[info] >       req: [Circular],
-[info] >       locals: [Object: null prototype] {},
-[info] >       [Symbol(isCorked)]: false,
-[info] >       [Symbol(outHeadersKey)]:
-[info] >        [Object: null prototype] { 'x-powered-by': [Array], vary: [Array] } },
-[info] >    body: {},
-[info] >    _body: true,
-[info] >    length: undefined,
-[info] >    route:
-[info] >     Route {
-[info] >       path: '/*',
-[info] >       stack:
-[info] >        [ [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer],
-[info] >          [Layer] ],
-[info] >       methods:
-[info] >        { acl: true,
-[info] >          bind: true,
-[info] >          checkout: true,
-[info] >          connect: true,
-[info] >          copy: true,
-[info] >          delete: true,
-[info] >          get: true,
-[info] >          head: true,
-[info] >          link: true,
-[info] >          lock: true,
-[info] >          'm-search': true,
-[info] >          merge: true,
-[info] >          mkactivity: true,
-[info] >          mkcalendar: true,
-[info] >          mkcol: true,
-[info] >          move: true,
-[info] >          notify: true,
-[info] >          options: true,
-[info] >          patch: true,
-[info] >          post: true,
-[info] >          propfind: true,
-[info] >          proppatch: true,
-[info] >          purge: true,
-[info] >          put: true,
-[info] >          rebind: true,
-[info] >          report: true,
-[info] >          search: true,
-[info] >          source: true,
-[info] >          subscribe: true,
-[info] >          trace: true,
-[info] >          unbind: true,
-[info] >          unlink: true,
-[info] >          unlock: true,
-[info] >          unsubscribe: true } } }
-[debug] [2019-06-11T04:27:14.422Z] DEBUG: Ephemeral server survived.
-[debug] [2019-06-11T04:27:14.422Z] [functions] Finished "checkDues" in ~1s
-[debug] [2019-06-11T04:27:18.948Z] Accepted request POST /arubair-flows/us-central1/checkDues --> checkDues
-[debug] [2019-06-11T04:27:19.216Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T04:27:19.217Z] [functions] Beginning execution of "checkDues"
-[debug] [2019-06-11T04:27:19.217Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T04:27:19.803Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-12T23:29:17.396Z] DEBUG: Trigger "checkDues" has been found, beginning invocation!
+[debug] [2019-06-12T23:29:17.396Z] DEBUG: 
+[debug] [2019-06-12T23:29:17.396Z] DEBUG: Running checkDues in mode HTTPS
+[debug] [2019-06-12T23:29:17.403Z] {"socketPath":"/tmp/firebase_emulator_invocation_21109.sock"}
+[debug] [2019-06-12T23:29:17.405Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_21109.sock"}
+[debug] [2019-06-12T23:29:17.427Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-12T23:29:17.591Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-12T23:29:17.597Z] [functions] Finished "checkDues" in ~1s
+[debug] [2019-06-14T20:44:06.230Z] ----------------------------------------------------------------------
+[debug] [2019-06-14T20:44:06.234Z] Command:       /home/morat-van/.nvm/versions/node/v10.15.3/bin/node /home/morat-van/.nvm/versions/node/v10.15.3/bin/firebase functions:shell
+[debug] [2019-06-14T20:44:06.235Z] CLI Version:   6.11.0
+[debug] [2019-06-14T20:44:06.235Z] Platform:      linux
+[debug] [2019-06-14T20:44:06.235Z] Node Version:  v10.15.3
+[debug] [2019-06-14T20:44:06.256Z] Time:          Fri Jun 14 2019 17:44:06 GMT-0300 (Argentina Standard Time)
+[debug] [2019-06-14T20:44:06.256Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-06-14T20:44:06.302Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-06-14T20:44:06.302Z] > authorizing via signed-in user
+[debug] [2019-06-14T20:44:06.302Z] [iam] checking project arubair-flows for permissions ["firebase.projects.get"]
+[debug] [2019-06-14T20:44:06.304Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-06-14T20:44:06.304Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-06-14T20:44:06.641Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-14T20:44:06.657Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/arubair-flows:testIamPermissions  
+
+[debug] [2019-06-14T20:44:08.543Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-14T20:44:08.555Z] [functions] Using node@10 from host.
+[debug] [2019-06-14T20:44:08.556Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/arubair-flows  
+ 
+[debug] [2019-06-14T20:44:09.760Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-14T20:44:09.760Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/619775745147:getServerAppConfig  
+ 
+[debug] [2019-06-14T20:44:11.207Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: Emulator started at http://localhost:5001
+[debug] [2019-06-14T20:44:11.219Z] [functions] Watching "/home/morat-van/dev/work/arubair/app/functions" for Cloud Functions...
+[debug] [2019-06-14T20:44:11.566Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-14T20:44:11.567Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-14T20:44:12.894Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T04:27:19.955Z] DEBUG: Trigger "checkDues" has been found, beginning invocation!
-[debug] [2019-06-11T04:27:19.955Z] DEBUG: 
-[debug] [2019-06-11T04:27:19.956Z] DEBUG: Running checkDues in mode HTTPS
-[debug] [2019-06-11T04:27:19.962Z] {"socketPath":"/tmp/firebase_emulator_invocation_5514.sock"}
-[debug] [2019-06-11T04:27:19.964Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_5514.sock"}
-[debug] [2019-06-11T04:27:19.981Z] DEBUG: Ephemeral server used!
-[debug] [2019-06-11T04:27:19.993Z] DEBUG: Ephemeral server survived.
-[debug] [2019-06-11T04:27:19.993Z] [functions] Finished "checkDues" in ~1s
-[debug] [2019-06-11T04:30:49.328Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
-[debug] [2019-06-11T04:30:49.851Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
-[debug] [2019-06-11T04:30:49.851Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
-[debug] [2019-06-11T04:30:51.134Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T04:30:51.135Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T04:30:51.732Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-14T20:44:13.994Z] [functions] HTTP trigger initialized at http://localhost:5001/arubair-flows/us-central1/sendTaskEmailsNow
+[debug] [2019-06-14T20:44:13.994Z] [functions] HTTP trigger initialized at http://localhost:5001/arubair-flows/us-central1/checkDues
+[info] i  functions: Loaded functions: sendTaskEmailsNow, checkDues
+[debug] [2019-06-14T20:47:30.925Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
+[debug] [2019-06-14T20:47:30.926Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
+[debug] [2019-06-14T20:47:32.217Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-14T20:47:32.218Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-14T20:47:32.780Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T04:47:58.883Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
-[debug] [2019-06-11T04:47:59.484Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
-[debug] [2019-06-11T04:47:59.487Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
-[debug] [2019-06-11T04:48:00.837Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T04:48:00.838Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T04:48:01.484Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-14T20:48:34.013Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
+[debug] [2019-06-14T20:48:34.788Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
+[debug] [2019-06-14T20:48:34.789Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
+[debug] [2019-06-14T20:48:36.096Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-14T20:48:36.096Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-14T20:48:36.683Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T04:50:48.467Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
-[debug] [2019-06-11T04:50:48.955Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
-[debug] [2019-06-11T04:50:48.955Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
-[debug] [2019-06-11T04:50:50.232Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T04:50:50.233Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T04:50:50.832Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-14T21:00:23.767Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
+[debug] [2019-06-14T21:00:24.410Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
+[debug] [2019-06-14T21:00:24.410Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
+[debug] [2019-06-14T21:00:25.720Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-14T21:00:25.721Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-14T21:00:26.271Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T04:53:07.076Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
-[debug] [2019-06-11T04:53:07.629Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
-[debug] [2019-06-11T04:53:07.629Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
-[debug] [2019-06-11T04:53:08.899Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T04:53:08.900Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T04:53:09.509Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-14T21:00:51.854Z] Accepted request OPTIONS /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-14T21:00:52.118Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-14T21:00:52.119Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-14T21:00:52.119Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-14T21:00:52.690Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T05:01:02.659Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
-[debug] [2019-06-11T05:01:03.250Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
-[debug] [2019-06-11T05:01:03.250Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
-[debug] [2019-06-11T05:01:04.518Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T05:01:04.519Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T05:01:05.134Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-14T21:00:52.848Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-14T21:00:52.848Z] DEBUG: 
+[debug] [2019-06-14T21:00:52.848Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-14T21:00:52.862Z] {"socketPath":"/tmp/firebase_emulator_invocation_15606.sock"}
+[debug] [2019-06-14T21:00:52.865Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_15606.sock"}
+[debug] [2019-06-14T21:00:52.875Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-14T21:00:52.882Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-14T21:00:52.882Z] [functions] Finished "sendTaskEmailsNow" in ~1s
+[debug] [2019-06-14T21:00:52.885Z] Accepted request POST /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-14T21:00:53.159Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-14T21:00:53.159Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-14T21:00:53.160Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-14T21:00:53.708Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T05:18:12.006Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
-[debug] [2019-06-11T05:18:12.511Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
-[debug] [2019-06-11T05:18:12.512Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
-[debug] [2019-06-11T05:18:13.810Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T05:18:13.811Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T05:18:14.402Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-14T21:00:53.868Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-14T21:00:53.869Z] DEBUG: 
+[debug] [2019-06-14T21:00:53.869Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-14T21:00:53.886Z] {"socketPath":"/tmp/firebase_emulator_invocation_15663.sock"}
+[debug] [2019-06-14T21:00:53.889Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_15663.sock"}
+[debug] [2019-06-14T21:00:53.949Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-14T21:00:54.210Z] DEBUG: Ephemeral server survived.
+[info] >  this happens
+[debug] [2019-06-14T21:01:01.217Z] [functions] Finished "sendTaskEmailsNow" in ~6s
+[debug] [2019-06-14T21:17:48.698Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
+[debug] [2019-06-14T21:17:49.210Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
+[debug] [2019-06-14T21:17:49.211Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
+[debug] [2019-06-14T21:17:50.478Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-14T21:17:50.479Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-14T21:17:51.031Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T06:21:13.752Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
-[debug] [2019-06-11T06:21:14.199Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
-[debug] [2019-06-11T06:21:14.199Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
-[debug] [2019-06-11T06:21:16.248Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T06:21:16.249Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T06:21:16.934Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-14T21:22:22.322Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
+[debug] [2019-06-14T21:22:22.993Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
+[debug] [2019-06-14T21:22:22.993Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
+[debug] [2019-06-14T21:22:24.254Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-14T21:22:24.255Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-14T21:22:24.816Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T08:13:03.174Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
-[debug] [2019-06-11T08:13:03.740Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
-[debug] [2019-06-11T08:13:03.741Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
-[debug] [2019-06-11T08:13:08.349Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T08:13:08.351Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T08:13:10.306Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-14T22:08:08.318Z] Accepted request OPTIONS /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-14T22:08:08.691Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-14T22:08:08.692Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-14T22:08:08.692Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-14T22:08:09.774Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T08:51:45.927Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
-[debug] [2019-06-11T08:51:50.403Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
-[debug] [2019-06-11T08:51:50.403Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
-[debug] [2019-06-11T08:51:52.345Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T08:51:52.345Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T08:51:52.346Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T08:51:52.347Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T08:51:54.218Z] DEBUG: firebase-admin has been stubbed.
-[debug] [2019-06-11T08:51:54.221Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-14T22:08:10.881Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-14T22:08:10.882Z] DEBUG: 
+[debug] [2019-06-14T22:08:10.882Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-14T22:08:10.893Z] {"socketPath":"/tmp/firebase_emulator_invocation_20934.sock"}
+[debug] [2019-06-14T22:08:10.894Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_20934.sock"}
+[debug] [2019-06-14T22:08:10.901Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-14T22:08:10.906Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-14T22:08:10.906Z] [functions] Finished "sendTaskEmailsNow" in ~1s
+[debug] [2019-06-14T22:08:10.909Z] Accepted request POST /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-14T22:08:11.209Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-14T22:08:11.210Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-14T22:08:11.210Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-14T22:08:11.769Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-14T22:08:11.921Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-14T22:08:11.921Z] DEBUG: 
+[debug] [2019-06-14T22:08:11.921Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-14T22:08:11.928Z] {"socketPath":"/tmp/firebase_emulator_invocation_20995.sock"}
+[debug] [2019-06-14T22:08:11.929Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_20995.sock"}
+[debug] [2019-06-14T22:08:11.987Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-14T22:08:12.232Z] DEBUG: Ephemeral server survived.
+[info] >  sendTaskEmailsNow triggered
+[debug] [2019-06-14T22:08:22.394Z] [functions] Finished "sendTaskEmailsNow" in ~9s
+[debug] [2019-06-14T22:10:48.483Z] Accepted request OPTIONS /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-14T22:10:48.765Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-14T22:10:48.766Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-14T22:10:48.766Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-14T22:10:49.319Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T09:09:48.955Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/package.json changed, reloading triggers
-[debug] [2019-06-11T09:09:49.066Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/package-lock.json changed, reloading triggers
-[debug] [2019-06-11T09:09:50.883Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T09:09:50.885Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T09:09:51.842Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-14T22:10:49.475Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-14T22:10:49.475Z] DEBUG: 
+[debug] [2019-06-14T22:10:49.475Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-14T22:10:49.479Z] {"socketPath":"/tmp/firebase_emulator_invocation_21146.sock"}
+[debug] [2019-06-14T22:10:49.481Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_21146.sock"}
+[debug] [2019-06-14T22:10:49.490Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-14T22:10:49.496Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-14T22:10:49.496Z] [functions] Finished "sendTaskEmailsNow" in ~1s
+[debug] [2019-06-14T22:10:49.498Z] Accepted request POST /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-14T22:10:49.761Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-14T22:10:49.762Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-14T22:10:49.762Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-14T22:10:50.337Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T14:24:57.100Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
-[debug] [2019-06-11T14:25:15.336Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T14:25:15.337Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T14:25:17.020Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-14T22:10:50.498Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-14T22:10:50.498Z] DEBUG: 
+[debug] [2019-06-14T22:10:50.498Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-14T22:10:50.505Z] {"socketPath":"/tmp/firebase_emulator_invocation_21201.sock"}
+[debug] [2019-06-14T22:10:50.506Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_21201.sock"}
+[debug] [2019-06-14T22:10:50.522Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-14T22:10:50.559Z] DEBUG: Ephemeral server survived.
+[info] >  sendTaskEmailsNow triggered
+[debug] [2019-06-14T22:10:59.033Z] [functions] Finished "sendTaskEmailsNow" in ~8s
+[debug] [2019-06-14T23:01:55.539Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
+[debug] [2019-06-14T23:01:56.273Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
+[debug] [2019-06-14T23:01:56.274Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
+[debug] [2019-06-14T23:02:01.177Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-14T23:02:01.180Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-14T23:02:02.717Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T14:26:07.512Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
-[debug] [2019-06-11T14:26:07.512Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
-[debug] [2019-06-11T14:26:08.984Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T14:26:08.985Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T14:26:09.517Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-14T23:12:10.845Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
+[debug] [2019-06-14T23:12:11.391Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
+[debug] [2019-06-14T23:12:11.391Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
+[debug] [2019-06-14T23:12:12.662Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-14T23:12:12.663Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-14T23:12:13.229Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T14:32:40.346Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
-[debug] [2019-06-11T14:32:41.466Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
-[debug] [2019-06-11T14:32:41.466Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
-[debug] [2019-06-11T14:32:41.890Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T14:32:41.890Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T14:32:42.553Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-14T23:12:29.459Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
+[debug] [2019-06-14T23:12:30.139Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
+[debug] [2019-06-14T23:12:30.140Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
+[debug] [2019-06-14T23:12:31.423Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-14T23:12:31.424Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-14T23:12:31.981Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T14:32:42.815Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T14:32:42.816Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T14:32:43.419Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-15T21:17:56.318Z] ----------------------------------------------------------------------
+[debug] [2019-06-15T21:17:56.322Z] Command:       /home/morat-van/.nvm/versions/node/v10.15.3/bin/node /home/morat-van/.nvm/versions/node/v10.15.3/bin/firebase functions:shell
+[debug] [2019-06-15T21:17:56.322Z] CLI Version:   6.11.0
+[debug] [2019-06-15T21:17:56.322Z] Platform:      linux
+[debug] [2019-06-15T21:17:56.322Z] Node Version:  v10.15.3
+[debug] [2019-06-15T21:17:56.323Z] Time:          Sat Jun 15 2019 18:17:56 GMT-0300 (Argentina Standard Time)
+[debug] [2019-06-15T21:17:56.323Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-06-15T21:17:56.376Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-06-15T21:17:56.377Z] > authorizing via signed-in user
+[debug] [2019-06-15T21:17:56.377Z] [iam] checking project arubair-flows for permissions ["firebase.projects.get"]
+[debug] [2019-06-15T21:17:56.379Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-06-15T21:17:56.380Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-06-15T21:17:56.654Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-15T21:17:56.734Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/arubair-flows:testIamPermissions  
+
+[debug] [2019-06-15T21:17:58.486Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-15T21:17:58.520Z] [functions] Using node@10 from host.
+[debug] [2019-06-15T21:17:58.521Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/arubair-flows  
+ 
+[debug] [2019-06-15T21:18:00.318Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-15T21:18:00.319Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/619775745147:getServerAppConfig  
+ 
+[debug] [2019-06-15T21:18:01.641Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: Emulator started at http://localhost:5001
+[debug] [2019-06-15T21:18:01.653Z] [functions] Watching "/home/morat-van/dev/work/arubair/app/functions" for Cloud Functions...
+[debug] [2019-06-15T21:18:01.968Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T21:18:01.970Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T21:18:03.391Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T15:37:04.929Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
-[debug] [2019-06-11T15:37:06.015Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
-[debug] [2019-06-11T15:37:06.016Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
-[debug] [2019-06-11T15:37:06.261Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T15:37:06.262Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T15:37:06.894Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-15T21:18:04.472Z] [functions] HTTP trigger initialized at http://localhost:5001/arubair-flows/us-central1/sendTaskEmailsNow
+[debug] [2019-06-15T21:18:04.472Z] [functions] HTTP trigger initialized at http://localhost:5001/arubair-flows/us-central1/checkDues
+[info] i  functions: Loaded functions: sendTaskEmailsNow, checkDues
+[debug] [2019-06-15T21:18:18.423Z] Accepted request OPTIONS /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T21:18:18.707Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T21:18:18.708Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T21:18:18.708Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T21:18:19.270Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T15:37:07.382Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T15:37:07.383Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T15:37:07.997Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-15T21:18:19.422Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T21:18:19.422Z] DEBUG: 
+[debug] [2019-06-15T21:18:19.423Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T21:18:19.436Z] {"socketPath":"/tmp/firebase_emulator_invocation_13961.sock"}
+[debug] [2019-06-15T21:18:19.440Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_13961.sock"}
+[debug] [2019-06-15T21:18:19.451Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T21:18:19.458Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-15T21:18:19.459Z] [functions] Finished "sendTaskEmailsNow" in ~1s
+[debug] [2019-06-15T21:18:19.460Z] Accepted request POST /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T21:18:19.734Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T21:18:19.735Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T21:18:19.735Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T21:18:20.303Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T22:43:02.929Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
-[debug] [2019-06-11T22:43:05.273Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
-[debug] [2019-06-11T22:43:05.273Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
-[debug] [2019-06-11T22:43:08.738Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T22:43:08.743Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T22:43:08.744Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T22:43:08.744Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T22:43:09.959Z] DEBUG: firebase-admin has been stubbed.
-[debug] [2019-06-11T22:43:09.960Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-15T21:18:20.458Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T21:18:20.459Z] DEBUG: 
+[debug] [2019-06-15T21:18:20.459Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T21:18:20.470Z] {"socketPath":"/tmp/firebase_emulator_invocation_14018.sock"}
+[debug] [2019-06-15T21:18:20.472Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_14018.sock"}
+[debug] [2019-06-15T21:18:20.671Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T21:18:21.089Z] DEBUG: Ephemeral server survived.
+[info] >  sendTaskEmailsNow triggered
+[debug] [2019-06-15T21:18:31.653Z] [functions] Finished "sendTaskEmailsNow" in ~8s
+[debug] [2019-06-15T21:42:35.813Z] Accepted request OPTIONS /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T21:42:36.113Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T21:42:36.114Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T21:42:36.114Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T21:42:36.676Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-15T21:42:36.824Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T21:42:36.824Z] DEBUG: 
+[debug] [2019-06-15T21:42:36.824Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T21:42:36.831Z] {"socketPath":"/tmp/firebase_emulator_invocation_15004.sock"}
+[debug] [2019-06-15T21:42:36.832Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_15004.sock"}
+[debug] [2019-06-15T21:42:36.840Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T21:42:36.844Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-15T21:42:36.845Z] [functions] Finished "sendTaskEmailsNow" in ~1s
+[debug] [2019-06-15T21:42:36.846Z] Accepted request POST /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T21:42:37.108Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T21:42:37.109Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T21:42:37.109Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T21:42:37.673Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T22:44:12.381Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/src/index.ts changed, reloading triggers
-[debug] [2019-06-11T22:44:13.781Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T22:44:13.782Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T22:44:14.245Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js.map changed, reloading triggers
-[debug] [2019-06-11T22:44:14.245Z] DEBUG: File /home/morat-van/dev/work/arubair/app/functions/lib/index.js changed, reloading triggers
-[debug] [2019-06-11T22:44:14.378Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-15T21:42:37.821Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T21:42:37.821Z] DEBUG: 
+[debug] [2019-06-15T21:42:37.821Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T21:42:37.828Z] {"socketPath":"/tmp/firebase_emulator_invocation_15059.sock"}
+[debug] [2019-06-15T21:42:37.828Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_15059.sock"}
+[debug] [2019-06-15T21:42:37.845Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T21:42:37.888Z] DEBUG: Ephemeral server survived.
+[info] >  sendTaskEmailsNow triggered
+[debug] [2019-06-15T21:42:43.160Z] [functions] Finished "sendTaskEmailsNow" in ~5s
+[debug] [2019-06-15T21:45:47.934Z] Accepted request OPTIONS /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T21:45:48.203Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T21:45:48.204Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T21:45:48.204Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T21:45:48.764Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T22:44:15.549Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T22:44:15.549Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T22:44:16.175Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-15T21:45:48.915Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T21:45:48.917Z] DEBUG: 
+[debug] [2019-06-15T21:45:48.917Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T21:45:48.923Z] {"socketPath":"/tmp/firebase_emulator_invocation_15292.sock"}
+[debug] [2019-06-15T21:45:48.923Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_15292.sock"}
+[debug] [2019-06-15T21:45:48.929Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T21:45:48.933Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-15T21:45:48.934Z] [functions] Finished "sendTaskEmailsNow" in ~1s
+[debug] [2019-06-15T21:45:48.935Z] Accepted request POST /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T21:45:49.203Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T21:45:49.204Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T21:45:49.204Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T21:45:49.756Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T22:49:35.787Z] Accepted request POST /arubair-flows/us-central1/checkDues --> checkDues
-[debug] [2019-06-11T22:49:36.079Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T22:49:36.090Z] [functions] Beginning execution of "checkDues"
-[debug] [2019-06-11T22:49:36.090Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T22:49:36.661Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-15T21:45:49.911Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T21:45:49.912Z] DEBUG: 
+[debug] [2019-06-15T21:45:49.912Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T21:45:49.925Z] {"socketPath":"/tmp/firebase_emulator_invocation_15347.sock"}
+[debug] [2019-06-15T21:45:49.927Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_15347.sock"}
+[debug] [2019-06-15T21:45:49.948Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T21:45:49.988Z] DEBUG: Ephemeral server survived.
+[info] >  sendTaskEmailsNow triggered
+[debug] [2019-06-15T21:45:57.637Z] [functions] Finished "sendTaskEmailsNow" in ~7s
+[debug] [2019-06-15T21:48:28.671Z] Accepted request OPTIONS /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T21:48:28.958Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T21:48:28.959Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T21:48:28.959Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T21:48:29.513Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T22:49:36.820Z] DEBUG: Trigger "checkDues" has been found, beginning invocation!
-[debug] [2019-06-11T22:49:36.820Z] DEBUG: 
-[debug] [2019-06-11T22:49:36.822Z] DEBUG: Running checkDues in mode HTTPS
-[debug] [2019-06-11T22:49:36.823Z] {"socketPath":"/tmp/firebase_emulator_invocation_22471.sock"}
-[debug] [2019-06-11T22:49:36.934Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_22471.sock"}
-[debug] [2019-06-11T22:49:37.181Z] DEBUG: Ephemeral server used!
-[debug] [2019-06-11T22:49:38.999Z] DEBUG: Ephemeral server survived.
-[debug] [2019-06-11T22:49:39.000Z] [functions] Finished "checkDues" in ~1s
-[info] >  (node:22471) UnhandledPromiseRejectionWarning: Error: 9 FAILED_PRECONDITION: The query requires an index. You can create it here: https://console.firebase.google.com/project/arubair-flows/database/firestore/indexes?create_composite=Cktwcm9qZWN0cy9hcnViYWlyLWZsb3dzL2RhdGFiYXNlcy8oZGVmYXVsdCkvY29sbGVjdGlvbkdyb3Vwcy90YXNrcy9pbmRleGVzL18QAhoKCgZzdGF0dXMQARoHCgNkdWUQARoMCghfX25hbWVfXxAB
-[info] >      at Object.exports.createStatusError (/home/morat-van/dev/work/arubair/app/functions/node_modules/grpc/src/common.js:91:15)
-[info] >      at ClientReadableStream._emitStatusIfDone (/home/morat-van/dev/work/arubair/app/functions/node_modules/grpc/src/client.js:233:26)
-[info] >      at ClientReadableStream._receiveStatus (/home/morat-van/dev/work/arubair/app/functions/node_modules/grpc/src/client.js:211:8)
-[info] >      at Object.onReceiveStatus (/home/morat-van/dev/work/arubair/app/functions/node_modules/grpc/src/client_interceptors.js:1272:15)
-[info] >      at InterceptingListener._callNext (/home/morat-van/dev/work/arubair/app/functions/node_modules/grpc/src/client_interceptors.js:568:42)
-[info] >      at InterceptingListener.onReceiveStatus (/home/morat-van/dev/work/arubair/app/functions/node_modules/grpc/src/client_interceptors.js:618:8)
-[info] >      at /home/morat-van/dev/work/arubair/app/functions/node_modules/grpc/src/client_interceptors.js:1029:24
-[info] >  (node:22471) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 3)
-[info] >  (node:22471) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
-[info] >  (node:22471) UnhandledPromiseRejectionWarning: Error: 9 FAILED_PRECONDITION: The query requires an index. You can create it here: https://console.firebase.google.com/project/arubair-flows/database/firestore/indexes?create_composite=Cktwcm9qZWN0cy9hcnViYWlyLWZsb3dzL2RhdGFiYXNlcy8oZGVmYXVsdCkvY29sbGVjdGlvbkdyb3Vwcy90YXNrcy9pbmRleGVzL18QAhoKCgZzdGF0dXMQARoHCgNkdWUQARoMCghfX25hbWVfXxAB
-[info] >      at Object.exports.createStatusError (/home/morat-van/dev/work/arubair/app/functions/node_modules/grpc/src/common.js:91:15)
-[info] >      at ClientReadableStream._emitStatusIfDone (/home/morat-van/dev/work/arubair/app/functions/node_modules/grpc/src/client.js:233:26)
-[info] >      at ClientReadableStream._receiveStatus (/home/morat-van/dev/work/arubair/app/functions/node_modules/grpc/src/client.js:211:8)
-[info] >      at Object.onReceiveStatus (/home/morat-van/dev/work/arubair/app/functions/node_modules/grpc/src/client_interceptors.js:1272:15)
-[info] >      at InterceptingListener._callNext (/home/morat-van/dev/work/arubair/app/functions/node_modules/grpc/src/client_interceptors.js:568:42)
-[info] >      at InterceptingListener.onReceiveStatus (/home/morat-van/dev/work/arubair/app/functions/node_modules/grpc/src/client_interceptors.js:618:8)
-[info] >      at /home/morat-van/dev/work/arubair/app/functions/node_modules/grpc/src/client_interceptors.js:1029:24
-[info] >  (node:22471) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 6)
-[debug] [2019-06-11T22:55:43.839Z] Accepted request POST /arubair-flows/us-central1/checkDues --> checkDues
-[debug] [2019-06-11T22:55:44.132Z] DEBUG: Functions runtime initialized.
-[debug] [2019-06-11T22:55:44.133Z] [functions] Beginning execution of "checkDues"
-[debug] [2019-06-11T22:55:44.133Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
-[debug] [2019-06-11T22:55:44.739Z] DEBUG: firebase-admin has been stubbed.
+[debug] [2019-06-15T21:48:29.668Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T21:48:29.668Z] DEBUG: 
+[debug] [2019-06-15T21:48:29.669Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T21:48:29.683Z] {"socketPath":"/tmp/firebase_emulator_invocation_15520.sock"}
+[debug] [2019-06-15T21:48:29.684Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_15520.sock"}
+[debug] [2019-06-15T21:48:29.692Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T21:48:29.696Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-15T21:48:29.697Z] [functions] Finished "sendTaskEmailsNow" in ~1s
+[debug] [2019-06-15T21:48:29.700Z] Accepted request POST /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T21:48:29.963Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T21:48:29.964Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T21:48:29.964Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T21:48:30.529Z] DEBUG: firebase-admin has been stubbed.
 [info] i  Your code has been provided a "firebase-admin" instance.
-[debug] [2019-06-11T22:55:44.891Z] DEBUG: Trigger "checkDues" has been found, beginning invocation!
-[debug] [2019-06-11T22:55:44.891Z] DEBUG: 
-[debug] [2019-06-11T22:55:44.891Z] DEBUG: Running checkDues in mode HTTPS
-[debug] [2019-06-11T22:55:44.918Z] {"socketPath":"/tmp/firebase_emulator_invocation_22809.sock"}
-[debug] [2019-06-11T22:55:44.920Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_22809.sock"}
-[debug] [2019-06-11T22:55:44.942Z] DEBUG: Ephemeral server used!
-[debug] [2019-06-11T22:55:45.110Z] DEBUG: Ephemeral server survived.
-[debug] [2019-06-11T22:55:45.117Z] [functions] Finished "checkDues" in ~1s
+[debug] [2019-06-15T21:48:30.703Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T21:48:30.704Z] DEBUG: 
+[debug] [2019-06-15T21:48:30.704Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T21:48:30.711Z] {"socketPath":"/tmp/firebase_emulator_invocation_15575.sock"}
+[debug] [2019-06-15T21:48:30.712Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_15575.sock"}
+[debug] [2019-06-15T21:48:30.731Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T21:48:30.769Z] DEBUG: Ephemeral server survived.
+[info] >  sendTaskEmailsNow triggered
+[debug] [2019-06-15T21:48:36.376Z] [functions] Finished "sendTaskEmailsNow" in ~5s
+[debug] [2019-06-15T22:10:21.794Z] Accepted request OPTIONS /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T22:10:22.126Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T22:10:22.127Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T22:10:22.127Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T22:10:22.728Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-15T22:10:22.898Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T22:10:22.898Z] DEBUG: 
+[debug] [2019-06-15T22:10:22.899Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T22:10:22.918Z] {"socketPath":"/tmp/firebase_emulator_invocation_16140.sock"}
+[debug] [2019-06-15T22:10:22.919Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_16140.sock"}
+[debug] [2019-06-15T22:10:22.927Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T22:10:22.932Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-15T22:10:22.932Z] [functions] Finished "sendTaskEmailsNow" in ~1s
+[debug] [2019-06-15T22:10:22.932Z] Accepted request POST /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T22:10:23.208Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T22:10:23.209Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T22:10:23.209Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T22:10:23.769Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-15T22:10:23.921Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T22:10:23.921Z] DEBUG: 
+[debug] [2019-06-15T22:10:23.921Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T22:10:23.939Z] {"socketPath":"/tmp/firebase_emulator_invocation_16196.sock"}
+[debug] [2019-06-15T22:10:23.941Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_16196.sock"}
+[debug] [2019-06-15T22:10:23.963Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T22:10:24.000Z] DEBUG: Ephemeral server survived.
+[info] >  sendTaskEmailsNow triggered
+[debug] [2019-06-15T22:10:31.710Z] [functions] Finished "sendTaskEmailsNow" in ~7s
+[debug] [2019-06-15T22:13:51.805Z] Accepted request OPTIONS /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T22:13:52.135Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T22:13:52.135Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T22:13:52.136Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T22:13:52.697Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-15T22:13:52.859Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T22:13:52.859Z] DEBUG: 
+[debug] [2019-06-15T22:13:52.859Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T22:13:52.866Z] {"socketPath":"/tmp/firebase_emulator_invocation_16479.sock"}
+[debug] [2019-06-15T22:13:52.867Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_16479.sock"}
+[debug] [2019-06-15T22:13:52.876Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T22:13:52.881Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-15T22:13:52.881Z] [functions] Finished "sendTaskEmailsNow" in ~1s
+[debug] [2019-06-15T22:13:52.884Z] Accepted request POST /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T22:13:53.148Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T22:13:53.148Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T22:13:53.149Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T22:13:53.709Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-15T22:13:53.864Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T22:13:53.864Z] DEBUG: 
+[debug] [2019-06-15T22:13:53.864Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T22:13:53.871Z] {"socketPath":"/tmp/firebase_emulator_invocation_16535.sock"}
+[debug] [2019-06-15T22:13:53.871Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_16535.sock"}
+[debug] [2019-06-15T22:13:53.887Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T22:13:53.924Z] DEBUG: Ephemeral server survived.
+[info] >  sendTaskEmailsNow triggered
+[debug] [2019-06-15T22:13:59.608Z] [functions] Finished "sendTaskEmailsNow" in ~5s
+[debug] [2019-06-15T22:15:43.830Z] Accepted request OPTIONS /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T22:15:44.120Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T22:15:44.121Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T22:15:44.121Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T22:15:44.692Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-15T22:15:44.848Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T22:15:44.849Z] DEBUG: 
+[debug] [2019-06-15T22:15:44.849Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T22:15:44.856Z] {"socketPath":"/tmp/firebase_emulator_invocation_16738.sock"}
+[debug] [2019-06-15T22:15:44.857Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_16738.sock"}
+[debug] [2019-06-15T22:15:44.862Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T22:15:44.867Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-15T22:15:44.868Z] [functions] Finished "sendTaskEmailsNow" in ~1s
+[debug] [2019-06-15T22:15:44.870Z] Accepted request POST /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T22:15:45.154Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T22:15:45.155Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T22:15:45.156Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T22:15:45.703Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-15T22:15:45.863Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T22:15:45.863Z] DEBUG: 
+[debug] [2019-06-15T22:15:45.863Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T22:15:45.875Z] {"socketPath":"/tmp/firebase_emulator_invocation_16795.sock"}
+[debug] [2019-06-15T22:15:45.876Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_16795.sock"}
+[debug] [2019-06-15T22:15:45.892Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T22:15:45.926Z] DEBUG: Ephemeral server survived.
+[info] >  sendTaskEmailsNow triggered
+[debug] [2019-06-15T22:15:51.740Z] [functions] Finished "sendTaskEmailsNow" in ~5s
+[debug] [2019-06-15T22:18:42.311Z] Accepted request OPTIONS /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T22:18:44.358Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T22:18:44.360Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T22:18:44.360Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T22:18:45.558Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-15T22:18:46.564Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T22:18:46.565Z] DEBUG: 
+[debug] [2019-06-15T22:18:46.565Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T22:18:46.591Z] {"socketPath":"/tmp/firebase_emulator_invocation_17086.sock"}
+[debug] [2019-06-15T22:18:46.592Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_17086.sock"}
+[debug] [2019-06-15T22:18:46.604Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T22:18:46.609Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-15T22:18:46.610Z] [functions] Finished "sendTaskEmailsNow" in ~1s
+[debug] [2019-06-15T22:18:46.611Z] Accepted request POST /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T22:18:46.880Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T22:18:46.881Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T22:18:46.881Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T22:18:47.437Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-15T22:18:47.587Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T22:18:47.588Z] DEBUG: 
+[debug] [2019-06-15T22:18:47.588Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T22:18:47.594Z] {"socketPath":"/tmp/firebase_emulator_invocation_17145.sock"}
+[debug] [2019-06-15T22:18:47.596Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_17145.sock"}
+[debug] [2019-06-15T22:18:47.649Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T22:18:47.905Z] DEBUG: Ephemeral server survived.
+[info] >  sendTaskEmailsNow triggered
+[debug] [2019-06-15T22:18:55.842Z] [functions] Finished "sendTaskEmailsNow" in ~7s
+[debug] [2019-06-15T22:20:41.857Z] Accepted request OPTIONS /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T22:20:43.104Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T22:20:43.106Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T22:20:43.106Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T22:20:43.772Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-15T22:20:43.943Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T22:20:43.943Z] DEBUG: 
+[debug] [2019-06-15T22:20:43.943Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T22:20:43.967Z] {"socketPath":"/tmp/firebase_emulator_invocation_17304.sock"}
+[debug] [2019-06-15T22:20:43.968Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_17304.sock"}
+[debug] [2019-06-15T22:20:43.979Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T22:20:43.985Z] Accepted request POST /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T22:20:43.991Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-15T22:20:43.991Z] [functions] Finished "sendTaskEmailsNow" in ~1s
+[debug] [2019-06-15T22:20:44.262Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T22:20:44.263Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T22:20:44.263Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T22:20:44.828Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-15T22:20:44.985Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T22:20:44.985Z] DEBUG: 
+[debug] [2019-06-15T22:20:44.985Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T22:20:45.003Z] {"socketPath":"/tmp/firebase_emulator_invocation_17361.sock"}
+[debug] [2019-06-15T22:20:45.004Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_17361.sock"}
+[debug] [2019-06-15T22:20:45.130Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T22:20:46.150Z] DEBUG: Ephemeral server survived.
+[info] >  sendTaskEmailsNow triggered
+[debug] [2019-06-15T22:20:54.330Z] [functions] Finished "sendTaskEmailsNow" in ~8s
+[debug] [2019-06-15T22:39:53.546Z] Accepted request OPTIONS /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T22:39:56.021Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T22:39:56.023Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T22:39:56.023Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T22:39:57.469Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-15T22:39:58.552Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T22:39:58.552Z] DEBUG: 
+[debug] [2019-06-15T22:39:58.552Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T22:39:58.574Z] {"socketPath":"/tmp/firebase_emulator_invocation_18366.sock"}
+[debug] [2019-06-15T22:39:58.575Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_18366.sock"}
+[debug] [2019-06-15T22:39:58.582Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T22:39:58.587Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-15T22:39:58.587Z] [functions] Finished "sendTaskEmailsNow" in ~1s
+[debug] [2019-06-15T22:39:58.588Z] Accepted request POST /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T22:39:58.858Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T22:39:58.859Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T22:39:58.859Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T22:39:59.419Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-15T22:39:59.585Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T22:39:59.585Z] DEBUG: 
+[debug] [2019-06-15T22:39:59.585Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T22:39:59.592Z] {"socketPath":"/tmp/firebase_emulator_invocation_18425.sock"}
+[debug] [2019-06-15T22:39:59.593Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_18425.sock"}
+[debug] [2019-06-15T22:39:59.658Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T22:39:59.924Z] DEBUG: Ephemeral server survived.
+[info] >  sendTaskEmailsNow triggered
+[debug] [2019-06-15T22:40:08.857Z] [functions] Finished "sendTaskEmailsNow" in ~7s
+[debug] [2019-06-15T22:46:53.848Z] Accepted request OPTIONS /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T22:46:54.142Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T22:46:54.142Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T22:46:54.143Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T22:46:54.709Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-15T22:46:54.865Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T22:46:54.865Z] DEBUG: 
+[debug] [2019-06-15T22:46:54.865Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T22:46:54.872Z] {"socketPath":"/tmp/firebase_emulator_invocation_18743.sock"}
+[debug] [2019-06-15T22:46:54.873Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_18743.sock"}
+[debug] [2019-06-15T22:46:54.880Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T22:46:54.886Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-15T22:46:54.887Z] [functions] Finished "sendTaskEmailsNow" in ~1s
+[debug] [2019-06-15T22:46:54.888Z] Accepted request POST /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-15T22:46:55.156Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-15T22:46:55.157Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-15T22:46:55.157Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-15T22:46:55.733Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-15T22:46:55.893Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-15T22:46:55.893Z] DEBUG: 
+[debug] [2019-06-15T22:46:55.893Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-15T22:46:55.907Z] {"socketPath":"/tmp/firebase_emulator_invocation_18799.sock"}
+[debug] [2019-06-15T22:46:55.908Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_18799.sock"}
+[debug] [2019-06-15T22:46:55.929Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-15T22:46:55.963Z] DEBUG: Ephemeral server survived.
+[info] >  sendTaskEmailsNow triggered
+[debug] [2019-06-15T22:47:01.672Z] [functions] Finished "sendTaskEmailsNow" in ~5s
+[debug] [2019-06-16T02:22:41.363Z] Accepted request OPTIONS /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-16T02:22:44.654Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-16T02:22:44.662Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-16T02:22:44.662Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-16T02:22:46.320Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-16T02:22:47.390Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-16T02:22:47.390Z] DEBUG: 
+[debug] [2019-06-16T02:22:47.480Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-16T02:22:47.488Z] {"socketPath":"/tmp/firebase_emulator_invocation_27901.sock"}
+[debug] [2019-06-16T02:22:47.544Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_27901.sock"}
+[debug] [2019-06-16T02:22:47.617Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-16T02:22:47.646Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-16T02:22:47.648Z] [functions] Finished "sendTaskEmailsNow" in ~1s
+[debug] [2019-06-16T02:22:47.658Z] Accepted request POST /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-16T02:22:47.920Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-16T02:22:47.921Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-16T02:22:47.921Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-16T02:22:48.495Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-16T02:22:48.647Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-16T02:22:48.647Z] DEBUG: 
+[debug] [2019-06-16T02:22:48.648Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-16T02:22:48.654Z] {"socketPath":"/tmp/firebase_emulator_invocation_27960.sock"}
+[debug] [2019-06-16T02:22:48.655Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_27960.sock"}
+[debug] [2019-06-16T02:22:48.721Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-16T02:22:49.045Z] DEBUG: Ephemeral server survived.
+[info] >  sendTaskEmailsNow triggered
+[debug] [2019-06-16T02:22:58.436Z] [functions] Finished "sendTaskEmailsNow" in ~8s
+[debug] [2019-06-16T06:57:59.300Z] Accepted request OPTIONS /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-16T06:57:59.590Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-16T06:57:59.590Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-16T06:57:59.590Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-16T06:58:00.137Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-16T06:58:00.308Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-16T06:58:00.309Z] DEBUG: 
+[debug] [2019-06-16T06:58:00.309Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-16T06:58:00.309Z] {"socketPath":"/tmp/firebase_emulator_invocation_3976.sock"}
+[debug] [2019-06-16T06:58:00.310Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_3976.sock"}
+[debug] [2019-06-16T06:58:00.343Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-16T06:58:00.348Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-16T06:58:00.348Z] [functions] Finished "sendTaskEmailsNow" in ~1s
+[debug] [2019-06-16T06:58:00.349Z] Accepted request POST /arubair-flows/us-central1/sendTaskEmailsNow --> sendTaskEmailsNow
+[debug] [2019-06-16T06:58:00.631Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-16T06:58:00.632Z] [functions] Beginning execution of "sendTaskEmailsNow"
+[debug] [2019-06-16T06:58:00.632Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-16T06:58:01.187Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-16T06:58:01.344Z] DEBUG: Trigger "sendTaskEmailsNow" has been found, beginning invocation!
+[debug] [2019-06-16T06:58:01.344Z] DEBUG: 
+[debug] [2019-06-16T06:58:01.344Z] DEBUG: Running sendTaskEmailsNow in mode HTTPS
+[debug] [2019-06-16T06:58:01.352Z] {"socketPath":"/tmp/firebase_emulator_invocation_4033.sock"}
+[debug] [2019-06-16T06:58:01.353Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_4033.sock"}
+[debug] [2019-06-16T06:58:01.370Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-16T06:58:01.409Z] DEBUG: Ephemeral server survived.
+[info] >  sendTaskEmailsNow triggered
+[debug] [2019-06-16T06:58:12.821Z] [functions] Finished "sendTaskEmailsNow" in ~11s
+[debug] [2019-06-17T20:35:33.767Z] ----------------------------------------------------------------------
+[debug] [2019-06-17T20:35:33.771Z] Command:       /home/morat-van/.nvm/versions/node/v10.15.3/bin/node /home/morat-van/.nvm/versions/node/v10.15.3/bin/firebase functions:shell
+[debug] [2019-06-17T20:35:33.771Z] CLI Version:   6.11.0
+[debug] [2019-06-17T20:35:33.772Z] Platform:      linux
+[debug] [2019-06-17T20:35:33.772Z] Node Version:  v10.15.3
+[debug] [2019-06-17T20:35:33.780Z] Time:          Mon Jun 17 2019 17:35:33 GMT-0300 (Argentina Standard Time)
+[debug] [2019-06-17T20:35:33.780Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-06-17T20:35:33.824Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-06-17T20:35:33.824Z] > authorizing via signed-in user
+[debug] [2019-06-17T20:35:33.825Z] [iam] checking project arubair-flows for permissions ["firebase.projects.get"]
+[debug] [2019-06-17T20:35:33.827Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-06-17T20:35:33.828Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-06-17T20:35:34.095Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-17T20:35:34.158Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/arubair-flows:testIamPermissions  
+
+[debug] [2019-06-17T20:35:35.972Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-17T20:35:36.004Z] [functions] Using node@10 from host.
+[debug] [2019-06-17T20:35:36.006Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/arubair-flows  
+ 
+[debug] [2019-06-17T20:35:38.122Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-17T20:35:38.123Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/619775745147:getServerAppConfig  
+ 
+[debug] [2019-06-17T20:35:38.601Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: Emulator started at http://localhost:5001
+[debug] [2019-06-17T20:35:38.635Z] [functions] Watching "/home/morat-van/dev/work/arubair/app/functions" for Cloud Functions...
+[debug] [2019-06-17T20:35:38.958Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-17T20:35:38.959Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-17T20:35:40.320Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-17T20:35:41.411Z] [functions] HTTP trigger initialized at http://localhost:5001/arubair-flows/us-central1/sendTaskEmailsNow
+[debug] [2019-06-17T20:35:41.411Z] [functions] HTTP trigger initialized at http://localhost:5001/arubair-flows/us-central1/checkDues
+[info] i  functions: Loaded functions: sendTaskEmailsNow, checkDues
+[debug] [2019-06-17T20:47:06.057Z] Accepted request POST /arubair-flows/us-central1/checkDues --> checkDues
+[debug] [2019-06-17T20:47:06.327Z] DEBUG: Functions runtime initialized.
+[debug] [2019-06-17T20:47:06.328Z] [functions] Beginning execution of "checkDues"
+[debug] [2019-06-17T20:47:06.328Z] DEBUG: Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-17T20:47:06.872Z] DEBUG: firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-17T20:47:07.025Z] DEBUG: Trigger "checkDues" has been found, beginning invocation!
+[debug] [2019-06-17T20:47:07.025Z] DEBUG: 
+[debug] [2019-06-17T20:47:07.025Z] DEBUG: Running checkDues in mode HTTPS
+[debug] [2019-06-17T20:47:07.039Z] {"socketPath":"/tmp/firebase_emulator_invocation_12249.sock"}
+[debug] [2019-06-17T20:47:07.042Z] DEBUG: [functions] Runtime ready! Sending request! {"socketPath":"/tmp/firebase_emulator_invocation_12249.sock"}
+[debug] [2019-06-17T20:47:07.111Z] DEBUG: Ephemeral server used!
+[debug] [2019-06-17T20:47:09.152Z] DEBUG: Ephemeral server survived.
+[debug] [2019-06-17T20:47:09.163Z] [functions] Finished "checkDues" in ~1s

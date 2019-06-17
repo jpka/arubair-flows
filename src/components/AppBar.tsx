@@ -24,6 +24,7 @@ import { connect } from 'react-redux';
 // import {
 //   Add as AddIcon
 // } from '@material-ui/icons';
+import { State } from '../index';
 import {
   actions as uiActions
 } from '../modules/ui';
@@ -105,10 +106,12 @@ const styles = (theme: Theme) =>
 export interface Props extends WithStyles<typeof styles> {
   position: any,
   addUser: () => any,
-  logout: () => any
+  logout: () => any,
+  editUser: (id) => any,
+  user: any
 }
 
-interface State {
+interface AppBarState {
   anchorEl: null | HTMLElement;
   mobileMoreAnchorEl: null | HTMLElement;
   menu: {
@@ -117,8 +120,8 @@ interface State {
   };
 }
 
-class PrimarySearchAppBar extends React.Component<Props, State> {
-  state: State = {
+class PrimarySearchAppBar extends React.Component<Props, AppBarState> {
+  state: AppBarState = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
     menu: {}
@@ -154,9 +157,10 @@ class PrimarySearchAppBar extends React.Component<Props, State> {
 
   render() {
     const { anchorEl, mobileMoreAnchorEl, menu } = this.state;
-    const { classes, addUser, logout } = this.props;
+    const { classes, addUser, editUser, logout, user } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+    console.log(user);
 
     const renderMenu = (
       <Menu
@@ -167,7 +171,7 @@ class PrimarySearchAppBar extends React.Component<Props, State> {
         onClose={this.handleMenuClose}
       >
         {menu.name === "profile" && [
-          <MenuItem key={1} onClick={this.handleMenuClose}>Edit user</MenuItem>,
+          <MenuItem key={1} onClick={this.menuAction(() => editUser(user.uid))}>Edit user</MenuItem>,
           <MenuItem key={2} onClick={this.menuAction(logout)}>Logout</MenuItem>
         ]}
         {menu.name === "actions" && [
@@ -255,7 +259,7 @@ class PrimarySearchAppBar extends React.Component<Props, State> {
                 </Badge>
               </IconButton> */}
               <IconButton color="inherit">
-                <Badge badgeContent={3} color="secondary">
+                <Badge badgeContent={user.overdueTasks ? user.overdueTasks.length : 0} color="secondary">
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
@@ -287,6 +291,10 @@ class PrimarySearchAppBar extends React.Component<Props, State> {
 } as any;
 
 export default connect(
-  null,
-  ({addUser: uiActions.newUser, logout: userActions.logout})
+  ({users}: State) => ({ user: users.current }),
+  ({
+    addUser: uiActions.newUser, 
+    editUser: uiActions.editUser,
+    logout: userActions.logout
+  })
 )(withStyles(styles)(PrimarySearchAppBar));

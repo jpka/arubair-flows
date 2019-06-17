@@ -77,7 +77,10 @@ const initialState: State = {
 	// 		}
 	// 	}
 	// },
-	orders: ordersInitialState
+	orders: ordersInitialState,
+	ui: {
+		modal: false
+	}
 };
 
 const composeEnhancers = window["__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"] || compose;

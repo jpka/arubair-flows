@@ -24,11 +24,13 @@ export const actionTypes = {
 	creating: `${prefix}.CREATING`,
 	created: `${prefix}.CREATED`,
 	createError: `${prefix}.CREATE_ERROR`,
+	edit: `${prefix}.EDIT`,
 	authenticating: `${prefix}.AUTHENTICATING`,
 	authenticationError: `${prefix}.AUTHENTICATION_ERROR`,
 	authenticated: `${prefix}.AUTHENTICATED`,
 	logout: `${prefix}.LOGOUT`,
-	usersChanged: `${prefix}.USERS_CHANGED`
+	usersChanged: `${prefix}.USERS_CHANGED`,
+	overdueTasksChanged: `${prefix}.OVERDUE_TASKS_CHANGED`,
 }
 
 export const actions = {
@@ -58,6 +60,21 @@ export const actions = {
 			}));
 		}
 	},
+	modify: (id, data) => async dispatch => {
+		try {
+			await usersColl.doc(id).update(data);
+			dispatch(uiActions.closeDrawer());
+			return dispatch(uiActions.notification({
+				type: "success",
+				message: "User was modified"
+			}));
+		} catch (e) {
+			return dispatch(uiActions.notification({
+				type: "error",
+				message: "User could not be modified. Check your connection and try again"
+			}));
+		}
+	},
 	login: ({email, password}) => async dispatch => {
 		console.log(email, password);
 		dispatch({ type: actionTypes.authenticating });
@@ -82,20 +99,22 @@ export const actions = {
 	logout: () => async dispatch => {
 		await auth.signOut();
 		return dispatch({type: actionTypes.logout});
-	}
+	},
+	overdueTasksChanged: (tasks) => ({ type: actionTypes.overdueTasksChanged, payload: tasks })
 }
 
 export interface UsersState {
-	users: User[],
+	users: {[key: string]: User},
 	current: User | null,
 	creationStatus: "processing" | null,
 	loggedIn: boolean | undefined
 }
 
 export const initialState: UsersState = {
-	users: [],
+	users: {},
 	current: null,
-	creationStatus: null
+	creationStatus: null,
+	loggedIn: false
 };
 
 export const reducer = (state: UsersState = initialState, action) => {
@@ -103,17 +122,17 @@ export const reducer = (state: UsersState = initialState, action) => {
 	let { users } = state;
 
 	switch (action.type) {
-		case actionTypes.add:
-			return {
-				...state,
-				users: [
-					...users,
-					{
-						name: "",
-						email: ""
-					}
-				]
-			};
+		// case actionTypes.add:
+		// 	return {
+		// 		...state,
+		// 		users: [
+		// 			...users,
+		// 			{
+		// 				name: "",
+		// 				email: ""
+		// 			}
+		// 		]
+		// 	};
 		case actionTypes.creating:
 			return {
 				...state,
@@ -142,10 +161,20 @@ export const reducer = (state: UsersState = initialState, action) => {
 				loggedIn: false
 			};
 		case actionTypes.usersChanged:
+			let newUsers = {};
+			payload.forEach(user => newUsers[user.id] = user);
 			return {
 				...state,
-				users: payload
-			}
+				users: newUsers
+			};
+		case actionTypes.overdueTasksChanged:
+			return {
+				...state,
+				current: {
+					...state.current,
+					overdueTasks: payload.tasks
+				}
+			};
 		default:
 			return state
 	}
@@ -219,13 +248,21 @@ export const connect = async (dispatch) => {
 	// 	});
 	// }
 
+	const onAuthentication = (user) => {
+		setupFCMToken(user.uid);
+		db.collectionGroup('tasks')
+			.where('assignee', '==', user.uid)
+			.where('status', '==', 'overdue').onSnapshot(snap => {
+				dispatch(actions.overdueTasksChanged(snap.docs.map(doc => doc.id)))
+			});
+	}
+
 	auth.onAuthStateChanged((user) => {
 		if (user) {
 			// User is signed in.
 			dispatch(actions.authenticated(user));
 			currentUserId = user.uid;
-			setupFCMToken(user.uid);
-			// setUpMessaging(userId);
+			onAuthentication(user);
 		} else {
 			console.log("LOGGED OUT");
 			// TODO: teardown sent tokens

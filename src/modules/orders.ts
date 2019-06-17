@@ -6,6 +6,8 @@ import 'firebase/auth';
 import produce from 'immer';
 // import { uniq, different } from 'lodash';
 
+import { actions as uiActions } from './ui';
+
 const db = firebase.firestore();
 const Timestamp = firebase.firestore.Timestamp;
 const ordersColl = db.collection('orders');
@@ -98,6 +100,7 @@ const tasksMeta: {
 		},
 		beforeSave?: (task: Task) => any,
 		afterSave?: (task: Task) => any,
+		afterSendEmails?: (task: Task) => any
 	}
 } = {
 	importCotizationConfirmation: {
@@ -181,17 +184,39 @@ const tasksMeta: {
 		defaults: {
 			label: "Cotization followup",
 			emails: {
-				list: [{subject: "Cotization followup", body: "Cotization followup template"}]
+				list: [
+					{
+						subject: "Cotization followup", 
+						body: "Cotization followup template for 1 week after",
+						recipients: { address: "CLIENT_ADDRESS" },
+					},
+					{
+						subject: "Cotization followup", 
+						body: "Cotization followup template for 3 week after",
+						recipients: { address: "CLIENT_ADDRESS" },
+					}
+				]
 			}
 		},
 		conditions: {
-			data: ({data, emails}) => (data && data.jobDate) || checkEmails(emails)
+			data: ({data}) => data && data.jobDate
 		},
 		beforeSave: (task: Task) => {
-			const { data } = task;
-			if (data.cotizationAnswered === true && data.jobDateReserved === false) {
+			const { data, emails, status } = task;
+			if (data && status !== "completed" && data.cotizationAnswered === "true" && data.jobDateReserved === "false") {
 				task.due = moment(task.due).add(14, 'days').toDate();
+				task.status = "pending";
 			}
+			return task;
+		},
+		afterSendEmails: ({orderId, id, due, emails}: Task) => {
+			// TODO: have this happen only when email sents are succesful
+			// if (checkEmails(emails)) {
+				if (due instanceof Timestamp) due = due.toDate();
+				ordersColl.doc(orderId).collection('tasks').doc(id).update({
+					due: moment(due).add(7, 'days').toDate()
+				});
+			// }
 		}
 	}
 }
@@ -295,7 +320,21 @@ export const actions = {
 			await ordersColl.doc(orderId).delete();
 			return { type: actionTypes.orders.remove };
 		},
-		modify: (orderId, data) => dispatch => ordersColl.doc(orderId).update(data),
+		modify: (orderId, data) => async dispatch => {
+			try {
+				await ordersColl.doc(orderId).update(data);
+				dispatch(uiActions.closeDrawer());
+				return dispatch(uiActions.notification({
+					type: "success",
+					message: "Order updated"
+				}));
+			} catch (e) {
+				return dispatch(uiActions.notification({
+					type: "error",
+					message: "Order could not be updated. Check your connection and try again"
+				}));
+			}
+		},
 		added: (id: string, order: Order) => ({
 			type: actionTypes.orders.added,
 			payload: { id, order }
@@ -320,12 +359,29 @@ export const actions = {
 			const savedTask: any = (await doc.get({source: "cache"})).data() || {};
 			const taskMeta = tasksMeta[savedTask.name];
 			const updatedTask = {...savedTask, ...values};
-			values.status = updatedTask.status = taskIsCompleted(updatedTask) ? statuses.completed : statuses.pending;
+			if (taskIsCompleted(updatedTask)) {
+				values.status = updatedTask.status = statuses.completed;
+			} else if (values.status === statuses.completed) {
+				values.status = updatedTask.status = statuses.pending;
+			}
 			console.log("update values", values);
-			if (taskMeta.beforeSave) taskMeta.beforeSave(updatedTask);
-			await doc.update(values);
-			if (taskMeta.afterSave) taskMeta.afterSave(updatedTask);
-			return dispatch({ type: actionTypes.tasks.modify });
+			try {
+				if (taskMeta.beforeSave) taskMeta.beforeSave(updatedTask);
+				await doc.update(updatedTask);
+				if (taskMeta.afterSave) taskMeta.afterSave(updatedTask);
+				dispatch(uiActions.closeDrawer());
+				dispatch(uiActions.notification({
+					type: "success",
+					message: "Task updated"
+				}));
+				return dispatch({ type: actionTypes.tasks.modify });
+			} catch (e) {
+				console.error(e);
+				return dispatch(uiActions.notification({
+					type: "error",
+					message: "Task could not be updated. Check your connection and try again"
+				}));
+			}
 		},
 		added: (orderId, id, task: Task) => ({
 			type: actionTypes.tasks.added,
@@ -348,8 +404,18 @@ export const actions = {
 				await firebase.functions().httpsCallable('sendTaskEmailsNow')({orderId, taskId: id, mock: true});
 			} catch (e) {
 				console.error("sendEmails error", e);
-				dispatch({ type: actionTypes.tasks.emails.sendingFailed, payload: {orderId, id} });
+				dispatch(uiActions.notification({type: "error", message: "There was an issue sending the emails, check your connection and try again"}));
+				return dispatch({ type: actionTypes.tasks.emails.sendingFailed, payload: {orderId, id} });
 			}
+
+			const task: any = (await getTask(orderId, id)).data();
+			if (task) {
+				const hook = tasksMeta[task.name] && tasksMeta[task.name].afterSendEmails;
+				hook && hook(task);
+			}
+
+			dispatch(uiActions.setModalOpen(false));
+			dispatch(uiActions.notification({type: "success", message: "Email(s) sent"}));
 			return dispatch({ type: actionTypes.tasks.emails.sent, payload: {orderId, id} });
 		}
 	},
@@ -490,42 +556,62 @@ export const reducer = (state: OrdersState = initialState, action) => produce(st
 			addTask(draft, payload);
 			break;
 		// case actionTypes.tasks.emails.sent:
-		// 	payload.task = draft.tasks[payload.id];
-		// 	payload.task.emails.status = "sending";
-		// 	addTask(draft, payload);
-		// 	break;
+		// 	payload.task = state.tasks[payload.id];
+		// 	payload.task = {
+		// 		...payload.task,
+		// 		emails: {
+		// 			...payload.task.emails,
+		// 			status: "sent"
+		// 		}
+		// 	};
+		// 	draft.tasks[payload.id] = payload.task;
+			// draft.orderedTasks[payload.task.dueDate][payload.task.orderId].indexOf();
+			// addTask(draft, payload);
+			// break;
 		// default:
 		// 	return state
 	}
 });
 
+const taskNotificationTitle = (order, task) => `${task.label} - ${order.client.name}`;
+
 export const connect = (dispatch) => {
+	let initialLoad = false;
 	ordersColl.where("status", "==", statuses.inProgress).orderBy('createdAt').onSnapshot(snapshot => {
 		// console.log('order change', snapshot);
 		snapshot.docChanges().forEach(change => {
+			const orderDoc = change.doc;
+			const order = orderDoc.data();
 			switch (change.type) {
 				case "added":
-					const orderDoc = change.doc;
 					change.doc.ref.collection('tasks').orderBy('due').onSnapshot(snapshot => {
 						snapshot.docChanges().forEach(change => {
+							const task = change.doc.data();
+							// if (initialLoad) dispatch(uiActions.notification({
+							// 	type: "success", 
+							// 	message: `Task '${task.label} (${order.client.name})' was ${change.type}`
+							// }));
+							// dispatch(uiActions.closeTask());
 							if (change.type === "removed") {
 								dispatch(actions.task.removed(orderDoc.id, change.doc.id));
 							} else {
 								//@ts-ignore
-								dispatch(actions.task[change.type](orderDoc.id, change.doc.id, change.doc.data()));
+								dispatch(actions.task[change.type](orderDoc.id, change.doc.id, task));
 							}
 						});
 						// return dispatch(actions.orderTasksChanged(orderDoc.id, snapshot.docs));
 					});
 					//@ts-ignore
-					return dispatch(actions.order.added(orderDoc.id, orderDoc.data()));
+					return dispatch(actions.order.added(orderDoc.id, order));
 				case "modified":
 					//@ts-ignore
-					return dispatch(actions.order.modified(change.doc.id, change.doc.data()));
+					return dispatch(actions.order.modified(orderDoc.id, order));
 				case "removed":
-					return dispatch(actions.order.removed(change.doc.id));
+					return dispatch(actions.order.removed(orderDoc.id));
 			}
 		});
+
+		initialLoad = true;
 	});
 	// db.collectionGroup('tasks').orderBy('due').onSnapshot(snapshot => {
 	// 	dispatch(actions.tasksChanged(snapshot.docs));
