@@ -9,6 +9,7 @@ import produce from 'immer';
 import { actions as uiActions } from './ui';
 
 const db = firebase.firestore();
+const auth = firebase.auth();
 const Timestamp = firebase.firestore.Timestamp;
 const ordersColl = db.collection('orders');
 
@@ -114,6 +115,15 @@ const tasksMeta: {
 	exportCotizationConfirmation: {
 		defaults: {
 			label: "Cotization confirmation",
+			emails: {
+				list: [
+					{ 
+						body: "Cotization confirmation request template",
+						subject: "Cotization in progress",
+						recipients: []
+					}
+				]
+			}
 		},
 		conditions: {
 			data: ({data, emails}) => (
@@ -154,12 +164,24 @@ const tasksMeta: {
 		conditions: {
 			data: ({emails}) => {
 				return (
-					emails.list.every(email => email.recipients.every(recipient => recipient.answered))
-					&&
-					checkEmails(emails)
+					emails.list.every(email => 
+						email.recipients.length > 0 
+						&& 
+						email.recipients.every(recipient => recipient.answered)
+					)
+					// &&
+					// checkEmails(emails)
 				);
 			}
 		},
+		beforeSave: (task) => {
+			// if emails sent but not completed, delay for 24 hs
+			if (checkEmails(task.emails) && task.status !== "completed") {
+				task.due = moment().add(24, 'hours').toDate();
+				task.status = "pending";
+			}
+			return task;
+		}
 		// beforeSave: (task) => {
 		// 	let {data} = task;
 		// 	if (data && data.prices) {
@@ -383,13 +405,13 @@ export const actions = {
 				}));
 			}
 		},
-		added: (orderId, id, task: Task) => ({
+		added: (orderId, id, task: Task, order: Order) => ({
 			type: actionTypes.tasks.added,
-			payload: { orderId, id, task }
+			payload: { orderId, id, task, order }
 		}),
-		modified: (orderId, id, task: Task) => ({
+		modified: (orderId, id, task: Task, order: Order) => ({
 			type: actionTypes.tasks.modified,
-			payload: { orderId, id, task }
+			payload: { orderId, id, task, order }
 		}),
 		removed: (orderId: string, id: string) => ({
 			type: actionTypes.tasks.removed,
@@ -447,6 +469,7 @@ export interface OrdersState {
 	orders: {[id: string]: Order},
 	tasks: {[id: string]: Task},
 	orderedTasks: {[date: string]: {[orderId: string]: Task[]}},
+	overdueTasks: {[id: string]: any},
 	dates: number[]
 }
 
@@ -454,13 +477,20 @@ export const initialState = {
 	orders: {},
 	tasks: {},
 	orderedTasks: {},
+	overdueTasks: {},
 	dates: []
 }
 
-const assignTask = ({tasks}: OrdersState, {id, orderId, dueDate, task}) => {
+const assignTask = ({tasks, overdueTasks}: OrdersState, {id, orderId, dueDate, task, order}) => {
 	// const defaults = tasksMeta[task.name] && tasksMeta[task.name].defaults) || {};
 	const defaults = {};
 	tasks[id] = { id, orderId, dueDate, ...defaults, ...task };
+	if (task.status === "overdue" && task.assignee && auth.currentUser && task.assignee === auth.currentUser.uid) {
+		overdueTasks[id] = {
+			orderId,
+			label: `${tasks[id].label} - ${order.client.name} (${order.type})`
+		};
+	}
 }
 
 const addTask = (state: OrdersState, payload) => {
@@ -480,7 +510,7 @@ const addTask = (state: OrdersState, payload) => {
 }
 
 const removeTask = (state: OrdersState, {id, orderId}) => {
-	let { tasks, orderedTasks, dates } = state;
+	let { tasks, orderedTasks, dates, overdueTasks } = state;
 	const task = tasks[id];
 	const dueDate = task.dueDate || getDueDate(task);
 
@@ -494,6 +524,7 @@ const removeTask = (state: OrdersState, {id, orderId}) => {
 		}
 	}
 
+	delete overdueTasks[id];
 	delete tasks[id];
 }
 
@@ -532,7 +563,8 @@ export const reducer = (state: OrdersState = initialState, action) => produce(st
 			addTask(draft, payload);
 			break;
 		case actionTypes.tasks.modified:
-			if (draft.tasks[payload.id].dueDate !== payload.task.dueDate) removeTask(draft, payload);
+			// if (draft.tasks[payload.id].dueDate !== payload.task.dueDate) 
+			removeTask(draft, payload);
 			addTask(draft, payload);
 			break;
 		case actionTypes.tasks.removed:
@@ -577,42 +609,54 @@ const taskNotificationTitle = (order, task) => `${task.label} - ${order.client.n
 
 export const connect = (dispatch) => {
 	let initialLoad = false;
-	ordersColl.where("status", "==", statuses.inProgress).orderBy('createdAt').onSnapshot(snapshot => {
-		// console.log('order change', snapshot);
-		snapshot.docChanges().forEach(change => {
-			const orderDoc = change.doc;
-			const order = orderDoc.data();
-			switch (change.type) {
-				case "added":
-					change.doc.ref.collection('tasks').orderBy('due').onSnapshot(snapshot => {
-						snapshot.docChanges().forEach(change => {
-							const task = change.doc.data();
-							// if (initialLoad) dispatch(uiActions.notification({
-							// 	type: "success", 
-							// 	message: `Task '${task.label} (${order.client.name})' was ${change.type}`
-							// }));
-							// dispatch(uiActions.closeTask());
-							if (change.type === "removed") {
-								dispatch(actions.task.removed(orderDoc.id, change.doc.id));
-							} else {
-								//@ts-ignore
-								dispatch(actions.task[change.type](orderDoc.id, change.doc.id, task));
-							}
-						});
-						// return dispatch(actions.orderTasksChanged(orderDoc.id, snapshot.docs));
-					});
-					//@ts-ignore
-					return dispatch(actions.order.added(orderDoc.id, order));
-				case "modified":
-					//@ts-ignore
-					return dispatch(actions.order.modified(orderDoc.id, order));
-				case "removed":
-					return dispatch(actions.order.removed(orderDoc.id));
-			}
-		});
+	let setupDone = false;
 
-		initialLoad = true;
+	const setup = () => {
+		if (setupDone) return;
+		setupDone = true;
+		ordersColl.where("status", "==", statuses.inProgress).orderBy('createdAt').onSnapshot(snapshot => {
+			// console.log('order change', snapshot);
+			snapshot.docChanges().forEach(change => {
+				const orderDoc = change.doc;
+				const order = orderDoc.data();
+				if (!order) return;
+				switch (change.type) {
+					case "added":
+						change.doc.ref.collection('tasks').orderBy('due').onSnapshot(snapshot => {
+							snapshot.docChanges().forEach(change => {
+								const task = change.doc.data();
+								// if (initialLoad) dispatch(uiActions.notification({
+								// 	type: "success", 
+								// 	message: `Task '${task.label} (${order.client.name})' was ${change.type}`
+								// }));
+								// dispatch(uiActions.closeTask());
+								if (change.type === "removed") {
+									dispatch(actions.task.removed(orderDoc.id, change.doc.id));
+								} else {
+									//@ts-ignore
+									dispatch(actions.task[change.type](orderDoc.id, change.doc.id, task, order));
+								}
+							});
+							// return dispatch(actions.orderTasksChanged(orderDoc.id, snapshot.docs));
+						});
+						//@ts-ignore
+						return dispatch(actions.order.added(orderDoc.id, order));
+					case "modified":
+						//@ts-ignore
+						return dispatch(actions.order.modified(orderDoc.id, order));
+					case "removed":
+						return dispatch(actions.order.removed(orderDoc.id));
+				}
+			});
+
+			initialLoad = true;
+		});
+	}
+
+	auth.onAuthStateChanged(user => {
+		if (user) setup();
 	});
+
 	// db.collectionGroup('tasks').orderBy('due').onSnapshot(snapshot => {
 	// 	dispatch(actions.tasksChanged(snapshot.docs));
 	// });

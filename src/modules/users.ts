@@ -2,6 +2,7 @@ import firebase, { firestore } from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/messaging';
 import 'firebase/firestore';
+import 'firebase/storage';
 
 import {
 	actions as uiActions
@@ -31,6 +32,8 @@ export const actionTypes = {
 	logout: `${prefix}.LOGOUT`,
 	usersChanged: `${prefix}.USERS_CHANGED`,
 	overdueTasksChanged: `${prefix}.OVERDUE_TASKS_CHANGED`,
+	updating: `${prefix}.UPDATING`,
+	finishedUpdating: `${prefix}.FINISHED_UPDATING`
 }
 
 export const actions = {
@@ -61,19 +64,31 @@ export const actions = {
 		}
 	},
 	modify: (id, data) => async dispatch => {
+		dispatch({type: actionTypes.updating});
 		try {
+			if (data.avatar && typeof data.avatar === "object") {
+				const ref = firebase.storage().ref(`profilePics/${id}`);
+				await ref.put(data.avatar);
+				data.avatar = await ref.getDownloadURL();
+			}
 			await usersColl.doc(id).update(data);
+			auth.currentUser && await auth.currentUser.updateProfile({
+				displayName: data.name,
+				photoURL: data.avatar
+			});
 			dispatch(uiActions.closeDrawer());
-			return dispatch(uiActions.notification({
+			dispatch(uiActions.notification({
 				type: "success",
 				message: "User was modified"
 			}));
 		} catch (e) {
-			return dispatch(uiActions.notification({
+			console.error("user update erorr", e);
+			dispatch(uiActions.notification({
 				type: "error",
 				message: "User could not be modified. Check your connection and try again"
 			}));
 		}
+		return dispatch({type: actionTypes.finishedUpdating});
 	},
 	login: ({email, password}) => async dispatch => {
 		console.log(email, password);
@@ -90,11 +105,11 @@ export const actions = {
 			dispatch({ type: actionTypes.authenticationError });
 			return dispatch(uiActions.notification({
 				type: "error",
-				message: "User could not login. Check your connection and try again"
+				message: "User could not login. Check your credentials and try again"
 			}));
 		}
 	},
-	authenticated: (user) => ({type: actionTypes.authenticated, payload: { user } }),
+	authenticated: (user) => ({ type: actionTypes.authenticated, payload: { user } }),
 	usersChanged: (users) => ({ type: actionTypes.usersChanged, payload: users }),
 	logout: () => async dispatch => {
 		await auth.signOut();
@@ -107,14 +122,16 @@ export interface UsersState {
 	users: {[key: string]: User},
 	current: User | null,
 	creationStatus: "processing" | null,
-	loggedIn: boolean | undefined
+	loggedIn: boolean | undefined,
+	updating: boolean
 }
 
 export const initialState: UsersState = {
 	users: {},
 	current: null,
 	creationStatus: null,
-	loggedIn: false
+	loggedIn: false,
+	updating: false
 };
 
 export const reducer = (state: UsersState = initialState, action) => {
@@ -172,8 +189,18 @@ export const reducer = (state: UsersState = initialState, action) => {
 				...state,
 				current: {
 					...state.current,
-					overdueTasks: payload.tasks
+					overdueTasks: payload
 				}
+			};
+		case actionTypes.updating:
+			return {
+				...state,
+				updating: true
+			};
+		case actionTypes.finishedUpdating:
+			return {
+				...state,
+				updating: false
 			};
 		default:
 			return state
@@ -186,7 +213,7 @@ export const connect = async (dispatch) => {
 	messaging.requestPermission();
 	messaging.usePublicVapidKey("BDojh40yQW6VzFh2vhoPTgpm1_sX_eFPUcYp7URaFC918qI3QXrYbdt3u25Fk4jWm_cghA2qs_N371b46hr-mAc");
 	
-	const fcmLog = (...msgs) => fcmLog("[FCM]", ...msgs);
+	const fcmLog = (...msgs) => console.log("[FCM]", ...msgs);
 
 	const getPersistedToken = () => {
 		const previousToken: any = localStorage.getItem("fcmToken");
@@ -207,7 +234,8 @@ export const connect = async (dispatch) => {
 		}
 
 		const previousToken = getPersistedToken();
-		if (previousToken && previousToken.token === token) return;
+		fcmLog(token, previousToken);
+		if (previousToken && previousToken.userId === userId && previousToken.token === token) return;
 		cleanPreviousToken();
 		if (token === null || token === "null") return;
 		localStorage.setItem("fcmToken", JSON.stringify({userId: userId, token}));
@@ -221,6 +249,10 @@ export const connect = async (dispatch) => {
 
 	messaging.onMessage(function(payload) {
 		console.log('Message received. ', payload);
+		dispatch(uiActions.notification({
+			message: `ALARM: ${payload.notification.title}`,
+			type: "warning"
+		}));
 	});
 
 	// const setUpMessaging = (userId) => {	
@@ -250,11 +282,11 @@ export const connect = async (dispatch) => {
 
 	const onAuthentication = (user) => {
 		setupFCMToken(user.uid);
-		db.collectionGroup('tasks')
-			.where('assignee', '==', user.uid)
-			.where('status', '==', 'overdue').onSnapshot(snap => {
-				dispatch(actions.overdueTasksChanged(snap.docs.map(doc => doc.id)))
-			});
+		// db.collectionGroup('tasks')
+		// 	.where('assignee', '==', user.uid)
+		// 	.where('status', '==', 'overdue').onSnapshot(snap => {
+		// 		dispatch(actions.overdueTasksChanged(snap.docs.map(doc => doc.id)))
+		// 	});
 	}
 
 	auth.onAuthStateChanged((user) => {

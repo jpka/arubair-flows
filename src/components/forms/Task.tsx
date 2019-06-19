@@ -31,8 +31,6 @@ import {
 } from "../../modules/orders";
 
 const SendEmailButton = (props) => {
-	console.log("send email button values", props.values);
-	console.log(props);
 	return <OGSendEmailButton 
 		className={props.className}
 		send={props.sendEmails}
@@ -111,7 +109,8 @@ const taskFragments = {
 				agents: schemas.emailedList
 			})
 		},
-		Fragment: ({classes, values}) => {
+		Fragment: ({classes, modalOpen, setModalOpen, ...props}) => {
+			const { values } = props;
 			// if (!values.prices) values.prices = {
 			// 	freights: [],
 			// 	agents: []
@@ -119,6 +118,9 @@ const taskFragments = {
 			if (values.data && values.data.cotizationSent) values.data.cotizationSent = values.data.cotizationSent.toString();
 			return (
 				<React.Fragment>
+					<Modal open={modalOpen} setOpen={setModalOpen}>
+						<EmailForm classes={classes} {...props} index={0} />
+					</Modal>
 					<FormGroup row>
 						<SubTitle classes={classes}>Cotization sent?</SubTitle>
 						<RadioGroup name="data.cotizationSent" options={[["Yes", true], ["No", false]]} />
@@ -137,13 +139,14 @@ const taskFragments = {
 						/>
 					)}
 					{values.data && values.data.cotizationSent === "false" && (
-						<TextField 
-							className={classes.wideField} 
-							name="data.emailBody" 
-							label="Email body to send" 
-							multiline 
-							variant="outlined"
-						/>
+						<Button
+							className={classes.button} 
+							variant="contained" 
+							color="secondary"
+							onClick={() => setModalOpen(true)}
+						>
+							Send email to client
+						</Button>
 					)}
 				</React.Fragment>
 			);
@@ -236,8 +239,13 @@ const makeTaskForm = (taskName, props) => {
 		const completed = utils.taskIsCompleted(values);
 		// console.log("form values", values);
 		const userOptions: any[] = Object.values(props.users).map((user: any) => [user.id, user.name]);
+		// const overdueStyle = {
+		// 	border: "2px solid red"
+		// };
+		// const overdue = values.status === 'overdue';
 		return (
 			<Form>
+			{/* // <Form style={overdue ? overdueStyle : {}}> */}
 				<Title classes={classes}>{values.label}</Title>
 				<TextField
 					required

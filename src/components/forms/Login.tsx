@@ -35,7 +35,8 @@ export default makeForm({
 				type="submit"
 				disabled={!isValid} 
 				className={classes.button} 
-				variant="contained" 
+				variant="contained"
+				style={{marginTop: "20px"}}
 				color="primary">
 				Login
 			</Button>

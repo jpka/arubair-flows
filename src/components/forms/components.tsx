@@ -33,6 +33,7 @@ import {
 	Remove as RemoveIcon,
 	Send as SendIcon
 } from '@material-ui/icons';
+import InputFiles from 'react-input-files';
 import { useStyles } from '../App';
 
 // interface FormProps {
@@ -231,6 +232,42 @@ export const RadioGroup = ({name, options, ...props}) => {
 	)
 }
 
+export const FileInput = ({name, children, ...props}) => {
+	return (
+		<Field name={name} render={({field}: FieldProps) => {
+			// if (!field.value) field.value = "";			
+			return (
+				<InputFiles 
+					value={field.value} 
+					name={name} {...props}
+					onChange={files => handleChange(field, name, props.multiple ? files : files[0])}>
+					{children}
+				</InputFiles>
+			)
+		}} />
+	)
+}
+
+export const ProgressButton = ({inProgress, isValid, children, ...props}) => {
+	const classes = useStyles();
+	
+	return (
+		<div>
+			<div style={{position: "relative"}}>
+				<Button 
+					{...props}
+					disabled={!isValid || inProgress}
+				>
+					{children}
+				</Button>
+				{inProgress && <CircularProgress size={24} className={classes.buttonProgress} />}
+			</div>
+			{/* {status === "failed" && <Error>Failed to send emails. Check the connection and try again</Error>} */}
+			{/* {(sentTimes && status !== "failed") && <Typography variant="caption">Emails succesfully sent {sentTimes} times</Typography>} */}
+		</div>
+	);
+}
+
 export const SendEmailButton = ({status, send, ...props}) => {
 	const classes = useStyles();
 	const sending = status === "sending";
@@ -270,7 +307,12 @@ export const makeForm = (props, Component) => {
 		// };
 
 		return (
-			<Formik onSubmit={onSubmit} initialValues={otherProps.initialValues} isInitialValid={isInitialValid} {...props}>
+			<Formik 
+				onSubmit={onSubmit} 
+				initialValues={otherProps.initialValues} 
+				enableReinitialize 
+				isInitialValid={isInitialValid} {...props}
+			>
 				{(props) => <Component classes={classes} {...props} {...otherProps} />}
 			</Formik>
 		);

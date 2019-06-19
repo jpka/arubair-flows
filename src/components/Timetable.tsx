@@ -123,7 +123,7 @@ const TasksCell = connect(
 			{tasks.map((task: any, i) => (
 				<Task 
 					key={i.toString()} 
-					openDetails={() => dispatch(uiActions.editTask(orderId, task.id))}
+					openDetails={() => dispatch(uiActions.openDrawer("editTask", {orderId, taskId: task.id, variant: task.status === 'overdue' ? "attention" : "none"}))}
 					onDelete={() => dispatch(ordersActions.task.remove(orderId, task.id))}
 					
 					{...task}

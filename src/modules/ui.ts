@@ -9,6 +9,7 @@ export const actionTypes = {
 	newUser: `${prefix}.NEW_USER`,
 	editUser: `${prefix}.EDIT_USER`,
 	notification: `${prefix}.NOTIFICATION`,
+	openDrawer: `${prefix}.OPEN_DRAWER`,
 	closeDrawer: `${prefix}.CLOSE_DRAWER`,
 	closeModal: `${prefix}.CLOSE_MODAL`,
 	setModalOpen: `${prefix}.SET_MODAL_OPEN`
@@ -21,6 +22,7 @@ export const actions = {
 	newUser: () => ({ type: actionTypes.newUser }),
 	editUser: (userId) => ({ type: actionTypes.editUser, payload: { userId } }),
 	notification: (notification) => ({ type: actionTypes.notification, payload: notification }),
+	openDrawer: (view, params) => ({ type: actionTypes.openDrawer, payload: { view, params } }),
 	closeDrawer: () => ({ type: actionTypes.closeDrawer }),
 	closeModal: () => ({ type: actionTypes.closeModal }),
 	setModalOpen: (state) => ({ type: actionTypes.setModalOpen, payload: state })
@@ -48,6 +50,8 @@ export const reducer = combineReducers({
 				return {view: "newUser", params: null};
 			case actionTypes.editUser:
 				return {view: "editUser", params: null};
+			case actionTypes.openDrawer:
+				return {view: payload.view, params: payload.params};
 			case actionTypes.closeDrawer:
 				return null;
 			default:

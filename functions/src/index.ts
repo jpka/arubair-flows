@@ -137,7 +137,8 @@ const sendTaskEmails = async (orderId, id, task: Task, mock = false) => {
 		// email.status = "sending";
 		// updateTask();
 		// done.push(sendEmail(email).then(updateTask));
-		done.push(mock ? sendEmailMock() : sendEmail(email, order.client.email));
+		// done.push(mock ? sendEmailMock() : sendEmail(email, order.client.email));
+		done.push(sendEmailMock());
 	});
 	return Promise.all(done)
 		.then(() => taskRef.update({
@@ -195,6 +196,7 @@ export const checkDues = functions.https.onCall(async () => {
 					taskDoc.ref.delete();
 					return;
 				}
+
 				const message = {
 					notification: {
 						title: `${label} (${order.type}) - ${order.client.name}`
@@ -226,7 +228,10 @@ export const checkDues = functions.https.onCall(async () => {
 					});
 				}
 
-				taskDoc.ref.update({ status: "overdue", due: moment(due.toDate()).add(1, 'hour').toDate() })
+				taskDoc.ref.update({ 
+					status: "overdue", 
+					due: moment().add(1, 'hour').toDate() 
+				});
 			});
 		}
 	}

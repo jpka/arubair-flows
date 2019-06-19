@@ -108,7 +108,9 @@ export interface Props extends WithStyles<typeof styles> {
   addUser: () => any,
   logout: () => any,
   editUser: (id) => any,
-  user: any
+  openTask: any,
+  user: any,
+  overdueTasks: any
 }
 
 interface AppBarState {
@@ -119,6 +121,16 @@ interface AppBarState {
     origin?: number | 'left' | 'right' | 'center'
   };
 }
+
+// const OverdueTasksMenu = connect(
+//   ({orders}: State) => ({tasks: orders.tasks})
+// )(({tasks, overdueTasks}: any) => {
+//   return (
+//     <React.Fragment>
+//       {overdueTasks.map(id => tasks[id])}
+//     </React.Fragment>
+//   )
+// })
 
 class PrimarySearchAppBar extends React.Component<Props, AppBarState> {
   state: AppBarState = {
@@ -157,10 +169,10 @@ class PrimarySearchAppBar extends React.Component<Props, AppBarState> {
 
   render() {
     const { anchorEl, mobileMoreAnchorEl, menu } = this.state;
-    const { classes, addUser, editUser, logout, user } = this.props;
+    const { classes, addUser, editUser, logout, user, overdueTasks, openTask } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-    console.log(user);
+    const overdueTasksIds = Object.keys(overdueTasks);
 
     const renderMenu = (
       <Menu
@@ -177,6 +189,12 @@ class PrimarySearchAppBar extends React.Component<Props, AppBarState> {
         {menu.name === "actions" && [
           <MenuItem key={1} onClick={this.menuAction(addUser)}>Add user</MenuItem>
         ]}
+        {menu.name === "overdueTasks" && overdueTasksIds.map((id, i) => 
+          <MenuItem 
+            key={i} 
+            onClick={this.menuAction(() => openTask({orderId: overdueTasks[id].orderId, taskId: id, variant: "attention"}))}
+          >{overdueTasks[id].label}</MenuItem>
+        )}
       </Menu>
     );
 
@@ -258,8 +276,8 @@ class PrimarySearchAppBar extends React.Component<Props, AppBarState> {
                   <MailIcon />
                 </Badge>
               </IconButton> */}
-              <IconButton color="inherit">
-                <Badge badgeContent={user.overdueTasks ? user.overdueTasks.length : 0} color="secondary">
+              <IconButton color="inherit" onClick={this.handleMenuOpen("overdueTasks", "left")}>
+                <Badge badgeContent={overdueTasksIds.length} color="secondary">
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
@@ -269,7 +287,7 @@ class PrimarySearchAppBar extends React.Component<Props, AppBarState> {
                 onClick={this.handleMenuOpen("profile", "right")}
                 color="inherit"
               >
-                <Avatar src="/imgs/profile/boy.png" />
+                <Avatar src={user.photoURL} />
               </IconButton>
             </div>
             <div className={classes.sectionMobile}>
@@ -291,10 +309,11 @@ class PrimarySearchAppBar extends React.Component<Props, AppBarState> {
 } as any;
 
 export default connect(
-  ({users}: State) => ({ user: users.current }),
+  ({users, orders}: State) => ({ user: users.current, overdueTasks: orders.overdueTasks }),
   ({
     addUser: uiActions.newUser, 
     editUser: uiActions.editUser,
-    logout: userActions.logout
+    logout: userActions.logout,
+    openTask: (params) => uiActions.openDrawer("editTask", params)
   })
 )(withStyles(styles)(PrimarySearchAppBar));

@@ -120,7 +120,7 @@ const viewsMap = {
 		})
 	)(withStyles(styles)(BaseUser)),
 	editUser: connect(
-		({users}: State) => ({ initialValues: users.users[users.current.uid] }),
+		({users}: State) => ({ initialValues: users.users[users.current.uid], updating: users.updating }),
 		(dispatch: ThunkDispatch<any, any, any>, { initialValues }: any) => ({ 
 			onSubmit: (values) => dispatch(usersActions.modify(values.id, values))
 		})
@@ -158,13 +158,21 @@ const AppDrawer = connect(
 				//         <CloseIcon />
 				//     </IconButton>
 				// </div> */}
+	let paperStyle: any = {};
+	if (params) {
+		switch (params.variant) {
+			case "attention":
+				paperStyle.border = "2px solid red";
+				break;
+		}
+	}
 
 	return (
 		// <Drawer variant="persistent" anchor="left" {...props} open={true}>
 			<div style={{width: 300, display: "inline-block", float: "left", position: "relative"}}>
 				<CloseIcon onClick={close} style={{position: "absolute", right: 25, top: 35}} />
 				{/* <Contents {...params}/> */}
-				<Paper className={classes.container}>
+				<Paper className={classes.container} style={paperStyle}>
 					<View {...params} />
 				</Paper>
 			</div>
